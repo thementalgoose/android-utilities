@@ -19,6 +19,8 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-utilities:0.1'
+    implementation 'com.github.thementalgoose:android-utilities:'
 }
 ```
+
+[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
