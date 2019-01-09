@@ -1,4 +1,4 @@
-package tmg.utilities_sample;
+package tmg.utilities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package tmg.utilities.base
+package tmg.utilities.mvvm
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.Disposable
 
 
-abstract class BaseDialogFragment<VM: BaseViewModel>: DialogFragment() {
+abstract class MVVMDialogFragment<VM: MVVMViewModel>: DialogFragment() {
     lateinit var viewModel: VM
     var disposables: MutableList<Disposable> = mutableListOf()
     /**

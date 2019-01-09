@@ -1,16 +1,19 @@
-package tmg.utilities.base
+package tmg.utilities.mvvm
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.reactivex.disposables.Disposable
+import tmg.utilities.R
 
-abstract class BaseFragment<VM: BaseViewModel>: Fragment() {
+abstract class MVVMBottomSheetFragment<VM: MVVMViewModel>: BottomSheetDialogFragment() {
 
     lateinit var viewModel: VM
     var disposables: MutableList<Disposable> = mutableListOf()
@@ -22,13 +25,7 @@ abstract class BaseFragment<VM: BaseViewModel>: Fragment() {
      * - Set the VM
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        val bundle: Bundle? = arguments
-        bundle?.let {
-            if (savedInstanceState != null) {
-                it.putAll(savedInstanceState)
-            }
-        }
-        bundle?.let {
+        arguments?.let {
             arguments(it)
         }
         super.onCreate(savedInstanceState)
@@ -80,14 +77,8 @@ abstract class BaseFragment<VM: BaseViewModel>: Fragment() {
      */
     override fun onPause() {
         super.onPause()
-        if (disposeOnPause()) {
-            disposables.forEach { it.dispose() }
-        }
+        disposables.forEach { it.dispose() }
     }
-    open fun disposeOnPause(): Boolean {
-        return true
-    }
-
 
     /**
      * State restoration methods for passing data to the view models
@@ -109,6 +100,16 @@ abstract class BaseFragment<VM: BaseViewModel>: Fragment() {
             viewModel.restoreInstanceState(it)
         }
     }
+
+    /**
+     * Sets the theme for the fragment to our custom theme
+     */
+    override fun getTheme(): Int = R.style.Theme_Design_Light_BottomSheetDialog
+
+    /**
+     * Creates the dialogue
+     */
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
 
     //region Abstract methods
 

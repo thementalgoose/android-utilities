@@ -1,4 +1,4 @@
-package tmg.utilities_sample;
+package tmg.utilities;
 
 import org.junit.Test;
 

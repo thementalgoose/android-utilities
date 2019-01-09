@@ -1,4 +1,4 @@
-package tmg.utilities.base
+package tmg.utilities.mvvm
 
 import android.content.pm.PackageManager
 import android.os.Build
@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.Disposable
 import tmg.utilities.utils.ColorUtils
 
-abstract class BaseActivity<VM: BaseViewModel>: AppCompatActivity() {
+abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
 
     lateinit var viewModel: VM
     val disposables: MutableList<Disposable> = mutableListOf()

@@ -1,19 +1,16 @@
-package tmg.utilities.base
+package tmg.utilities.mvvm
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.reactivex.disposables.Disposable
-import tmg.utilities_sample.R
 
-abstract class BaseBottomSheetFragment<VM: BaseViewModel>: BottomSheetDialogFragment() {
+abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
 
     lateinit var viewModel: VM
     var disposables: MutableList<Disposable> = mutableListOf()
@@ -25,7 +22,13 @@ abstract class BaseBottomSheetFragment<VM: BaseViewModel>: BottomSheetDialogFrag
      * - Set the VM
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        arguments?.let {
+        val bundle: Bundle? = arguments
+        bundle?.let {
+            if (savedInstanceState != null) {
+                it.putAll(savedInstanceState)
+            }
+        }
+        bundle?.let {
             arguments(it)
         }
         super.onCreate(savedInstanceState)
@@ -77,8 +80,14 @@ abstract class BaseBottomSheetFragment<VM: BaseViewModel>: BottomSheetDialogFrag
      */
     override fun onPause() {
         super.onPause()
-        disposables.forEach { it.dispose() }
+        if (disposeOnPause()) {
+            disposables.forEach { it.dispose() }
+        }
     }
+    open fun disposeOnPause(): Boolean {
+        return true
+    }
+
 
     /**
      * State restoration methods for passing data to the view models
@@ -100,16 +109,6 @@ abstract class BaseBottomSheetFragment<VM: BaseViewModel>: BottomSheetDialogFrag
             viewModel.restoreInstanceState(it)
         }
     }
-
-    /**
-     * Sets the theme for the fragment to our custom theme
-     */
-    override fun getTheme(): Int = R.style.Theme_Design_Light_BottomSheetDialog
-
-    /**
-     * Creates the dialogue
-     */
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
 
     //region Abstract methods
 

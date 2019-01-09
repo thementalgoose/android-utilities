@@ -12,7 +12,6 @@ repositories {
 }
 
 group = 'com.github.thementalgoose'
-version = '1.0'
 
 android {
     compileSdkVersion 28
@@ -23,9 +22,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -43,7 +40,7 @@ android {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from android.sourceSets.main.java.sourceFiles
 }
 
@@ -53,7 +50,7 @@ task javadoc(type: Javadoc) {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 

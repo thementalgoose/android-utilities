@@ -1,10 +1,10 @@
-package tmg.utilities.base
+package tmg.utilities.mvvm
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 
-abstract class BaseViewModel: ViewModel() {
+abstract class MVVMViewModel: ViewModel() {
 
     val disposables: MutableList<Disposable> = mutableListOf()
 
