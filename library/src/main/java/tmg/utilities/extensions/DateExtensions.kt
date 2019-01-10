@@ -119,4 +119,17 @@ fun Date.toCal(): Calendar {
     return calendar
 }
 
+/**
+ * Relative time
+ */
+fun Date.secondsDiff(secondDate: Date): Int {
+    return ((secondDate.time - this.time) / 1000L).toInt()
+}
+fun Date.minutesDiff(secondDate: Date): Int {
+    return secondsDiff(secondDate) / 60
+}
+//fun Date.diffBetween(secondDate: Date, diff: (years: Int, months: Int, day: Int, hours: Int, minutes: Int, seconds: Int, milliseconds: Int) -> Unit): Int {
+//
+//}
+
 //endregion

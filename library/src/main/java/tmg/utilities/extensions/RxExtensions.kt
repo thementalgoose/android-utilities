@@ -1,8 +1,15 @@
 package tmg.utilities.extensions
 
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.IdRes
 import io.reactivex.Notification
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function3
 import io.reactivex.subjects.PublishSubject
@@ -152,6 +159,9 @@ class CombineTriple<T1, T2, T3>: Function3<T1, T2, T3, Triple<T1, T2, T3>>{
     }
 }
 
+/**
+ * [BiFunction] that takes as inputs of List<T> and outputs List<T>
+ */
 class ListConcat<T>: BiFunction<List<T>, List<T>, List<T>>{
     override fun apply(list1: List<T>, list2: List<T>): List<T> {
         return list1 + list2
@@ -159,37 +169,52 @@ class ListConcat<T>: BiFunction<List<T>, List<T>, List<T>>{
 }
 
 
-/**
- * Unwrapping errors
- */
-fun <T: Throwable,E> Observable<E>.forwardErrorsTo(publishSubject: PublishSubject<T>): Observable<E> {
-    return doOnError {
-        publishSubject.onNext(it as T)
-    }
-}
+//region Observable View binding
 
 /**
- *
+ * Bind the value of the observable to a TextView text
  */
-fun <T> combineFlatten(items: List<Observable<List<T>>>): Observable<List<T>> {
-    return Observable.combineLatest(items) {list ->
-        list.map { it as List<T> }.toList().flatten()
+fun Observable<String>.bindText(view: TextView): Disposable {
+    return this.subscribe {
+        view.text = it
     }
 }
 
-fun <T> Observable<T>.subscribeNoError(subscribe: (T) -> Unit): Disposable {
-    return subscribe(subscribe, {})
-}
-
-fun <T> Observable<List<T>>.scanConcat(): Observable<List<T>> {
-    return scan(ListConcat())
-}
-fun Observable<Int>.scanSum(): Observable<Int> {
-    return scan(IntSum())
-}
-
-class IntSum : BiFunction<Int, Int, Int> {
-    override fun apply(t1: Int, t2: Int): Int {
-        return t1 + t2
+/**
+ * Bind the value of the observable to a Button text
+ */
+fun Observable<String>.bindText(view: Button): Disposable {
+    return this.subscribe {
+        view.text = it
     }
 }
+
+/**
+ * Bind the value of the observable to an EditText
+ */
+fun Observable<String>.bindText(view: EditText): Disposable {
+    return this.subscribe {
+        view.setText(it)
+    }
+}
+
+/**
+ * Bind a drawable value of the observable to an ImageView
+ */
+fun Observable<Int>.bindResource(view: ImageView): Disposable {
+    return this.subscribe {
+        view.setImageResource(it)
+    }
+}
+
+/**
+ * Bind the content description to the observable to an ImageView
+ */
+fun Observable<String>.bindContentDescription(view: ImageView): Disposable {
+    return this.subscribe {
+        view.contentDescription = it
+    }
+}
+
+
+//endregion

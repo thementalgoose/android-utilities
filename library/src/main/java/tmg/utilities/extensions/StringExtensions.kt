@@ -3,6 +3,8 @@ package tmg.utilities.extensions
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.view.View
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,6 +52,35 @@ fun String.extendWith(char: Char, toLength: Int): String {
     else {
         return this
     }
+}
+
+//endregion
+
+/**
+ * Determine if the string is an email
+ */
+fun String.isEmail(): Boolean {
+    return this.matches(Regex("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+}
+
+/**
+ * If the string is a URL (ie. contains '://')
+ */
+fun String.isUrl(): Boolean {
+    return this.matches(Regex("[a-zA-z]+://[^\\s]*"))
+}
+
+/**
+ * If the string is a HTTP URL (ie. Starts with http:// or https://)
+ */
+fun String.isHttp(): Boolean {
+    return this.matches(Regex("(http|https)://[^\\s]*"))
+}
+
+//region Snackbar
+
+fun String.showAsSnackbar(view: View, length: Int = Snackbar.LENGTH_LONG) {
+    Snackbar.make(view, this, length).show()
 }
 
 //endregion

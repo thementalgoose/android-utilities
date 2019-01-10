@@ -1,8 +1,11 @@
 package tmg.utilities.extensions
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.appcompat.app.AppCompatActivity
 
 //region Starting activity
