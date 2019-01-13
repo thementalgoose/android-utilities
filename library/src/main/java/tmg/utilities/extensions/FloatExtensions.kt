@@ -24,3 +24,14 @@ fun Float.pxToDp(res: Resources): Float {
 }
 
 //endregion
+
+//region Precision
+
+fun Float.toDecimalPlacesString(dp: Int): String {
+    return String.format("%.1f", dp)
+}
+fun Float.toDecimalPlaces(dp: Int): Float {
+    return toDecimalPlacesString(dp).toFloat()
+}
+
+//endregion
