@@ -44,3 +44,13 @@ fun Int.toLength(numberOfDigits: Int): String {
 }
 
 //endregion
+
+//region Time
+
+fun Int.secondsToHHmm(): String {
+    val hours: String = (this / (60 * 60)).toLength(2)
+    val minutes: String = (this / 60).toLength(2)
+    return "$hours:$minutes"
+}
+
+//endregion
