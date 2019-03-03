@@ -136,7 +136,12 @@ abstract class SortedListAdapter<E, T : RecyclerView.ViewHolder>: RecyclerView.A
         mSortedList.beginBatchedUpdates()
         for (i in mSortedList.size() - 1 downTo 0) {
             val model = mSortedList.get(i)
-            if (!models.contains(model)) {
+            if (mComparator != null) {
+                if (models.find { mComparator!!.equal(model, it) } == null) {
+                    mSortedList.remove(model)
+                }
+            }
+            else if (!models.contains(model)) {
                 mSortedList.remove(model)
             }
         }
