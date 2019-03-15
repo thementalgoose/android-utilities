@@ -1,7 +1,9 @@
 package tmg.utilities.extensions
 
 import android.content.res.Resources
+import androidx.appcompat.app.AppCompatActivity
 import tmg.utilities.utils.DensityUtils
+import kotlin.coroutines.coroutineContext
 
 //region Density conversions
 
@@ -28,6 +30,13 @@ fun Int.pxToDp(res: Resources): Float {
 //region To String
 
 /**
+ * Display number as 2 digit string
+ */
+fun Int.dp2(): String {
+    return toLength(2)
+}
+
+/**
  * Convert an integer to a string but with a given length
  *
  * (ie. 2.toLength(2) = "02"
@@ -35,8 +44,8 @@ fun Int.pxToDp(res: Resources): Float {
  * @param numberOfDigits The number of digits we should make this integer
  */
 fun Int.toLength(numberOfDigits: Int): String {
-    return if (this < 10) {
-        "0$this"
+    return if (this < Math.pow(10.0, (numberOfDigits - 1).toDouble())) {
+        return "0" + toLength(numberOfDigits - 1)
     }
     else {
         this.toString()

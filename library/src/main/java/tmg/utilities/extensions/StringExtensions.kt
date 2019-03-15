@@ -5,6 +5,7 @@ import android.text.Html
 import android.text.Spanned
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,6 +19,39 @@ import java.util.*
 fun String.toDate(format: String): Date {
     val sdf: SimpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
     return sdf.parse(this)
+}
+
+/**
+ * Get the minutes from a time string
+ */
+fun String.minsPastHour(): Int {
+    val resp: List<String> = this.split(":")
+    if (resp.size == 2) {
+        return resp[1].toIntOrNull() ?: 0
+    }
+    throw Exception("String is not a valid time format $this")
+}
+
+/**
+ * Get the total mins
+ */
+fun String.minsTotal(): Int {
+    val resp: List<String> = this.split(":")
+    if (resp.size == 2) {
+        return (resp[0].toIntOrNull() ?: 0) * 60 + (resp[1].toIntOrNull() ?: 0)
+    }
+    throw Exception("String is not a valid time format $this")
+}
+
+/**
+ * Get the hours from a time string
+ */
+fun String.hours(): Int {
+    val resp: List<String> = this.split(":")
+    if (resp.size == 2) {
+        return resp[0].toIntOrNull() ?: 0
+    }
+    throw Exception("String is not a valid time format $this")
 }
 
 //endregion
