@@ -1,5 +1,6 @@
 package tmg.utilities.extensions
 
+import android.content.Context
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import tmg.utilities.utils.DensityUtils
@@ -60,6 +61,14 @@ fun Int.secondsToHHmm(): String {
     val hours: String = (this / (60 * 60)).toLength(2)
     val minutes: String = (this / 60).toLength(2)
     return "$hours:$minutes"
+}
+
+//endregion
+
+//region Strings
+
+fun Int.toStringResource(context: Context): String {
+    return context.getString(this)
 }
 
 //endregion

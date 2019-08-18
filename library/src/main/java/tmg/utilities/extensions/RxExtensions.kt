@@ -1,5 +1,6 @@
 package tmg.utilities.extensions
 
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -216,5 +217,34 @@ fun Observable<String>.bindContentDescription(view: ImageView): Disposable {
     }
 }
 
+//endregion
+
+fun <T> Observable<T>.print(): Observable<T> {
+    return this.print { it.toString() }
+}
+
+//region Subscription
+
+fun <T> Observable<T>.subscribeNoError(onNext: (value: T) -> Unit): Disposable {
+    return this.subscribe({
+        Log.d("Rx", "Subscription called");
+        onNext(it)
+    }, { error ->
+        Log.e("Rx", "Error occured but error is surpressed")
+        error.printStackTrace()
+    })
+}
+
+//endregion
+
+//region Observable<Boolean>
+
+fun Observable<Boolean>.isTrue(): Observable<Boolean> {
+    return this.filter { it }
+}
+
+fun Observable<Boolean>.isFalse(): Observable<Boolean> {
+    return this.filter { !it }
+}
 
 //endregion
