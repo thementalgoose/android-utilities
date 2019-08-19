@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.reflect.KClass
 
@@ -38,6 +39,15 @@ fun AppCompatActivity.viewUrl(url: String) {
     val intent: Intent = Intent(Intent.ACTION_VIEW)
     intent.data = Uri.parse(url)
     startActivity(intent)
+}
+
+//endregion
+
+//region Logging
+
+fun AppCompatActivity.info(msg: String) {
+    val packageName: String = this.packageName.takeLast(20)
+    Log.i(packageName, this.localClassName + " - " + msg)
 }
 
 //endregion

@@ -22,10 +22,7 @@ abstract class DiffListAdapter<MODEL, VIEW_HOLDER : RecyclerView.ViewHolder>(val
         onBindViewHolder(holder, position, items[position])
     }
 
-    open fun onBindViewHolder(holder: VIEW_HOLDER, position: Int, model: MODEL){
-
-    }
-
+    abstract fun onBindViewHolder(holder: VIEW_HOLDER, position: Int, model: MODEL)
 }
 
 class DiffComparatorCallback<MODEL>(val oldItems: List<MODEL>, val newItems: List<MODEL>, val comparator: DiffComparator<MODEL>): DiffUtil.Callback() {
