@@ -9,7 +9,7 @@
             style="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="?attr/actionBarSize" />
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
