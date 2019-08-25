@@ -24,3 +24,11 @@ dependencies {
 ```
 
 [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
+
+
+#### Usage
+
+```
+<!-- Change the background color of the about activity by overriding this resource -->
+<color name="aboutThisApp_backgroundColor">#6200ea</color>
+```

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -70,13 +71,16 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
     /**
      * Initialise the toolbar
      */
-    fun initToolbar(@IdRes toolbarRes: Int, showBack: Boolean = false) {
+    fun initToolbar(@IdRes toolbarRes: Int, showBack: Boolean = false, @DrawableRes indicator: Int? = null) {
         this.showBack = showBack
         toolbar = findViewById(toolbarRes)
         setSupportActionBar(toolbar)
         if (showBack) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setHomeButtonEnabled(true)
+        }
+        indicator?.let {
+            supportActionBar!!.setHomeAsUpIndicator(it)
         }
     }
 
