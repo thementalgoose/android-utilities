@@ -76,6 +76,8 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         )
         viewModel.inputs.setupDependencies(dependencies)
 
+        initToolbar(R.id.toolbar, true)
+
         adapter = AboutThisAppDependencyAdapter(this)
         rvAboutThisAppDependencies.layoutManager = LinearLayoutManager(this)
         rvAboutThisAppDependencies.adapter = adapter
