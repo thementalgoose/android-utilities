@@ -9,7 +9,7 @@ import tmg.utilities.mvvm.MVVMViewModel
 //region Inputs
 
 interface AboutThisAppVMInputs {
-    fun setupLinks(github: String, website: String, email: String, play: String)
+    fun setupLinks(github: String, website: String, email: String, play: String? = null, appPackage: String? = null)
     fun setupData(name: String, nameDesc: String, imageUrl: String, footnote: String, thankYou: String, appVersion: String)
     fun setupDependencies(dependencies: List<AboutThisAppDependency>)
 
@@ -49,6 +49,7 @@ class AboutThisAppVM: MVVMViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutpu
     private val websiteLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
     private val emailLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
     private val playLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
+    private val packageLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
 
     private val nameTextEvent: BehaviorSubject<String> = BehaviorSubject.create()
     private val nameDescTextEvent: BehaviorSubject<String> = BehaviorSubject.create()
@@ -73,11 +74,19 @@ class AboutThisAppVM: MVVMViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutpu
 
     // Inputs
 
-    override fun setupLinks(github: String, website: String, email: String, play: String) {
+    override fun setupLinks(github: String, website: String, email: String, play: String?, appPackage: String?) {
         githubLinkEvent.onNext(github)
         websiteLinkEvent.onNext(website)
         emailLinkEvent.onNext(email)
-        playLinkEvent.onNext(play)
+        if (play != null && appPackage != null) {
+            throw Exception("You must only provide either `play` or `appPackage` as parameters")
+        }
+        play?.let {
+            playLinkEvent.onNext(it)
+        }
+        appPackage?.let {
+            packageLinkEvent.onNext(it)
+        }
     }
 
     override fun setupDependencies(dependencies: List<AboutThisAppDependency>) {
@@ -135,7 +144,13 @@ class AboutThisAppVM: MVVMViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutpu
     }
 
     override fun clickedPlay(): Observable<String> {
-        return playLinkEvent.takeWhen(playEvent)
+        return Observable.merge(
+            playLinkEvent
+                .takeWhen(playEvent),
+            packageLinkEvent
+                .takeWhen(playEvent)
+                .map { "https://play.google.com/store/apps/details?id=$it" }
+        )
     }
 
     override fun name(): Observable<String> {

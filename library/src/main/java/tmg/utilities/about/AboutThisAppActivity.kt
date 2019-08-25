@@ -21,7 +21,8 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
     private lateinit var github: String
     private lateinit var email: String
     private lateinit var website: String
-    private lateinit var play: String
+    private var play: String? = null
+    private var appPackageName: String? = null
     private lateinit var dependencies: List<AboutThisAppDependency>
     private lateinit var appName: String
     private lateinit var footnote: String
@@ -44,7 +45,8 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
             github = it.getString(INTENT_GITHUB)!!
             email = it.getString(INTENT_EMAIL)!!
             website = it.getString(INTENT_WEBSITE)!!
-            play = it.getString(INTENT_PLAY)!!
+            play = it.getString(INTENT_PLAY)
+            appPackageName = it.getString(INTENT_PACKAGE_NAME)
             dependencies = it.getParcelableArray(INTENT_DEPENDENCIES)
                 ?.map { it as AboutThisAppDependency }
                 ?.toList() ?: listOf()
@@ -65,7 +67,8 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
             github = github,
             website = website,
             email = email,
-            play = play
+            play = play,
+            appPackage = appPackageName
         )
         viewModel.inputs.setupData(
             name = name,
@@ -205,6 +208,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         private const val INTENT_EMAIL: String = "INTENT_EMAIL"
         private const val INTENT_WEBSITE: String = "INTENT_WEBSITE"
         private const val INTENT_PLAY: String = "INTENT_PLAY"
+        private const val INTENT_PACKAGE_NAME: String = "INTENT_PACKAGE_NAME"
         private const val INTENT_APP_NAME: String = "INTENT_APP_NAME"
         private const val INTENT_APP_VERSION: String = "INTENT_APP_VERSION"
         private const val INTENT_FOOTNOTE: String = "INTENT_FOOTNOTE"
@@ -219,13 +223,17 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
                    github: String,
                    email: String,
                    website: String,
-                   play: String,
+                   packageName: String? = null,
+                   play: String? = null,
                    dependencies: List<AboutThisAppDependency>,
                    appName: String,
                    appVersion: String,
                    footnote: String,
                    thankYou: String
         ): Intent {
+            if (play == null && packageName == null) {
+                throw Exception("You must set either a play store link or give the package name")
+            }
             val intent = Intent(context, AboutThisAppActivity::class.java)
             intent.putExtra(INTENT_NAME, name)
             intent.putExtra(INTENT_NAME_DESC, nameDesc)
@@ -233,6 +241,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
             intent.putExtra(INTENT_GITHUB, github)
             intent.putExtra(INTENT_EMAIL, email)
             intent.putExtra(INTENT_WEBSITE, website)
+            intent.putExtra(INTENT_PACKAGE_NAME, packageName)
             intent.putExtra(INTENT_PLAY, play)
             intent.putExtra(INTENT_DEPENDENCIES, dependencies.toTypedArray())
             intent.putExtra(INTENT_APP_NAME, appName)
