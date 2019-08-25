@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.Toolbar
             style="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:id="@+id/toolbar"
-            android:background="?attr/colorPrimary"
+            android:background="@color/aboutThisApp_backgroundColor"
             android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
@@ -24,8 +24,8 @@
                 android:paddingBottom="@dimen/aboutThisApp_edgePadding">
 
             <RelativeLayout
-                    android:elevation="2dp"
-                    android:background="?attr/colorPrimary"
+                    android:elevation="@dimen/aboutThisApp_toolbarElevation"
+                    android:background="@color/aboutThisApp_backgroundColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
-                        android:layout_marginTop="@dimen/aboutThisApp_edgePaddingHalf"
+                        android:layout_marginTop="@dimen/aboutThisApp_edgePadding"
                         android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
                         android:layout_toEndOf="@id/imgAboutAvatar"
                         android:textSize="20sp"
@@ -159,7 +159,6 @@
                     android:paddingStart="@dimen/aboutThisApp_edgePadding"
                     android:paddingTop="@dimen/aboutThisApp_edgePadding"
                     android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-                    android:paddingBottom="@dimen/aboutThisApp_edgePadding"
                     tools:text="More footnote values for feedback" />
 
             <TextView

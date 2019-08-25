@@ -2,6 +2,9 @@
 <resources>
     <dimen name="aboutThisApp_avatarSize">72dp</dimen>
     <dimen name="aboutThisApp_dependencyIconSize">42dp</dimen>
+
     <dimen name="aboutThisApp_edgePadding">12dp</dimen>
     <dimen name="aboutThisApp_edgePaddingHalf">6dp</dimen>
+
+    <dimen name="aboutThisApp_toolbarElevation">4dp</dimen>
 </resources>
