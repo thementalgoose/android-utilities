@@ -51,6 +51,9 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
                 ?.map { it as AboutThisAppDependency }
                 ?.toList() ?: listOf()
             appName = it.getString(INTENT_APP_NAME)!!
+            name = it.getString(INTENT_NAME)!!
+            nameDesc = it.getString(INTENT_NAME_DESC)!!
+            imageUrl = it.getString(INTENT_IMAGE_URL)!!
             footnote = it.getString(INTENT_FOOTNOTE)!!
             thankYou = it.getString(INTENT_THANK_YOU)!!
             appVersion = it.getString(INTENT_APP_VERSION)!!
