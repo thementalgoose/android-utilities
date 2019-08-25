@@ -1,6 +1,7 @@
 package tmg.utilities.extensions
 
 import android.content.Context
+import android.graphics.Rect
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -70,3 +71,15 @@ fun EditText.focusKeyboard() {
 
 //endregion
 
+//region Bounds
+
+/**
+ * Rectangle describing the bounds of the view
+ */
+fun View.rect(): Rect {
+    val l = IntArray(2)
+    getLocationOnScreen(l)
+    return Rect(l[0], l[1], l[0] + width, l[1] + height)
+}
+
+//endregion

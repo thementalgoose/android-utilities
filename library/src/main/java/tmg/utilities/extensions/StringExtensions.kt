@@ -4,6 +4,7 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.view.View
+import androidx.core.text.HtmlCompat
 import com.google.android.material.snackbar.Snackbar
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -115,6 +116,17 @@ fun String.isHttp(): Boolean {
 
 fun String.showAsSnackbar(view: View, length: Int = Snackbar.LENGTH_LONG) {
     Snackbar.make(view, this, length).show()
+}
+
+//endregion
+
+//region HTML
+
+/**
+ * Convert a string to HTML
+ */
+fun String.html(): Spanned {
+    return HtmlCompat.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY);
 }
 
 //endregion

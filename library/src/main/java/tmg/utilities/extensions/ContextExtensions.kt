@@ -2,7 +2,9 @@ package tmg.utilities.extensions
 
 import android.content.Context
 import android.content.Intent
+import android.text.Spanned
 import androidx.annotation.ArrayRes
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import tmg.utilities.utils.SharedPreferencesUtils
 import kotlin.reflect.KClass
@@ -79,6 +81,18 @@ fun <T: Any> Context.startActivity(kClass: KClass<T>) {
 
 fun <T: Any> Context.startActivity(kClass: Class<T>) {
     startActivity(Intent(this, kClass::class.java))
+}
+
+//endregion
+
+//region HTML
+
+fun Context.getHtml(@IdRes id: Int): Spanned {
+    return getString(id).html()
+}
+
+fun Context.getHtml(value: String): Spanned {
+    return value.html()
 }
 
 //endregion
