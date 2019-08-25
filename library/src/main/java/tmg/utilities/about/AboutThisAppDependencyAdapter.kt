@@ -8,7 +8,8 @@ import tmg.utilities.sortedlist.SortedListAdapter
 import tmg.utilities.sortedlist.SortedListComparator
 
 class AboutThisAppDependencyAdapter(
-    private val callback: AboutThisAppDependencyCallback
+    private val callback: AboutThisAppDependencyCallback,
+    private val isDarkMode: Boolean
 ): SortedListAdapter<AboutThisAppDependency, AboutThisAppDependencyViewHolder>(AboutThisAppDependency::class.java, AboutThisAppDependencyComparator()) {
     override fun onBindViewHolder(
         holder: AboutThisAppDependencyViewHolder,
@@ -23,7 +24,7 @@ class AboutThisAppDependencyAdapter(
         viewType: Int
     ): AboutThisAppDependencyViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_view_dependency_item, parent, false)
-        return AboutThisAppDependencyViewHolder(callback, view)
+        return AboutThisAppDependencyViewHolder(callback, isDarkMode, view)
     }
 }
 

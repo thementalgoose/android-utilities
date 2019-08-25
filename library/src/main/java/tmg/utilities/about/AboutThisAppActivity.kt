@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_about_this_app.*
@@ -14,6 +15,8 @@ import tmg.utilities.extensions.subscribeNoError
 import tmg.utilities.mvvm.MVVMActivity
 
 class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependencyCallback {
+
+    private var isDarkMode: Boolean = false
 
     private lateinit var name: String
     private lateinit var nameDesc: String
@@ -42,6 +45,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
     override fun arguments(bundle: Bundle) {
         super.arguments(bundle)
         intent.extras?.let {
+            isDarkMode = it.getBoolean(INTENT_IS_DARK_MODE)
             github = it.getString(INTENT_GITHUB)!!
             email = it.getString(INTENT_EMAIL)!!
             website = it.getString(INTENT_WEBSITE)!!
@@ -80,9 +84,34 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         )
         viewModel.inputs.setupDependencies(dependencies)
 
+        if (isDarkMode) {
+            llAboutThisAppBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_backgroundDark))
+
+            toolbar?.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_headerDark))
+            rlToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_headerDark))
+            tvAboutThisAppName.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLight))
+            tvAboutThisAppDesc.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLightSecondary))
+
+            tvAboutThisAppThankYou.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLightSecondary))
+            tvAboutThisAppFootnotes.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLightSecondary))
+            tvAboutThisAppAppVersion.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLightSecondary))
+        }
+        else {
+            llAboutThisAppBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_backgroundLight))
+
+            toolbar?.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_headerLight))
+            rlToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_headerLight))
+            tvAboutThisAppName.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLight))
+            tvAboutThisAppDesc.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textLightSecondary))
+
+            tvAboutThisAppThankYou.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textDarkSecondary))
+            tvAboutThisAppFootnotes.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textDarkSecondary))
+            tvAboutThisAppAppVersion.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textDarkSecondary))
+        }
+
         initToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
 
-        adapter = AboutThisAppDependencyAdapter(this)
+        adapter = AboutThisAppDependencyAdapter(this, isDarkMode)
         rvAboutThisAppDependencies.layoutManager = LinearLayoutManager(this)
         rvAboutThisAppDependencies.adapter = adapter
     }
@@ -91,25 +120,49 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
 
         // Inputs
 
-        disposables += btnGithub
+        disposables += btnGithubLight
             .click()
             .subscribeNoError {
                 viewModel.inputs.clickGithub()
             }
 
-        disposables += btnEmail
+        disposables += btnEmailLight
             .click()
             .subscribeNoError {
                 viewModel.inputs.clickEmail()
             }
 
-        disposables += btnPlay
+        disposables += btnPlayLight
             .click()
             .subscribeNoError {
                 viewModel.inputs.clickPlay()
             }
 
-        disposables += btnWebsite
+        disposables += btnWebsiteLight
+            .click()
+            .subscribeNoError {
+                viewModel.inputs.clickWebsite()
+            }
+
+        disposables += btnGithubDark
+            .click()
+            .subscribeNoError {
+                viewModel.inputs.clickGithub()
+            }
+
+        disposables += btnEmailDark
+            .click()
+            .subscribeNoError {
+                viewModel.inputs.clickEmail()
+            }
+
+        disposables += btnPlayDark
+            .click()
+            .subscribeNoError {
+                viewModel.inputs.clickPlay()
+            }
+
+        disposables += btnWebsiteDark
             .click()
             .subscribeNoError {
                 viewModel.inputs.clickWebsite()
@@ -214,9 +267,11 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         private const val INTENT_FOOTNOTE: String = "INTENT_FOOTNOTE"
         private const val INTENT_THANK_YOU: String = "INTENT_THANK_YOU"
         private const val INTENT_DEPENDENCIES: String = "INTENT_DEPENDENCIES"
+        private const val INTENT_IS_DARK_MODE: String = "INTENT_IS_DARK_MODE"
 
         @JvmStatic
         fun intent(context: Context,
+                   isDarkMode: Boolean,
                    name: String,
                    nameDesc: String,
                    imageUrl: String,
@@ -235,6 +290,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
                 throw Exception("You must set either a play store link or give the package name")
             }
             val intent = Intent(context, AboutThisAppActivity::class.java)
+            intent.putExtra(INTENT_IS_DARK_MODE, isDarkMode)
             intent.putExtra(INTENT_NAME, name)
             intent.putExtra(INTENT_NAME_DESC, nameDesc)
             intent.putExtra(INTENT_IMAGE_URL, imageUrl)

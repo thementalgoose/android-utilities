@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:id="@+id/llAboutThisAppBackground"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
             style="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:id="@+id/toolbar"
-            android:background="@color/aboutThisApp_backgroundColor"
+            android:background="@color/aboutThisApp_headerLight"
             android:elevation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
@@ -24,8 +25,9 @@
                 android:paddingBottom="@dimen/aboutThisApp_edgePadding">
 
             <RelativeLayout
+                    android:id="@+id/rlToolbar"
                     android:elevation="@dimen/aboutThisApp_toolbarElevation"
-                    android:background="@color/aboutThisApp_backgroundColor"
+                    android:background="@color/aboutThisApp_headerLight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -77,26 +79,88 @@
                     android:orientation="horizontal">
 
                 <Button
-                        android:id="@+id/btnGithub"
+                        android:id="@+id/btnGithubLight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:drawableTop="@drawable/ic_util_icon_github"
+                        android:drawableTop="@drawable/ic_util_icon_github_light"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/aboutThisApp_textLight"
+                        android:text="@string/about_this_app_github"
+                        android:textAllCaps="false" />
+
+                <Button
+                        android:id="@+id/btnWebsiteLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@drawable/ic_util_icon_website_light"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/aboutThisApp_textLight"
+                        android:text="@string/about_this_app_website"
+                        android:textAllCaps="false" />
+
+                <Button
+                        android:id="@+id/btnEmailLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@drawable/ic_util_icon_email_light"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/aboutThisApp_textLight"
+                        android:text="@string/about_this_app_email"
+                        android:textAllCaps="false" />
+
+                <Button
+                        android:id="@+id/btnPlayLight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@drawable/ic_util_icon_play_light"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/aboutThisApp_textLight"
+                        android:paddingBottom="8dp"
+                        android:text="@string/about_this_app_play"
+                        android:textAllCaps="false" />
+
+                <Button
+                        android:id="@+id/btnGithubDark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableTop="@drawable/ic_util_icon_github_dark"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/aboutThisApp_textDark"
                         android:paddingBottom="8dp"
                         android:text="@string/about_this_app_github"
                         android:textAllCaps="false" />
 
                 <Button
-                        android:id="@+id/btnWebsite"
+                        android:id="@+id/btnWebsiteDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/aboutThisApp_textDark"
                         android:background="@null"
-                        android:drawableTop="@drawable/ic_util_icon_website"
+                        android:drawableTop="@drawable/ic_util_icon_website_dark"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:paddingTop="8dp"
@@ -105,12 +169,13 @@
                         android:textAllCaps="false" />
 
                 <Button
-                        android:id="@+id/btnEmail"
+                        android:id="@+id/btnEmailDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:drawableTop="@drawable/ic_util_icon_email"
+                        android:textColor="@color/aboutThisApp_textDark"
+                        android:drawableTop="@drawable/ic_util_icon_email_dark"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:paddingTop="8dp"
@@ -119,12 +184,13 @@
                         android:textAllCaps="false" />
 
                 <Button
-                        android:id="@+id/btnPlay"
+                        android:id="@+id/btnPlayDark"
+                        android:textColor="@color/aboutThisApp_textDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:drawableTop="@drawable/ic_util_icon_play"
+                        android:drawableTop="@drawable/ic_util_icon_play_dark"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center"
                         android:paddingTop="8dp"
@@ -155,7 +221,6 @@
                     android:id="@+id/tvAboutThisAppFootnotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:paddingStart="@dimen/aboutThisApp_edgePadding"
                     android:paddingTop="@dimen/aboutThisApp_edgePadding"
                     android:paddingEnd="@dimen/aboutThisApp_edgePadding"

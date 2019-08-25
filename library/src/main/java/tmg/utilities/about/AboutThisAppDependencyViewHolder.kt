@@ -4,12 +4,14 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import tmg.utilities.R
 
 class AboutThisAppDependencyViewHolder(
     private val callback: AboutThisAppDependencyCallback,
+    isDarkMode: Boolean,
     itemView: View
 ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
@@ -23,6 +25,46 @@ class AboutThisAppDependencyViewHolder(
 
     init {
         clAboutThisAppDependencyMain.setOnClickListener(this)
+        if (isDarkMode) {
+            tvAboutThisAppDependencyName.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textLight
+                )
+            )
+            tvAboutThisAppDependencyAuthor.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textLight
+                )
+            )
+            tvAboutThisAppDependencyUrl.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textLight
+                )
+            )
+        }
+        else {
+            tvAboutThisAppDependencyName.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textDark
+                )
+            )
+            tvAboutThisAppDependencyAuthor.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textDark
+                )
+            )
+            tvAboutThisAppDependencyUrl.setTextColor(
+                ContextCompat.getColor(
+                    itemView.context,
+                    R.color.aboutThisApp_textDark
+                )
+            )
+        }
     }
 
     fun bind(dependency: AboutThisAppDependency) {
