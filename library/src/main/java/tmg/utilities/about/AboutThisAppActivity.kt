@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_about_this_app.*
 import tmg.utilities.R
-import tmg.utilities.extensions.bindText
-import tmg.utilities.extensions.click
-import tmg.utilities.extensions.subscribeNoError
+import tmg.utilities.extensions.*
 import tmg.utilities.mvvm.MVVMActivity
 
 class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependencyCallback {
@@ -82,7 +80,12 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
             thankYou = thankYou,
             appVersion = appVersion
         )
+
         viewModel.inputs.setupDependencies(dependencies)
+
+        showButtons(isDarkMode)
+
+        initToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
 
         if (isDarkMode) {
             llAboutThisAppBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_backgroundDark))
@@ -109,11 +112,20 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
             tvAboutThisAppAppVersion.setTextColor(ContextCompat.getColor(this, R.color.aboutThisApp_textDarkSecondary))
         }
 
-        initToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
-
         adapter = AboutThisAppDependencyAdapter(this, isDarkMode)
         rvAboutThisAppDependencies.layoutManager = LinearLayoutManager(this)
         rvAboutThisAppDependencies.adapter = adapter
+    }
+
+    private fun showButtons(isDarkMode: Boolean) {
+        if (isDarkMode) btnGithubLight.show() else btnGithubLight.hide()
+        if (isDarkMode) btnWebsiteLight.show() else btnWebsiteLight.hide()
+        if (isDarkMode) btnEmailLight.show() else btnEmailLight.hide()
+        if (isDarkMode) btnPlayLight.show() else btnPlayLight.hide()
+        if (!isDarkMode) btnGithubDark.show() else btnGithubDark.hide()
+        if (!isDarkMode) btnWebsiteDark.show() else btnWebsiteDark.hide()
+        if (!isDarkMode) btnEmailDark.show() else btnEmailDark.hide()
+        if (!isDarkMode) btnPlayDark.show() else btnPlayDark.hide()
     }
 
     override fun observeViewModel() {
