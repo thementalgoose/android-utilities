@@ -28,7 +28,7 @@ interface AboutThisAppVMOutputs {
     fun dependencies(): Observable<List<AboutThisAppDependency>>
 
     fun clickedGithub(): Observable<String>
-    fun cilckedWebsite(): Observable<String>
+    fun clickedWebsite(): Observable<String>
     fun clickedEmail(): Observable<String>
     fun clickedPlay(): Observable<String>
 
@@ -126,7 +126,7 @@ class AboutThisAppVM: MVVMViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutpu
         return githubLinkEvent.takeWhen(githubEvent)
     }
 
-    override fun cilckedWebsite(): Observable<String> {
+    override fun clickedWebsite(): Observable<String> {
         return websiteLinkEvent.takeWhen(websiteEvent)
     }
 

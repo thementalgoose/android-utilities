@@ -5,10 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_about_this_app.*
-import kotlinx.android.synthetic.main.item_view_dependency_item.*
 import tmg.utilities.R
 import tmg.utilities.extensions.bindText
 import tmg.utilities.extensions.click
@@ -119,7 +117,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         // Outputs
 
         disposables += viewModel.outputs
-            .cilckedWebsite()
+            .clickedWebsite()
             .subscribeNoError {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             }
@@ -127,17 +125,17 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         disposables += viewModel.outputs
             .clickedEmail()
             .subscribeNoError {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-            }
-
-        disposables += viewModel.outputs
-            .clickedGithub()
-            .subscribeNoError {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/html"
                 intent.putExtra(Intent.EXTRA_EMAIL, it)
                 intent.putExtra(Intent.EXTRA_SUBJECT, appName)
                 startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
+            }
+
+        disposables += viewModel.outputs
+            .clickedGithub()
+            .subscribeNoError {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             }
 
         disposables += viewModel.outputs

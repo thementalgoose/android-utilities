@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="aboutThisApp_avatarSize">56dp</dimen>
+    <dimen name="aboutThisApp_avatarSize">72dp</dimen>
     <dimen name="aboutThisApp_dependencyIconSize">42dp</dimen>
     <dimen name="aboutThisApp_edgePadding">12dp</dimen>
     <dimen name="aboutThisApp_edgePaddingHalf">6dp</dimen>
