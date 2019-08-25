@@ -87,6 +87,8 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
 
         initToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
 
+        setStatusBar(ContextCompat.getColor(this, if (isDarkMode) R.color.aboutThisApp_headerDark else R.color.aboutThisApp_headerLight))
+
         if (isDarkMode) {
             llAboutThisAppBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_backgroundDark))
 
