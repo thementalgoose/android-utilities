@@ -239,12 +239,47 @@ fun <T> Observable<T>.subscribeNoError(onNext: (value: T) -> Unit): Disposable {
 
 //region Observable<Boolean>
 
+/**
+ * Check if observable value is true
+ */
 fun Observable<Boolean>.isTrue(): Observable<Boolean> {
     return this.filter { it }
 }
 
+/**
+ * Check if observable value is false
+ */
 fun Observable<Boolean>.isFalse(): Observable<Boolean> {
     return this.filter { !it }
+}
+
+//endregion
+
+//region Observable<String>
+
+/**
+ * If the string is empty, map it to a given [value]
+ */
+fun Observable<String>.mapEmptyTo(value: String): Observable<String> {
+    return this.map {
+        return@map if (it.isEmpty()) {
+            value
+        }
+        else {
+            it
+        }
+    }
+}
+
+/**
+ * Bind the text to the Edit Text if it's not already in focus!
+ */
+fun Observable<String>.bindTextIfNotFocus(editText: EditText): Disposable {
+    return this.subscribeNoError {
+        if (!editText.hasFocus() && editText.text.toString() != it) {
+            editText.setText(it)
+        }
+    }
 }
 
 //endregion

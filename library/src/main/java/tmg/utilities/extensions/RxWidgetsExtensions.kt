@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
+import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
@@ -45,7 +46,8 @@ fun View.clickObservable(): Observable<Unit> {
 
 //endregion
 
-//region
+//region Switch
+
 fun Switch.click(): Observable<Any> {
     return RxView
         .clicks(this)

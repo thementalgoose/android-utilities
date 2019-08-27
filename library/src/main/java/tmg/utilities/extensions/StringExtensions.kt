@@ -24,6 +24,8 @@ fun String.toDate(format: String): Date {
 
 /**
  * Get the minutes from a time string
+ *
+ * Assumes the string is "HH:mm"
  */
 fun String.minsPastHour(): Int {
     val resp: List<String> = this.split(":")
@@ -35,6 +37,8 @@ fun String.minsPastHour(): Int {
 
 /**
  * Get the total mins
+ *
+ * Assumes the string is "HH:mm"
  */
 fun String.minsTotal(): Int {
     val resp: List<String> = this.split(":")
@@ -46,6 +50,8 @@ fun String.minsTotal(): Int {
 
 /**
  * Get the hours from a time string
+ *
+ * Assumes the string is "HH:mm"
  */
 fun String.hours(): Int {
     val resp: List<String> = this.split(":")

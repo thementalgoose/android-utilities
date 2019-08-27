@@ -1,30 +1,46 @@
 package tmg.utilities.mvvm
 
+import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 
 abstract class MVVMViewModel: ViewModel() {
 
-    val disposables: MutableList<Disposable> = mutableListOf()
+    lateinit var context: Context
+
+    @Deprecated("Please return observables back to the Activity or Fragment. Will be removed in the future")
+    private val disposables: MutableList<Disposable> = mutableListOf()
 
     /**
      * Register a disposable with the view model
+     *
+     * @deprecated Please pipe disposables out of the View Model into the Activity / Fragment
      */
+    @Deprecated("No longer used. Return observables back to the Activity or Fragment")
     fun register(disposable: Disposable) {
         disposables.add(disposable)
+    }
+
+    /**
+     * Supply the context to the view model before anything gets returned out
+     */
+    open fun supplyContext(context: Context) {
+        this.context = context
     }
 
     /**
      * State handling method for state restoration
      */
     open fun saveInstanceState(bundle: Bundle) {
+
     }
 
     /**
      * State handling method for state restoration
      */
     open fun restoreInstanceState(bundle: Bundle) {
+
     }
 
     /**

@@ -5,10 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
-import androidx.annotation.LayoutRes
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
@@ -46,11 +43,9 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         viewModel = viewModelProvider().get(viewModelClass())
+        viewModel.supplyContext(applicationContext)
         initViews()
     }
-
-    abstract fun viewModelClass(): Class<VM>
-
     open fun viewModelProvider(): ViewModelProvider {
         return ViewModelProviders.of(this)
     }
@@ -82,6 +77,10 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
         indicator?.let {
             supportActionBar!!.setHomeAsUpIndicator(it)
         }
+    }
+
+    fun setToolbarTitle(@StringRes title: Int) {
+        supportActionBar?.setTitle(title)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -147,6 +146,11 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
      */
     @LayoutRes
     abstract fun getLayoutId(): Int
+
+    /**
+     * Get the class of the VM for VM inflation
+     */
+    abstract fun viewModelClass(): Class<VM>
 
     /**
      * Initialise the views.

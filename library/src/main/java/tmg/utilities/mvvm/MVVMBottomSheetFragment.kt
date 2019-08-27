@@ -30,6 +30,7 @@ abstract class MVVMBottomSheetFragment<VM: MVVMViewModel>: BottomSheetDialogFrag
         }
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider().get(viewModelClass())
+        viewModel.supplyContext(context!!)
     }
 
     /**
@@ -48,6 +49,10 @@ abstract class MVVMBottomSheetFragment<VM: MVVMViewModel>: BottomSheetDialogFrag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+    }
+
+    fun viewModelProvider(): ViewModelProvider {
+        return ViewModelProviders.of(this)
     }
 
     /**
@@ -121,10 +126,6 @@ abstract class MVVMBottomSheetFragment<VM: MVVMViewModel>: BottomSheetDialogFrag
     abstract fun getLayoutId(): Int
 
     abstract fun viewModelClass(): Class<VM>
-
-    open fun viewModelProvider(): ViewModelProvider {
-        return ViewModelProviders.of(this)
-    }
 
     /**
      * Observe I/O on the view model

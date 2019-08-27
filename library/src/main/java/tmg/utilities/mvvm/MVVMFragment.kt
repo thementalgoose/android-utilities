@@ -33,6 +33,7 @@ abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
         }
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider().get(viewModelClass())
+        viewModel.supplyContext(context!!)
     }
 
     /**

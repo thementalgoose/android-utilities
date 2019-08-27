@@ -87,7 +87,7 @@ fun <T: Any> Context.startActivity(kClass: Class<T>) {
 
 //region HTML
 
-fun Context.getHtml(@IdRes id: Int): Spanned {
+fun Context.getHtml(@StringRes id: Int): Spanned {
     return getString(id).html()
 }
 

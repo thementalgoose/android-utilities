@@ -6,14 +6,22 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
 
-fun SpannableString.onClick(source: String, color: Int, onClick: () -> Unit): SpannableString {
+/**
+ * Take some text, highlight some text with a color and add a click listener to it
+ * @param source Text to click
+ * @param color Color to change too, default = null,
+ * @param onClick Callback
+ */
+fun SpannableString.onClick(source: String, color: Int? = null, onClick: () -> Unit): SpannableString {
     val startIndex = this.toString().indexOf(source)
     if (startIndex == -1) {
         throw Exception("Cannot highlight this title as $source is not contained with ${this}")
     }
     this.setSpan(object : ClickableSpan() {
         override fun updateDrawState(ds: TextPaint) {
-            ds.color = color
+            if (color != null) {
+                ds.color = color
+            }
         }
 
         override fun onClick(widget: View) {
@@ -31,7 +39,7 @@ fun String.highlight(source: String, color: Int): SpannableString {
     if (startIndex == -1) {
         throw Exception("Cannot highlight this title as $source is not contained with ${this}")
     }
-    val spannable: SpannableString = SpannableString(this)
+    val spannable = SpannableString(this)
     spannable.setSpan(object : ClickableSpan() {
         override fun updateDrawState(ds: TextPaint) {
             ds.color = color

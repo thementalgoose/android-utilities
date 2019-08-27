@@ -29,6 +29,7 @@ abstract class MVVMDialogFragment<VM: MVVMViewModel>: DialogFragment() {
         }
         super.onCreate(savedInstanceState)
         viewModel = viewModelProvider().get(viewModelClass())
+        viewModel.supplyContext(context!!)
     }
 
     abstract fun viewModelClass(): Class<VM>
@@ -108,6 +109,7 @@ abstract class MVVMDialogFragment<VM: MVVMViewModel>: DialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = viewModelProvider().get(viewModelClass())
+        viewModel.supplyContext(context!!)
     }
     //region Abstract methods
     /**
