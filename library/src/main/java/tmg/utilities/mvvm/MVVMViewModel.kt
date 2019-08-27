@@ -25,8 +25,13 @@ abstract class MVVMViewModel: ViewModel() {
     /**
      * Supply the context to the view model before anything gets returned out
      */
-    open fun supplyContext(context: Context) {
+    fun supplyContext(context: Context) {
         this.context = context
+        contextAvailable()
+    }
+
+    open fun contextAvailable() {
+
     }
 
     /**
