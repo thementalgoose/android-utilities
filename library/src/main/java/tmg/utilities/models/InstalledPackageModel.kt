@@ -22,7 +22,7 @@ data class InstalledPackageModel(
         packageManager = packageManager,
         packageInfo = packageInfo,
         appName = packageInfo.loadLabel(packageManager).toString(),
-        packageName = packageInfo.resolvePackageName,
+        packageName = packageInfo.activityInfo.packageName,
         iconRes = packageInfo.icon
     )
 
