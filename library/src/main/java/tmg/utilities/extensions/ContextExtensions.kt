@@ -102,8 +102,10 @@ fun Context.getHtml(value: String): Spanned {
 
 //region Installed apps
 
-fun Context.installedPackages(): List<InstalledPackageModel> {
-    val pmList = packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
+fun Context.installedPackages(flags: Int? = null): List<InstalledPackageModel> {
+    val intent = Intent(Intent.ACTION_MAIN, null)
+    intent.addCategory(Intent.CATEGORY_LAUNCHER)
+    val pmList = packageManager.queryIntentActivities(intent, flags ?: 0)
     return pmList.map {
         InstalledPackageModel(packageManager, it)
     }
