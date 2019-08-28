@@ -8,6 +8,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposables
 
@@ -80,6 +82,16 @@ fun View.rect(): Rect {
     val l = IntArray(2)
     getLocationOnScreen(l)
     return Rect(l[0], l[1], l[0] + width, l[1] + height)
+}
+
+//endregion
+
+//region Snackbar
+
+fun View.snackbar(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG, func: Snackbar.() -> Unit) {
+    val snackbar = Snackbar.make(this, resources.getString(messageRes), length)
+    snackbar.func()
+    snackbar.show()
 }
 
 //endregion

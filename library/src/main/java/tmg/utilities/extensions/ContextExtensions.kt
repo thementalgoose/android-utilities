@@ -2,11 +2,14 @@ package tmg.utilities.extensions
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.text.Spanned
 import androidx.annotation.ArrayRes
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import io.reactivex.Observable
+import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.SharedPreferencesUtils
+import tmg.utilities.utils.ongoing
 import kotlin.reflect.KClass
 
 //region Shared Preferences
@@ -93,6 +96,21 @@ fun Context.getHtml(@StringRes id: Int): Spanned {
 
 fun Context.getHtml(value: String): Spanned {
     return value.html()
+}
+
+//endregion
+
+//region Installed apps
+
+fun Context.installedPackages(): List<InstalledPackageModel> {
+    val pmList = packageManager.getInstalledPackages(PackageManager.GET_META_DATA)
+    return pmList.map {
+        InstalledPackageModel(packageManager, it)
+    }
+}
+
+fun Context.installedPackagesObservable(): Observable<List<InstalledPackageModel>> {
+    return ongoing { installedPackages() }
 }
 
 //endregion
