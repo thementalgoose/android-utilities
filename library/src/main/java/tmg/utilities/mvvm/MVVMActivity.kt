@@ -16,11 +16,12 @@ import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.Disposable
 import tmg.utilities.utils.ColorUtils
 
-abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
+abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity(), MVVMFragmentToActivityCommunicator {
 
     lateinit var viewModel: VM
     val disposables: MutableList<Disposable> = mutableListOf()
     var toolbar: Toolbar? = null
+    var fragmentCommunicator: MVVMActivityToFragmentCommunicator? = null
 
     private var showBack: Boolean? = null
 
@@ -46,6 +47,7 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
         viewModel.supplyContext(applicationContext)
         initViews()
     }
+
     open fun viewModelProvider(): ViewModelProvider {
         return ViewModelProviders.of(this)
     }
@@ -90,6 +92,35 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (passBackEventsToFragments()) {
+            if (fragmentCommunicator == null || !fragmentCommunicator!!.activityFragmentBackClicked()) {
+                super.onBackPressed()
+            } else {
+                backPressHandledByFragment()
+            }
+        }
+        else {
+            super.onBackPressed()
+        }
+    }
+
+    /**
+     * Override method to disable passing events back to the [MVVMFragment]
+     * Defaults to true
+     */
+    open fun passBackEventsToFragments(): Boolean {
+        return true
+    }
+
+    /**
+     * Method called when a back press is handled by an instance of MVVMFragment that's inside
+     * the [getSupportFragmentManager] manager
+     */
+    open fun backPressHandledByFragment() {
+
     }
 
     /**
@@ -176,7 +207,6 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
     //endregion
 
     //region Permissions
-
 
     /**
      * Request a given permission
@@ -283,7 +313,6 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
 
     //region Fragments
 
-
     /**
      * Loading in a fragment to an activity
      *
@@ -310,6 +339,14 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity() {
      */
     fun loadFragment(frag: Fragment, @IdRes layoutRes: Int) {
         loadFragment(frag, layoutRes, null)
+    }
+
+    //endregion
+
+    //region MVVMCommunicators
+
+    override fun provideCommunicator(communicator: MVVMActivityToFragmentCommunicator) {
+        this.fragmentCommunicator = communicator
     }
 
     //endregion

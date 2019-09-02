@@ -1,5 +1,6 @@
 package tmg.utilities.mvvm
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.Disposable
 
-abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
+abstract class MVVMFragment<VM: MVVMViewModel>: Fragment(), MVVMActivityToFragmentCommunicator {
 
     lateinit var viewModel: VM
     var disposables: MutableList<Disposable> = mutableListOf()
@@ -70,6 +71,10 @@ abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
 
     }
 
+    /**
+     * OnResume
+     * - Relaunch Observable bindings
+     */
     override fun onResume() {
         super.onResume()
         observeViewModel()
@@ -89,6 +94,12 @@ abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
         return true
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is MVVMFragmentToActivityCommunicator) {
+            (context as MVVMFragmentToActivityCommunicator).provideCommunicator(this)
+        }
+    }
 
     /**
      * State restoration methods for passing data to the view models
@@ -110,6 +121,23 @@ abstract class MVVMFragment<VM: MVVMViewModel>: Fragment() {
             viewModel.restoreInstanceState(it)
         }
     }
+
+    //region Back button behavior
+
+    override fun activityFragmentBackClicked(): Boolean {
+        return onBackPressed()
+    }
+
+    /**
+     * Method called if enabled in [MVVMActivity]
+     * Return true if this fragment handles the back, otherwise return false
+     * Defaults to false (to handle it back in the activity)
+     */
+    open fun onBackPressed(): Boolean {
+        return false
+    }
+
+    //endregion
 
     //region Abstract methods
 
