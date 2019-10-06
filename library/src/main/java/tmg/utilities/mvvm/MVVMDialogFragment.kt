@@ -44,9 +44,9 @@ abstract class MVVMDialogFragment<VM: MVVMViewModel>: DialogFragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(getLayoutId(), container, false)
-        if (dialog != null && dialog.window != null) {
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.let {
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.requestFeature(Window.FEATURE_NO_TITLE)
         }
         return v
     }

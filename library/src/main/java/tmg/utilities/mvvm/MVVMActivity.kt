@@ -151,8 +151,8 @@ abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity(), MVVMFragmen
      * State restoration methods for passing data to the view models
      * - onSaveInstanceState
      */
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState?.let {
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.let {
             viewModel.saveInstanceState(it)
         }
         super.onSaveInstanceState(outState)

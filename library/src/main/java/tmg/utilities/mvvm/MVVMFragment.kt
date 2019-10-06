@@ -94,7 +94,7 @@ abstract class MVVMFragment<VM: MVVMViewModel>: Fragment(), MVVMActivityToFragme
         return true
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is MVVMFragmentToActivityCommunicator) {
             (context as MVVMFragmentToActivityCommunicator).provideCommunicator(this)
