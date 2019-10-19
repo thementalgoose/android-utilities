@@ -1,19 +1,15 @@
 package tmg.utilities.extensions
 
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.IdRes
-import io.reactivex.Notification
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
-import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function3
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Notification
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.BiFunction
+import io.reactivex.rxjava3.functions.Function3
 
 /**
  * Calls Observable.combineLatest() on [this] and [other] creating an [Observable] of Pairs of both

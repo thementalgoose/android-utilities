@@ -5,43 +5,37 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.TextView
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
+import androidx.core.widget.addTextChangedListener
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.rxjava3.core.Observable
+import com.jakewharton.rxbinding3.widget.textChanges
 
-//region Buttons
-
-fun Button.textChanged(): Observable<String> {
-    return RxTextView
-        .textChanges(this)
-        .map { it.toString() }
-}
-
-//endregion
+// TODO: Replace these with proper listeners when RxBindings gets updated to support RxJava3
 
 //region Edit Text
 
 fun EditText.textChanged(): Observable<String> {
-    return RxTextView
-        .textChanges(this)
-        .map { it.toString() }
+    return Observable.create { emitter ->
+        this.addTextChangedListener {
+            emitter.onNext(it.toString())
+        }
+    }
 }
 
 fun EditText.focus(): Observable<Boolean> {
-    return RxView
-        .focusChanges(this)
+    return Observable.create { emitter ->
+        this.setOnFocusChangeListener { view, b ->
+            emitter.onNext(b)
+        }
+    }
 }
 
 fun View.click(): Observable<Any> {
-    return RxView
-        .clicks(this)
-}
-
-fun View.clickObservable(): Observable<Unit> {
-    return RxView
-        .clicks(this)
-        .map { Unit }
+    return Observable.create { emitter ->
+        this.setOnClickListener {
+            emitter.onNext(Unit)
+        }
+    }
 }
 
 //endregion
@@ -49,8 +43,11 @@ fun View.clickObservable(): Observable<Unit> {
 //region Switch
 
 fun Switch.click(): Observable<Any> {
-    return RxView
-        .clicks(this)
+    return Observable.create { emitter ->
+        this.setOnClickListener {
+            emitter.onNext(Unit)
+        }
+    }
 }
 
 //endregion

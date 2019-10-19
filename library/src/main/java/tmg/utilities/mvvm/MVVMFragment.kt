@@ -9,7 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class MVVMFragment<VM: MVVMViewModel>: Fragment(), MVVMActivityToFragmentCommunicator {
 

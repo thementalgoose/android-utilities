@@ -3,7 +3,7 @@ package tmg.utilities.mvvm
 import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 abstract class MVVMViewModel: ViewModel() {
 

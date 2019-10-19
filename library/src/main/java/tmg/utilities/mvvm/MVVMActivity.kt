@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.disposables.Disposable
 import tmg.utilities.utils.ColorUtils
 
 abstract class MVVMActivity<VM: MVVMViewModel>: AppCompatActivity(), MVVMFragmentToActivityCommunicator {
