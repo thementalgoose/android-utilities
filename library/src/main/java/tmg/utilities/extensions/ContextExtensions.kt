@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.text.Spanned
 import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.SharedPreferencesUtils
 import tmg.utilities.utils.ongoing
