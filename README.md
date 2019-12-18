@@ -1,8 +1,6 @@
 # Android Utilities class 
 
-Contains a collection of all the sample utility / base / abstract classes that I use throughout most of my projects 
-
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
+Contains a collection of all the extensions and generic utilities that I commonly use
 
 #### Root `build.gradle`
 
@@ -19,28 +17,8 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-utilities:'
+    implementation 'com.github.thementalgoose:android-utilities:1.0.0'     // Use Jitpack version if newer
 }
 ```
 
 [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
-
-
-#### Usage
-
-```
-    <!-- Override colours in the setting by declaring these in your app -->
-    <color name="aboutThisApp_headerDark">#3C306E</color>
-    <color name="aboutThisApp_headerLight">#5D25E6</color>
-
-    <color name="aboutThisApp_textDesc">#f2f2f2</color>
-    <color name="aboutThisApp_textName">#fbfbfb</color>
-
-    <color name="aboutThisApp_backgroundLight">#f2f2f2</color>
-    <color name="aboutThisApp_textLight">#f8f8f8</color>
-    <color name="aboutThisApp_textLightSecondary">#e8e8e8</color>
-
-    <color name="aboutThisApp_backgroundDark">#282828</color>
-    <color name="aboutThisApp_textDark">#222222</color>
-    <color name="aboutThisApp_textDarkSecondary">#383838</color>
-```
