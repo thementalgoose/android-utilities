@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="about_this_app_github">Github</string>
-    <string name="about_this_app_email">Email</string>
-    <string name="about_this_app_website">Website</string>
-    <string name="about_this_app_play">Play</string>
-    <string name="app_version_version_name">App Version %s</string>
-    <string name="about_this_app_send_email">Send Email</string>
-</resources>

@@ -35,3 +35,18 @@ fun Float.toDecimalPlaces(dp: Int): Float {
 }
 
 //endregion
+
+//region Positive values only
+
+/**
+ * Make any float value capped as a positive value
+ */
+fun Float.positive(): Float {
+    return if (this < 0.0f) {
+        0.0f
+    } else {
+        this
+    }
+}
+
+//endregion

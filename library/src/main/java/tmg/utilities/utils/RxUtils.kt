@@ -1,6 +1,6 @@
 package tmg.utilities.utils
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * Start an observable stream with a value that doesn't close

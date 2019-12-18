@@ -69,10 +69,10 @@ fun String.hours(): Int {
  * Convert the string to HTML
  */
 fun String.fromHtml(): Spanned {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     } else {
-        return Html.fromHtml(this)
+        Html.fromHtml(this)
     }
 }
 
@@ -120,19 +120,22 @@ fun String.isHttp(): Boolean {
 
 //region Snackbar
 
+/**
+ * Show a given string as a snackbar message
+ */
 fun String.showAsSnackbar(view: View, length: Int = Snackbar.LENGTH_LONG) {
     Snackbar.make(view, this, length).show()
 }
 
 //endregion
 
-//region HTML
+//region Enums
 
 /**
- * Convert a string to HTML
+ * Convert any string value into it's enum value by a given property of the enum
  */
-fun String.html(): Spanned {
-    return HtmlCompat.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY);
+inline fun <reified T : Enum<T>> String.toEnum(by: (enum: T) -> String = { it.name }): T? {
+    return enumValues<T>().firstOrNull { by(it) == this }
 }
 
 //endregion

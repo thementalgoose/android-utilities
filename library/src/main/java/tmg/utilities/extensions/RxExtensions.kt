@@ -10,6 +10,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.functions.Function3
+import tmg.utilities.models.Nullable
 
 /**
  * Calls Observable.combineLatest() on [this] and [other] creating an [Observable] of Pairs of both
@@ -215,18 +216,23 @@ fun Observable<String>.bindContentDescription(view: ImageView): Disposable {
 
 //endregion
 
+/**
+ * Print the contents of the observable stream
+ */
 fun <T> Observable<T>.print(): Observable<T> {
     return this.print { it.toString() }
 }
 
 //region Subscription
 
+/**
+ * Subscribe to an observable, implement the error handler but do nothing with it
+ */
 fun <T> Observable<T>.subscribeNoError(onNext: (value: T) -> Unit): Disposable {
     return this.subscribe({
-        Log.d("Rx", "Subscription called");
         onNext(it)
     }, { error ->
-        Log.e("Rx", "Error occured but error is surpressed")
+        Log.e("Rx", "Error occurred but error is suppressed")
         error.printStackTrace()
     })
 }
@@ -274,6 +280,80 @@ fun Observable<String>.bindTextIfNotFocus(editText: EditText): Disposable {
     return this.subscribeNoError {
         if (!editText.hasFocus() && editText.text.toString() != it) {
             editText.setText(it)
+        }
+    }
+}
+
+//endregion
+
+//region Observable<List<T>>
+
+/**
+ * If the list in this flow is empty then use a specified value
+ * @param list
+ */
+fun <T> Observable<List<T>>.ifListEmpty(list: List<T>): Observable<List<T>> {
+    return map {
+        return@map if (it.isEmpty()) {
+            list
+        }
+        else {
+            it
+        }
+    }
+}
+
+//endregion
+
+//region Observable<Nullable>
+
+/**
+ * Filter if the value inside the nullable is actually null or not
+ */
+fun <T> Observable<Nullable<T>>.filterNotNull(): Observable<T> {
+    return concatMap {
+        if(it.value != null) {
+            Observable.just(it.value)
+        }
+        else {
+            Observable.empty()
+        }
+    }
+}
+
+/**
+ * Extract the data held in Nullable<T> and map it's contents to form Nullable<R>
+ * @param func
+ */
+fun <T, R> Observable<Nullable<T>>.mapNullable(func: (T?) -> R?): Observable<Nullable<R>> {
+    return map {
+        Nullable(func(it.value))
+    }
+}
+
+/**
+ * Wrap a value inside a nullable
+ * @param func
+ */
+fun <T, R> Observable<T>.wrapNullable(func: (T) -> R?): Observable<Nullable<R>> {
+    return map {
+        Nullable(func(it))
+    }
+}
+
+/**
+ * Switch map operation on a nullable value
+ */
+fun <T, R> Observable<Nullable<T>>.switchMapNullable(func: (T) -> Observable<R>): Observable<Nullable<R>> {
+    return switchMap {
+        if(it.value == null) {
+            Observable.just(Nullable())
+        }
+        else {
+            func(it.value)
+                .map {
+                    Nullable(it)
+                }
         }
     }
 }

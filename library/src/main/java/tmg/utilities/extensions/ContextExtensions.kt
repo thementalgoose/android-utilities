@@ -91,11 +91,11 @@ fun <T: Any> Context.startActivity(kClass: Class<T>) {
 //region HTML
 
 fun Context.getHtml(@StringRes id: Int): Spanned {
-    return getString(id).html()
+    return getString(id).fromHtml()
 }
 
 fun Context.getHtml(value: String): Spanned {
-    return value.html()
+    return value.fromHtml()
 }
 
 //endregion
