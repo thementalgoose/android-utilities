@@ -11,6 +11,7 @@ import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.SharedPreferencesUtils
 import tmg.utilities.utils.ongoing
 import kotlin.reflect.KClass
+import android.content.res.Configuration
 
 //region Shared Preferences
 
@@ -113,6 +114,33 @@ fun Context.installedPackages(flags: Int? = null): List<InstalledPackageModel> {
 
 fun Context.installedPackagesObservable(): Observable<List<InstalledPackageModel>> {
     return ongoing { installedPackages() }
+}
+
+//endregion
+
+//region Dark Mode
+
+/**
+ * Check if the preference from the OS is in "night" mode
+ * @param ifUndefinedDefaultTo Defaults to false (ie. it's day mode)
+ */
+fun Context.isInNightMode(ifUndefinedDefaultTo: Boolean = false): Boolean {
+    return when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_YES -> true
+        Configuration.UI_MODE_NIGHT_NO -> false
+        else -> ifUndefinedDefaultTo
+    }
+}
+/**
+ * Check if the preference from the OS is in "day" mode
+ * @param ifUndefinedDefaultTo Defaults to true (ie. it's day mode)
+ */
+fun Context.isInDayMode(ifUndefinedDefaultTo: Boolean = true): Boolean {
+    return when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_YES -> false
+        Configuration.UI_MODE_NIGHT_NO -> true
+        else -> ifUndefinedDefaultTo
+    }
 }
 
 //endregion

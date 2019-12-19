@@ -45,9 +45,3 @@ fun Activity.setStatusBarColor(color: Int) {
         window.statusBarColor = ColorUtils.darken(color)
     }
 }
-
-
-//region Fragments
-
-
-//endregion
