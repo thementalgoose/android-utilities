@@ -1,17 +1,32 @@
 package tmg.utilities.extensions
 
+import android.app.Activity
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.AUDIO_SERVICE
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.hardware.SensorManager
+import android.media.AudioManager
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
+import android.os.Build
+import android.telephony.TelephonyManager
 import android.text.Spanned
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
 import io.reactivex.rxjava3.core.Observable
 import tmg.utilities.models.InstalledPackageModel
+import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.SharedPreferencesUtils
 import tmg.utilities.utils.ongoing
 import kotlin.reflect.KClass
-import android.content.res.Configuration
+
 
 //region Shared Preferences
 
@@ -43,24 +58,24 @@ fun Context.getString(key: String, prefsKey: String): String {
     return SharedPreferencesUtils.getString(this, key, prefsKey)
 }
 
-fun Context.getInt(key: String, prefsKey: String): Int {
-    return SharedPreferencesUtils.getInt(this, key, prefsKey)
+fun Context.getInt(key: String, prefsKey: String, defaultValue: Int = -1): Int {
+    return SharedPreferencesUtils.getInt(this, key, defaultValue, prefsKey)
 }
 
-fun Context.getLong(key: String, prefsKey: String): Long {
-    return SharedPreferencesUtils.getLong(this, key, prefsKey)
+fun Context.getLong(key: String, prefsKey: String, defaultValue: Long = -1L): Long {
+    return SharedPreferencesUtils.getLong(this, key, defaultValue, prefsKey)
 }
 
-fun Context.getFloat(key: String, prefsKey: String): Float {
-    return SharedPreferencesUtils.getFloat(this, key, prefsKey)
+fun Context.getFloat(key: String, prefsKey: String, defaultValue: Float = -1f): Float {
+    return SharedPreferencesUtils.getFloat(this, key, defaultValue, prefsKey)
 }
 
-fun Context.getBoolean(key: String, prefsKey: String): Boolean {
-    return SharedPreferencesUtils.getBoolean(this, key, prefsKey)
+fun Context.getBoolean(key: String, prefsKey: String, defaultValue: Boolean = false): Boolean {
+    return SharedPreferencesUtils.getBoolean(this, key, defaultValue)
 }
 
-fun Context.getSet(key: String, prefsKey: String): Set<String> {
-    return SharedPreferencesUtils.getSet(this, key, prefsKey)
+fun Context.getSet(key: String, prefsKey: String, defaultValue: Set<String> = setOf()): Set<String> {
+    return SharedPreferencesUtils.getSet(this, key, defaultValue)
 }
 
 //endregion
@@ -141,6 +156,111 @@ fun Context.isInDayMode(ifUndefinedDefaultTo: Boolean = true): Boolean {
         Configuration.UI_MODE_NIGHT_NO -> true
         else -> ifUndefinedDefaultTo
     }
+}
+
+//endregion
+
+//region Package info
+
+/**
+ * Get the package info
+ */
+fun Context.packageInfo(): PackageInfo {
+    return packageManager.getPackageInfo(packageName, 0)
+}
+
+/**
+ * Get the current version name of the app build
+ */
+fun Context.versionName(): String {
+    return packageInfo().versionName
+}
+
+/**
+ * Get the current version code for the app build
+ */
+fun Context.versionCode(): Long {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        packageInfo().longVersionCode
+    } else {
+        packageInfo().versionCode.toLong()
+    }
+}
+
+/**
+ * Get the application name as displayed in the launcher
+ */
+fun Context.appName(): String? {
+    var applicationInfo: ApplicationInfo? = null
+    try {
+        applicationInfo = packageManager.getApplicationInfo(this.applicationInfo.packageName, 0)
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    return ((if (applicationInfo != null) packageManager.getApplicationLabel(applicationInfo) else null) as? String)
+}
+
+//endregion
+
+//region Services
+
+/**
+ * Audio Manager
+ */
+val Context.managerAudio: AudioManager
+    get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+/**
+ * Connectivity manager
+ */
+val Context.managerConnectivity: ConnectivityManager
+    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+/**
+ * Window manager
+ */
+val Context.managerWindow: WindowManager
+    get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+/**
+ * Input method manager
+ */
+val Context.managerInputMethod: InputMethodManager
+    get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+/**
+ * Clipboard Manager
+ */
+val Context.managerClipboard: ClipboardManager
+    get() = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+/**
+ * Sensor Manager
+ */
+val Context.managerSensor: SensorManager
+    get() = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+/**
+ * Telephony Manager
+ */
+val Context.managerTelephony: TelephonyManager
+    get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+
+/**
+ * Wifi Manager
+ */
+val Context.managerWifi: WifiManager
+    get() = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+
+//endregion
+
+//region Clipboard
+
+/**
+ * Copy some text to the clipboard
+ */
+fun Context.copyToClipboard(text: String, label: String = "Clipboard") {
+    ClipboardUtils.copyToClipboard(this, text, label)
 }
 
 //endregion

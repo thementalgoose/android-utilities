@@ -1,15 +1,22 @@
 package tmg.utilities.extensions
 
 import android.app.Activity
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Context.WINDOW_SERVICE
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.WindowManager
-import androidx.annotation.IdRes
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.Px
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import tmg.utilities.models.DeviceStatus
+import tmg.utilities.models.PermissionRequestResult
+import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.ColorUtils
+import tmg.utilities.utils.PermissionUtils
 
 /**
  * Get the height of the status bar that's displayed inside an activity
@@ -45,3 +52,86 @@ fun Activity.setStatusBarColor(color: Int) {
         window.statusBarColor = ColorUtils.darken(color)
     }
 }
+
+
+//region Soft keyboard
+
+/**
+ * Show or hide the soft keyboard
+ */
+fun Activity.setSoftKeyboard(show: Boolean) {
+    val inputMethodManager = this.managerInputMethod
+    if (show) {
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
+    }
+    else {
+        currentFocus?.windowToken?.let {
+            inputMethodManager.hideSoftInputFromWindow(it, 0)
+        }
+    }
+}
+
+//endregion
+
+//region Permissions
+
+/**
+ * Check if a specific permission is granted
+ */
+fun Activity.isPermissionGranted(permission: String): Boolean {
+    return PermissionUtils.getPermissionsState(this, permission).isAllGranted
+}
+
+/**
+ * Check if a list of permissions have been approved
+ */
+fun Activity.getPermissionsState(vararg permissions: String): PermissionRequestResult {
+    return PermissionUtils.getPermissionsState(this, *permissions)
+}
+
+//endregion
+
+//region Dimensions
+
+/**
+ * Screen height, in Px
+ */
+@Px
+fun Activity.getScreenHeight(): Int {
+    return this.displayMetrics().heightPixels
+}
+
+/**
+ * Screen width, in Px
+ */
+@Px
+fun Activity.getScreenWidth(): Int {
+    return this.displayMetrics().widthPixels
+}
+
+/**
+ * Display metrics related to the activity
+ */
+fun Activity.displayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+    return displayMetrics
+}
+
+//endregion
+
+//region Device Status
+
+/**
+ * Get summary of all the device attributes
+ */
+val Activity.deviceStatus: DeviceStatus
+    get() = DeviceStatus(this)
+
+/**
+ * Check if the WiFi is enabled
+ */
+val Activity.isWiFiEnabled: Boolean
+    get() = managerWifi.isWifiEnabled
+
+//endregion

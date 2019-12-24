@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
+import tmg.utilities.extensions.managerInputMethod
 
 
 //region Visibility
@@ -54,16 +55,14 @@ fun View.gone() {
  * Close the keyboard from the given view
  */
 fun View.closeKeyboard() {
-    val inputManager = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    inputManager?.hideSoftInputFromWindow(this.windowToken, 0)
+    this.context.managerInputMethod.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 /**
  * Focus the keyboard on a given edit text if it can
  */
 fun EditText.focusKeyboard() {
-    val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    inputManager?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    this.context.managerInputMethod.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
 //endregion

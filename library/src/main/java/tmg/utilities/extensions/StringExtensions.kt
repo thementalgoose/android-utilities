@@ -1,11 +1,13 @@
 package tmg.utilities.extensions
 
+import android.content.Context
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.view.View
 import androidx.core.text.HtmlCompat
 import com.google.android.material.snackbar.Snackbar
+import tmg.utilities.utils.ClipboardUtils
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -136,6 +138,17 @@ fun String.showAsSnackbar(view: View, length: Int = Snackbar.LENGTH_LONG) {
  */
 inline fun <reified T : Enum<T>> String.toEnum(by: (enum: T) -> String = { it.name }): T? {
     return enumValues<T>().firstOrNull { by(it) == this }
+}
+
+//endregion
+
+//region Clipboard
+
+/**
+ * Copy a string to the clipboard
+ */
+fun String.copyToClipboard(context: Context, label: String = "Clipboard") {
+    ClipboardUtils.copyToClipboard(context, this, label)
 }
 
 //endregion
