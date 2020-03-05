@@ -12,6 +12,7 @@ import kotlin.reflect.KClass
  * @param context Context to start the activity from
  * @param with Optional bundle
  */
+@Deprecated("Use the extension methods on Fragment / Context")
 fun <T: Any> KClass<T>.start(context: Context, with: ((bundle: Bundle) -> Unit)? = null) {
     val intent = Intent(context, this.java)
     if (with != null) {
@@ -28,6 +29,7 @@ fun <T: Any> KClass<T>.start(context: Context, with: ((bundle: Bundle) -> Unit)?
  * @param requestCode Request code for the activity callback
  * @param with Optional bundle
  */
+@Deprecated("Use the extension methods on Fragment / Context")
 fun <T: Any> KClass<T>.startForResult(context: Activity, requestCode: Int, with: ((bundle: Bundle) -> Unit)? = null) {
     val intent = Intent(context, this.java)
     if (with != null) {
@@ -43,6 +45,7 @@ fun <T: Any> KClass<T>.startForResult(context: Activity, requestCode: Int, with:
  * @param context Context to start the activity from
  * @param with Optional bundle
  */
+@Deprecated("Use the extension methods on Fragment / Context")
 fun <T: Any> KClass<T>.startClearStack(context: Context, with: ((bundle: Bundle) -> Unit)? = null) {
     val intent = Intent(context, this.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

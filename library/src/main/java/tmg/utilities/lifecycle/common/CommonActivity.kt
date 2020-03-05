@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import tmg.utilities.extensions.initToolbar
+import tmg.utilities.extensions.startActivity
 import tmg.utilities.lifecycle.mvvm.MVVMActivity
 
 /**

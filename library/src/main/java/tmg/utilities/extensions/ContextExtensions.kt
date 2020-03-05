@@ -94,11 +94,7 @@ fun Context.getStringArray(@ArrayRes resource: Int): Array<String> {
 
 //region Activity
 
-fun <T: Any> Context.startActivity(kClass: KClass<T>) {
-    startActivity(Intent(this, kClass::class.java))
-}
-
-fun <T: Any> Context.startActivity(kClass: Class<T>) {
+inline fun <reified T: Any> Context.startActivity(kClass: Class<T>) {
     startActivity(Intent(this, kClass::class.java))
 }
 

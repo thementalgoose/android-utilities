@@ -128,8 +128,5 @@ fun Date.secondsDiff(secondDate: Date): Int {
 fun Date.minutesDiff(secondDate: Date): Int {
     return secondsDiff(secondDate) / 60
 }
-//fun Date.diffBetween(secondDate: Date, diff: (years: Int, months: Int, day: Int, hours: Int, minutes: Int, seconds: Int, milliseconds: Int) -> Unit): Int {
-//
-//}
 
 //endregion

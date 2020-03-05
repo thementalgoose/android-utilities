@@ -8,6 +8,7 @@ import android.content.Context.WINDOW_SERVICE
 import android.content.Intent
 import android.media.AudioManager
 import android.os.Build
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -40,7 +41,6 @@ fun Activity.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
     }
     startActivity(intent)
 }
-
 
 /**
  * Programatically set the status bar color
