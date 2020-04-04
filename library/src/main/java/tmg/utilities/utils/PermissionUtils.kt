@@ -7,7 +7,6 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import tmg.utilities.models.PermissionRequestResult
-import tmg.utilities.models.PermissionRequestState
 
 class PermissionUtils {
     companion object {
