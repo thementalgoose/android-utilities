@@ -17,7 +17,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-utilities:1.0.0'     // Use Jitpack version if newer
+    implementation 'com.github.thementalgoose:android-utilities:1.0.2'     // Use Jitpack version if newer
 }
 ```
 
