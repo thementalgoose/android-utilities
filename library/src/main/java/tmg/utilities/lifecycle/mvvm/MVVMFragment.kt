@@ -18,6 +18,7 @@ import tmg.utilities.lifecycle.rx.RxFragment
  * Recommend using RxActivity and something like Koin for Dependency injection, and declare VM
  *   inside each subclass rather than using generics
  */
+@Deprecated("No longer supported. Please migrate to not depending on this and use your own dependency management")
 abstract class MVVMFragment<VM: MVVMViewModel>: RxFragment() {
 
     lateinit var viewModel: VM

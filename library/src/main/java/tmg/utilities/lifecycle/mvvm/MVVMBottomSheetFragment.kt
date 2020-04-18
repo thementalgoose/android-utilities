@@ -20,6 +20,7 @@ import tmg.utilities.lifecycle.rx.RxBottomSheetFragment
  * Recommend using RxActivity and something like Koin for Dependency injection, and declare VM
  *   inside each subclass rather than using generics
  */
+@Deprecated("No longer supported. Please migrate to not depending on this and use your own dependency management")
 abstract class MVVMBottomSheetFragment<VM: MVVMViewModel>: RxBottomSheetFragment() {
 
     lateinit var viewModel: VM

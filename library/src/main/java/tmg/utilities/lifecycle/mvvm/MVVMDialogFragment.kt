@@ -20,6 +20,7 @@ import tmg.utilities.lifecycle.rx.RxDialogFragment
  * Recommend using RxActivity and something like Koin for Dependency injection, and declare VM
  *   inside each subclass rather than using generics
  */
+@Deprecated("No longer supported. Please migrate to not depending on this and use your own dependency management")
 abstract class MVVMDialogFragment<VM: MVVMViewModel>: RxDialogFragment() {
 
     lateinit var viewModel: VM
