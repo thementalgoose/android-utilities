@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.observe
 import kotlin.reflect.KClass
 
 /**
@@ -122,6 +124,14 @@ fun AppCompatActivity.loadFragment(frag: Fragment, @IdRes layoutRes: Int, tag: S
  */
 fun AppCompatActivity.loadFragment(frag: Fragment, @IdRes layoutRes: Int) {
     loadFragment(frag, layoutRes, null)
+}
+
+//endregion
+
+//region Lifecycle
+
+fun <T> AppCompatActivity.observe(liveData: LiveData<T>, action: (data: T) -> Unit) {
+    liveData.observe(this, action)
 }
 
 //endregion

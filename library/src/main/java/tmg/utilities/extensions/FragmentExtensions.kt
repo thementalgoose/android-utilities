@@ -1,7 +1,10 @@
 package tmg.utilities.extensions
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.observe
 import kotlin.reflect.KClass
 
 /**
@@ -20,3 +23,11 @@ fun Fragment.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
 inline fun <reified T: Any> Fragment.startActivity(kClass: Class<T>) {
     context?.startActivity(kClass)
 }
+
+//region Lifecycle
+
+fun <T> Fragment.observe(liveData: LiveData<T>, action: (data: T) -> Unit) {
+    liveData.observe(viewLifecycleOwner, action)
+}
+
+//endregion
