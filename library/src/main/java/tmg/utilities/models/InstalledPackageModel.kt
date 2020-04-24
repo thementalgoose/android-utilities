@@ -1,12 +1,9 @@
 package tmg.utilities.models
 
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
-import android.os.Build
 
 data class InstalledPackageModel(
     private val packageManager: PackageManager,

@@ -8,15 +8,12 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import tmg.utilities.extensions.initToolbar
-import tmg.utilities.extensions.startActivity
-import tmg.utilities.lifecycle.mvvm.MVVMActivity
+import tmg.utilities.lifecycle.rx.RxActivity
 
 /**
  * Common class which includes generic helpers (but no Rx or MVVM logic)
- * See [RxActivity] and [MVVMActivity] for those implementations
+ * See [RxActivity] for an implementation
  */
 abstract class CommonActivity: AppCompatActivity() {
 

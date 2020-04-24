@@ -1,14 +1,17 @@
 package tmg.utilities.extensions
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
+@ExperimentalCoroutinesApi
 fun <T,E> Flow<T>.combinePair(second: Flow<E>): Flow<Pair<T, E>> {
     return this.combine(second) { a, b -> Pair(a, b) }
 }
 
+@ExperimentalCoroutinesApi
 fun <T,E,R> Flow<T>.combineTriple(second: Flow<E>, third: Flow<R>): Flow<Triple<T, E, R>> {
     return this
         .combine(second) { a, b -> Pair(a, b) }

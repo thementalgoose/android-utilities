@@ -1,21 +1,14 @@
 package tmg.utilities.extensions
 
 import android.app.Activity
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Context.WINDOW_SERVICE
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Build
-import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.Px
 import tmg.utilities.models.DeviceStatus
 import tmg.utilities.models.PermissionRequestResult
-import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.ColorUtils
 import tmg.utilities.utils.PermissionUtils
 

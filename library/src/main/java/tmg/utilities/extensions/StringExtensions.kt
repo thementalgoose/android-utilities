@@ -5,10 +5,8 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import android.view.View
-import androidx.core.text.HtmlCompat
 import com.google.android.material.snackbar.Snackbar
 import tmg.utilities.utils.ClipboardUtils
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -74,6 +72,7 @@ fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     } else {
+        @Suppress("DEPRECATION")
         Html.fromHtml(this)
     }
 }

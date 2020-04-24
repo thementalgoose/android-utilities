@@ -1,17 +1,8 @@
 package tmg.utilities.lifecycle.mvvm
 
-import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import tmg.utilities.R
 import tmg.utilities.lifecycle.rx.RxBottomSheetFragment
 
 /**

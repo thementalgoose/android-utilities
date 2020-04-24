@@ -2,9 +2,7 @@ package tmg.utilities.extensions
 
 import android.content.Context
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import tmg.utilities.utils.DensityUtils
-import kotlin.coroutines.coroutineContext
 
 //region Density conversions
 

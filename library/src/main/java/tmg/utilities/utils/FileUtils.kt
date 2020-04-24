@@ -2,7 +2,6 @@ package tmg.utilities.utils
 
 import android.net.Uri
 import java.io.File
-import java.nio.file.Files.delete
 
 class FileUtils {
     companion object {
@@ -13,9 +12,10 @@ class FileUtils {
             }
         }
 
+        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         fun renameFile(from: Uri, to: Uri) {
-            from.path?.let {
-                File(it).renameTo(File(it))
+            if (from.path != null && to.path != null) {
+                File(from.path).renameTo(File(to.path))
             }
         }
     }

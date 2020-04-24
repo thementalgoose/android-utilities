@@ -1,14 +1,10 @@
 package tmg.utilities.extensions
 
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
-import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
-import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.rxjava3.core.Observable
-import com.jakewharton.rxbinding3.widget.textChanges
 
 // TODO: Replace these with proper listeners when RxBindings gets updated to support RxJava3
 
@@ -24,7 +20,7 @@ fun EditText.textChanged(): Observable<String> {
 
 fun EditText.focus(): Observable<Boolean> {
     return Observable.create { emitter ->
-        this.setOnFocusChangeListener { view, b ->
+        this.setOnFocusChangeListener { _, b ->
             emitter.onNext(b)
         }
     }

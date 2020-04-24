@@ -1,6 +1,5 @@
 package tmg.utilities.extensions.views
 
-import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager

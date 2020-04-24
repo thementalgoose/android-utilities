@@ -1,15 +1,8 @@
 package tmg.utilities.lifecycle.mvvm
 
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.annotation.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import tmg.utilities.lifecycle.rx.RxActivity
 
 /**

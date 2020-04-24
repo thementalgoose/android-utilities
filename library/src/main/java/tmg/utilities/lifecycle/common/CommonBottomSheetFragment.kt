@@ -9,7 +9,6 @@ import androidx.annotation.LayoutRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import tmg.utilities.R
-import tmg.utilities.lifecycle.mvvm.MVVMActivity
 
 /**
  * Common class which includes generic helpers (but no Rx or MVVM logic)

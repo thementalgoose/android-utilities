@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Context.AUDIO_SERVICE
 import android.media.AudioManager
 import android.util.Log
 import tmg.utilities.enums.DeviceRingerMode

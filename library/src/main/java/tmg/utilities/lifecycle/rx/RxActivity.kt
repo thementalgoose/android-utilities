@@ -1,8 +1,6 @@
 package tmg.utilities.lifecycle.rx
 
-import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 import tmg.utilities.lifecycle.common.CommonActivity
 
 /**

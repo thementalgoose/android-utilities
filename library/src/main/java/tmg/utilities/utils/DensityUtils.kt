@@ -1,8 +1,8 @@
 package tmg.utilities.utils
 
 import android.content.res.Resources
-import android.util.TypedValue
 import android.util.DisplayMetrics
+import android.util.TypedValue
 
 class DensityUtils {
     companion object {

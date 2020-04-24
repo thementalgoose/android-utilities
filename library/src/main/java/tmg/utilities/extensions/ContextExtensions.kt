@@ -1,9 +1,7 @@
 package tmg.utilities.extensions
 
-import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.AUDIO_SERVICE
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
@@ -25,7 +23,6 @@ import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.SharedPreferencesUtils
 import tmg.utilities.utils.ongoing
-import kotlin.reflect.KClass
 
 
 //region Shared Preferences
@@ -55,27 +52,27 @@ fun Context.save(key: String, value: Long, prefsKey: String) {
 }
 
 fun Context.getString(key: String, prefsKey: String): String {
-    return SharedPreferencesUtils.getString(this, key, prefsKey)
+    return SharedPreferencesUtils.getString(this, key, prefsKey = prefsKey)
 }
 
 fun Context.getInt(key: String, prefsKey: String, defaultValue: Int = -1): Int {
-    return SharedPreferencesUtils.getInt(this, key, defaultValue, prefsKey)
+    return SharedPreferencesUtils.getInt(this, key, defaultValue, prefsKey = prefsKey)
 }
 
 fun Context.getLong(key: String, prefsKey: String, defaultValue: Long = -1L): Long {
-    return SharedPreferencesUtils.getLong(this, key, defaultValue, prefsKey)
+    return SharedPreferencesUtils.getLong(this, key, defaultValue, prefsKey = prefsKey)
 }
 
 fun Context.getFloat(key: String, prefsKey: String, defaultValue: Float = -1f): Float {
-    return SharedPreferencesUtils.getFloat(this, key, defaultValue, prefsKey)
+    return SharedPreferencesUtils.getFloat(this, key, defaultValue, prefsKey = prefsKey)
 }
 
 fun Context.getBoolean(key: String, prefsKey: String, defaultValue: Boolean = false): Boolean {
-    return SharedPreferencesUtils.getBoolean(this, key, defaultValue)
+    return SharedPreferencesUtils.getBoolean(this, key, defaultValue, prefsKey = prefsKey)
 }
 
 fun Context.getSet(key: String, prefsKey: String, defaultValue: Set<String> = setOf()): Set<String> {
-    return SharedPreferencesUtils.getSet(this, key, defaultValue)
+    return SharedPreferencesUtils.getSet(this, key, defaultValue, prefsKey = prefsKey)
 }
 
 //endregion
@@ -168,6 +165,7 @@ fun Context.packageInfo(): PackageInfo {
 /**
  * Get the current version name of the app build
  */
+@Deprecated("Version name access through package info is deprecated", ReplaceWith("BuildConfig.VERSION_NAME"))
 fun Context.versionName(): String {
     return packageInfo().versionName
 }
@@ -175,10 +173,12 @@ fun Context.versionName(): String {
 /**
  * Get the current version code for the app build
  */
+@Deprecated("Version code access through package info is deprecated", ReplaceWith("BuildConfig.VERSION_CODE"))
 fun Context.versionCode(): Long {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         packageInfo().longVersionCode
     } else {
+        @Suppress("DEPRECATION")
         packageInfo().versionCode.toLong()
     }
 }
