@@ -5,7 +5,7 @@ import java.util.*
 //region Date
 
 fun Long.toDate(): Date {
-    return Date(this)
+    return Date(if (this <= 0L) 0L else this)
 }
 
 /**

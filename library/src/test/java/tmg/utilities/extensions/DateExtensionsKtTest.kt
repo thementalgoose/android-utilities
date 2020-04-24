@@ -6,8 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
 
-const val date1: Long = 1587749084000 // 24/04/2020 18:24:44
-const val date2: Long = 1509793753000 // 04/11/2017 11:09:13
+private const val date1: Long = 1587749084000 // 24/04/2020 18:24:44
+private const val date2: Long = 1509793753000 // 04/11/2017 11:09:13
 
 class DateExtensionsKtTest {
 
