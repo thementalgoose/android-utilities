@@ -19,7 +19,7 @@ import java.util.*
  *
  * @param format The format that you expect the string in (ie. "2018-09-09".toDate("yyyy-MM-dd"))
  */
-fun String.toDate(format: String): Date {
+fun String.toDate(format: String): Date? {
     val sdf: SimpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
     return sdf.parse(this)
 }

@@ -28,7 +28,7 @@ fun Float.pxToDp(res: Resources): Float {
 //region Precision
 
 fun Float.toDecimalPlacesString(dp: Int): String {
-    return String.format("%.1f", dp)
+    return "%.${dp}f".format(this)
 }
 fun Float.toDecimalPlaces(dp: Int): Float {
     return toDecimalPlacesString(dp).toFloat()

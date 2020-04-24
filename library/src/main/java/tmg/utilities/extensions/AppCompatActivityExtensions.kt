@@ -64,15 +64,17 @@ fun AppCompatActivity.logError(msg: String, tag: String = this.packageName.takeL
  * @param showBack Should show the back arrow or not. Defaults to false
  * @param indicator Should override the back indicator.
  */
-fun AppCompatActivity.initToolbar(@IdRes toolbarRes: Int, showBack: Boolean = false, @DrawableRes indicator: Int? = null): Toolbar {
+fun AppCompatActivity.initToolbar(@IdRes toolbarRes: Int, showBack: Boolean = false, @DrawableRes indicator: Int = -1): Toolbar {
     val toolbar = findViewById<Toolbar>(toolbarRes)
     setSupportActionBar(toolbar)
-    if (showBack) {
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeButtonEnabled(true)
-    }
-    indicator?.let {
-        supportActionBar!!.setHomeAsUpIndicator(it)
+    supportActionBar?.let {
+        if (showBack) {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeButtonEnabled(true)
+        }
+        if (indicator != -1) {
+            it.setHomeAsUpIndicator(indicator)
+        }
     }
     return toolbar
 }

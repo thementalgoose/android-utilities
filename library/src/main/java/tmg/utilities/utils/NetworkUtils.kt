@@ -47,6 +47,7 @@ class NetworkUtils {
         /**
          * Get the connection type of the device
          */
+        @SuppressLint("MissingPermission")
         @JvmStatic
         fun getNetworkState(context: Context): NetworkConnectionType {
             context.managerConnectivity.run {

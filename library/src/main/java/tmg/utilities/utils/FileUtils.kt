@@ -8,11 +8,15 @@ class FileUtils {
     companion object {
 
         fun deleteFile(uri: Uri) {
-            File(uri.path).delete()
+            uri.path?.let {
+                File(it).delete()
+            }
         }
 
         fun renameFile(from: Uri, to: Uri) {
-            File(from.path).renameTo(File(to.path))
+            from.path?.let {
+                File(it).renameTo(File(it))
+            }
         }
     }
 }

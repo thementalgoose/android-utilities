@@ -3,6 +3,7 @@ package tmg.utilities.utils
 import android.content.Context
 import android.content.SharedPreferences
 
+@Deprecated("Deprecated in favour of subclassing SharedPrefManager and using DI to implement values", replaceWith = ReplaceWith("SharedPref"))
 class SharedPreferencesUtils {
 
     companion object {

@@ -1,3 +1,4 @@
+
 package tmg.utilities.adapters
 
 import androidx.recyclerview.widget.RecyclerView

@@ -77,7 +77,7 @@ abstract class CommonActivity: AppCompatActivity() {
      * Assign the toolbar to the item stored in the activity
      */
     fun setupToolbar(@IdRes toolbarRes: Int, showBack: Boolean = false, @DrawableRes backIcon: Int? = null) {
-        this.toolbar = this.initToolbar(toolbarRes, showBack, backIcon)
+        this.toolbar = this.initToolbar(toolbarRes, showBack, backIcon ?: -1)
     }
 
     //endregion

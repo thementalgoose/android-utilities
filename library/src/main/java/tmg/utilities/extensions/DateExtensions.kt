@@ -25,14 +25,18 @@ fun Date.toFormatYYYYMMDD(separator: String = "-"): String {
 fun Date.toFormatDDMMYYYY(separator: String = "-"): String {
     return toFormat("dd${separator}MM${separator}yyyy")
 }
+fun Date.toFormatMMDDYYYY(separator: String = "-"): String {
+    return toFormat("MM${separator}dd${separator}yyyy")
+}
 
 /**
  * Get operations on a date object
+ * Days of week are returned 1 Monday through 7 Sunday
  */
 fun Date.dayOfWeek(): Int {
-    return (toCal().get(Calendar.DAY_OF_WEEK) + 6) % 7
+    return ((toCal().get(Calendar.DAY_OF_WEEK) + 5) % 7) + 1
 }
-fun Date.dayOfWeek(isShort: Boolean = true): String {
+fun Date.dayOfWeekString(isShort: Boolean = true): String {
     return toFormat(if (isShort) "E" else "EEEE")
 }
 fun Date.dayOfMonth(): Int {
@@ -49,7 +53,7 @@ fun Date.year(): Int {
 fun Date.month(): Int {
     return toCal().get(Calendar.MONTH) + 1
 }
-fun Date.month(isShort: Boolean): String {
+fun Date.monthString(isShort: Boolean): String {
     return if (isShort) {
         toFormat("MMM")
     }

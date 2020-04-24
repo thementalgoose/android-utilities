@@ -1,4 +1,4 @@
-package tmg.utilities.extensions
+    package tmg.utilities.extensions
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

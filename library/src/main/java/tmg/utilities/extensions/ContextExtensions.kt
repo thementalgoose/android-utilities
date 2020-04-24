@@ -27,59 +27,6 @@ import tmg.utilities.utils.SharedPreferencesUtils
 import tmg.utilities.utils.ongoing
 import kotlin.reflect.KClass
 
-
-//region Shared Preferences
-
-fun Context.save(key: String, value: String, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.save(key: String, value: Boolean, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.save(key: String, value: Float, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.save(key: String, value: Int, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.save(key: String, value: Set<String>, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.save(key: String, value: Long, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
-}
-
-fun Context.getString(key: String, prefsKey: String): String {
-    return SharedPreferencesUtils.getString(this, key, prefsKey)
-}
-
-fun Context.getInt(key: String, prefsKey: String, defaultValue: Int = -1): Int {
-    return SharedPreferencesUtils.getInt(this, key, defaultValue, prefsKey)
-}
-
-fun Context.getLong(key: String, prefsKey: String, defaultValue: Long = -1L): Long {
-    return SharedPreferencesUtils.getLong(this, key, defaultValue, prefsKey)
-}
-
-fun Context.getFloat(key: String, prefsKey: String, defaultValue: Float = -1f): Float {
-    return SharedPreferencesUtils.getFloat(this, key, defaultValue, prefsKey)
-}
-
-fun Context.getBoolean(key: String, prefsKey: String, defaultValue: Boolean = false): Boolean {
-    return SharedPreferencesUtils.getBoolean(this, key, defaultValue)
-}
-
-fun Context.getSet(key: String, prefsKey: String, defaultValue: Set<String> = setOf()): Set<String> {
-    return SharedPreferencesUtils.getSet(this, key, defaultValue)
-}
-
-//endregion
-
 //region Resources
 
 fun Context.getStringList(@ArrayRes resource: Int): List<String> {
