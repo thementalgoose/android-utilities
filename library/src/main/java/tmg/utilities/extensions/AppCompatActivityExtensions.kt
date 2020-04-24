@@ -12,8 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
+import tmg.utilities.lifecycle.DataEvent
+import tmg.utilities.lifecycle.Event
 
-/**
+    /**
  * View a URL in the Activity
  * @param url The url to view
  */
@@ -135,4 +137,19 @@ fun <T> AppCompatActivity.observe(liveData: LiveData<T>, action: (data: T) -> Un
     liveData.observe(this, action)
 }
 
+fun <T> AppCompatActivity.observeEvent(liveData: LiveData<DataEvent<T>>, action: (data: T) -> Unit) {
+    liveData.observe(this) {
+        if (it.processEvent) {
+            action(it.data)
+        }
+    }
+}
+
+fun AppCompatActivity.observeEvent(liveData: LiveData<Event>, action: () -> Unit) {
+    liveData.observe(this) {
+        if (it.processEvent) {
+            action()
+        }
+    }
+}
 //endregion
