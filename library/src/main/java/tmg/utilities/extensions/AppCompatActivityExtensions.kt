@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
 
-    /**
+/**
  * View a URL in the Activity
  * @param url The url to view
  */
@@ -21,6 +21,10 @@ fun AppCompatActivity.viewUrl(url: String) {
     val intent: Intent = Intent(Intent.ACTION_VIEW)
     intent.data = Uri.parse(url)
     startActivity(intent)
+}
+
+fun AppCompatActivity.viewWebpage(url: String) {
+    this.viewUrl(url)
 }
 
 //endregion
