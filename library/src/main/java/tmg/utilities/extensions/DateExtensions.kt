@@ -6,16 +6,13 @@ import java.util.*
 //region String formatting
 
 /**
- * Convert a Date to a format
+ * Convert a Date to a string with a given format
+ * @param dateFormat Defaults to `dd/MM/yyyy HH:mm`
  */
-fun Date.toFormat(dateFormat: String): String {
+fun Date.toFormat(dateFormat: String = "dd/MM/yyyy HH:mm"): String {
     val sdf: SimpleDateFormat = SimpleDateFormat(dateFormat, Locale.getDefault())
     return sdf.format(this)
 }
-
-/**
- * Shortcut conversion methodsfor
- */
 fun Date.toFormatHHMM(separator: String = ":"): String {
     return toFormat("HH${separator}mm")
 }

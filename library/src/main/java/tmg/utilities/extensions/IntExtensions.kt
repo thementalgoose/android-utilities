@@ -26,6 +26,22 @@ fun Int.pxToDp(res: Resources): Float {
 
 //endregion
 
+//region Capping
+
+/**
+ * Cap an integer to a specific min and max value
+ *
+ * @param min If the number is below the min, then cap it to the min
+ * @param max If the number is below the max, then cap it to the max
+ */
+fun Int.capTo(min: Int, max: Int): Int {
+    if (this < min) return min
+    if (this > max) return max
+    return this
+}
+
+//endregion
+
 //region To String
 
 /**
@@ -75,11 +91,14 @@ fun Int.toStringResource(context: Context): String {
  * Make any int value capped as a positive value
  */
 fun Int.positive(): Int {
-    return if (this < 0) {
-        0
-    } else {
-        this
-    }
+    return if (this < 0) 0 else this
+}
+
+/**
+ * Make any int value capped as a positive value
+ */
+fun Int.negative(): Int {
+    return if (this > 0) 0 else this
 }
 
 //region Enums

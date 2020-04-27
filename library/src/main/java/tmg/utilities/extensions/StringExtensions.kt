@@ -7,6 +7,7 @@ import android.text.Spanned
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import tmg.utilities.utils.ClipboardUtils
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,7 +20,13 @@ import java.util.*
  */
 fun String.toDate(format: String): Date? {
     val sdf: SimpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
-    return sdf.parse(this)
+    sdf.isLenient = false
+    return try {
+        sdf.parse(this)
+    }
+    catch (e: ParseException) {
+        null
+    }
 }
 
 /**
@@ -27,12 +34,12 @@ fun String.toDate(format: String): Date? {
  *
  * Assumes the string is "HH:mm"
  */
-fun String.minsPastHour(): Int {
+fun String.minsPastHour(): Int? {
     val resp: List<String> = this.split(":")
-    if (resp.size == 2) {
-        return resp[1].toIntOrNull() ?: 0
+    if (resp.size == 2 && this.length == 5) {
+        return (resp[1].toIntOrNull() ?: 0).capTo(0, 59)
     }
-    throw Exception("String is not a valid time format $this")
+    return null
 }
 
 /**
@@ -40,12 +47,14 @@ fun String.minsPastHour(): Int {
  *
  * Assumes the string is "HH:mm"
  */
-fun String.minsTotal(): Int {
+fun String.minsTotal(): Int? {
     val resp: List<String> = this.split(":")
-    if (resp.size == 2) {
-        return (resp[0].toIntOrNull() ?: 0) * 60 + (resp[1].toIntOrNull() ?: 0)
+    if (resp.size == 2 && this.length == 5) {
+        val mins = (resp[0].toIntOrNull() ?: 0) * 60 + (resp[1].toIntOrNull() ?: 0)
+        if (mins >= (60 * 24)) return (60 * 24)
+        return mins
     }
-    throw Exception("String is not a valid time format $this")
+    return null
 }
 
 /**
@@ -53,12 +62,12 @@ fun String.minsTotal(): Int {
  *
  * Assumes the string is "HH:mm"
  */
-fun String.hours(): Int {
+fun String.hours(): Int? {
     val resp: List<String> = this.split(":")
-    if (resp.size == 2) {
-        return resp[0].toIntOrNull() ?: 0
+    if (resp.size == 2 && this.length == 5) {
+        return (resp[0].toIntOrNull() ?: 0).capTo(min = 0, max = 24)
     }
-    throw Exception("String is not a valid time format $this")
+    return null
 }
 
 //endregion
@@ -88,11 +97,11 @@ fun String.fromHtml(): Spanned {
  * @param toLength The length of the final string
  */
 fun String.extendWith(char: Char, toLength: Int): String {
-    if (this.length < toLength) {
-        return char + extendWith(char, toLength - 1)
+    return if (this.length < toLength) {
+        extendWith(char, toLength - 1) + char
     }
     else {
-        return this
+        this
     }
 }
 

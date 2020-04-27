@@ -15,8 +15,8 @@ class LongExtensionsKtTest {
     @Test
     fun `LongExtensions toDate checking dates get converted properly`() {
 
-        assertEquals("24/04/2020 18:24:44", date1.toDate().toFormat("dd/MM/yyyy HH:mm:ss"))
-        assertEquals("04/11/2017 11:09:13", date2.toDate().toFormat("dd/MM/yyyy HH:mm:ss"))
+        assertEquals("24/04/2020 18:24:44", date1.toDate()?.toFormat("dd/MM/yyyy HH:mm:ss"))
+        assertEquals("04/11/2017 11:09:13", date2.toDate()?.toFormat("dd/MM/yyyy HH:mm:ss"))
     }
 
     @Test
