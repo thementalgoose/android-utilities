@@ -32,8 +32,6 @@ abstract class CommonActivity: AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(layoutId())
-        initComponents()
-        initViews()
     }
 
     //region Open / Abstract methods
@@ -49,19 +47,6 @@ abstract class CommonActivity: AppCompatActivity() {
      *   Override to import arguments
      */
     open fun arguments(bundle: Bundle) { }
-
-    /**
-     * Any component initialisation logic (ie. View Models)
-     * Runs before the [initViews] method
-     */
-    @Deprecated("This override is not needed. Override `onCreate` and apply this after `super.onCreate(savedInstanceState)`")
-    open fun initComponents() { }
-
-    /**
-     * Any view initialisation logic
-     */
-    @Deprecated("This override is not needed. Override `onCreate` and apply this after `super.onCreate(savedInstanceState)`")
-    open fun initViews() { }
 
     /**
      * Request permissions code

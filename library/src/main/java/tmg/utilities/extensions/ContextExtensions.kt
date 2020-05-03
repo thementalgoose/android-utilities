@@ -163,27 +163,6 @@ fun Context.packageInfo(): PackageInfo {
 }
 
 /**
- * Get the current version name of the app build
- */
-@Deprecated("Version name access through package info is deprecated", ReplaceWith("BuildConfig.VERSION_NAME"))
-fun Context.versionName(): String {
-    return packageInfo().versionName
-}
-
-/**
- * Get the current version code for the app build
- */
-@Deprecated("Version code access through package info is deprecated", ReplaceWith("BuildConfig.VERSION_CODE"))
-fun Context.versionCode(): Long {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-        packageInfo().longVersionCode
-    } else {
-        @Suppress("DEPRECATION")
-        packageInfo().versionCode.toLong()
-    }
-}
-
-/**
  * Get the application name as displayed in the launcher
  */
 fun Context.appName(): String? {
