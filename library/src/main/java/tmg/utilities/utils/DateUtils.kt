@@ -5,6 +5,7 @@ import tmg.utilities.extensions.month
 import tmg.utilities.extensions.year
 import java.util.*
 
+@Deprecated("Please use LocalDateTime instead to represent this. This will be removed as of 2.0.0", ReplaceWith("LocalDateTime"))
 class DateUtils {
 
     companion object {
@@ -19,6 +20,7 @@ class DateUtils {
          * @param minutes (Optional)
          * @param seconds (Optional)
          */
+        @Deprecated("Please use LocalDateTime instead to represent this. This will be removed as of 2.0.0", ReplaceWith("LocalDateTime"))
         fun date(year: Int, month: Int, day: Int, hour: Int = 0, minutes: Int = 0, seconds: Int = 0): Date {
             val cal: Calendar = Calendar.getInstance()
             cal.set(Calendar.YEAR, year)
@@ -38,10 +40,10 @@ class DateUtils {
          * @param minutes The hour
          * @param seconds (Optional)
          */
+        @Deprecated("Please use LocalTime instead to represent just a time. This will be removed as of 2.0.0", ReplaceWith("LocalTime"))
         fun time(hour: Int, minutes: Int, seconds: Int = 0): Date {
             val date: Date = Date()
             return date(date.year(), date.month() - 1, date.dayOfMonth(), hour, minutes, seconds)
         }
-
     }
 }

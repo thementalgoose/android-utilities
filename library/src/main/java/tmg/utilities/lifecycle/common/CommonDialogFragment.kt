@@ -62,12 +62,6 @@ abstract class CommonDialogFragment: DialogFragment() {
     open fun arguments(bundle: Bundle) { }
 
     /**
-     * Any component initialisation logic (ie. View Models)
-     * Runs before the [initViews] method
-     */
-    open fun initComponents() { }
-
-    /**
      * Any view initialisation logic
      */
     open fun initViews() { }

@@ -90,15 +90,15 @@ fun Int.toStringResource(context: Context): String {
 /**
  * Make any int value capped as a positive value
  */
-fun Int.positive(): Int {
-    return if (this < 0) 0 else this
+fun Int?.positive(): Int {
+    return if (this == null || this < 0) 0 else this
 }
 
 /**
  * Make any int value capped as a positive value
  */
-fun Int.negative(): Int {
-    return if (this > 0) 0 else this
+fun Int?.negative(): Int {
+    return if (this == null || this > 0) 0 else this
 }
 
 //region Enums

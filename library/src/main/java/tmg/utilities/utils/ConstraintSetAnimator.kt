@@ -20,7 +20,7 @@ import androidx.transition.TransitionManager
 open class ConstraintSetAnimator(
     private val layout: ConstraintLayout,
     private val duration: Int = 200,
-    initialiseSet: (constraintSet: ConstraintSet) -> Unit
+    initialiseNewLayout: (constraintSet: ConstraintSet) -> Unit
 ) {
 
     var isAnimated: Boolean = false
@@ -30,7 +30,7 @@ open class ConstraintSetAnimator(
     init {
         originalConstraintSet.clone(layout)
         modifiedConstraintSet.clone(originalConstraintSet)
-        initialiseSet(modifiedConstraintSet)
+        initialiseNewLayout(modifiedConstraintSet)
     }
 
     fun revert() {

@@ -46,6 +46,21 @@ fun View.gone() {
     visibility = View.GONE
 }
 
+/**
+ * Showing a view and specifying the inverse behavior if not
+ *
+ * view.show(false, isGone = false) will set it to invisible
+ * view.show(false, isGone = true) will set it to gone
+ * view.show(true, isGone = true) will set it to visible
+ */
+fun View.show(value: Boolean, isGone: Boolean = true) {
+    if (value) {
+        show()
+    } else {
+        if (isGone) gone() else invisible()
+    }
+}
+
 //endregion
 
 //region Keyboard

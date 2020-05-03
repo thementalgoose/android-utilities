@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
+import android.os.Build
 import android.util.Log
 import tmg.utilities.enums.DeviceRingerMode
 import tmg.utilities.extensions.managerAudio
@@ -42,7 +43,11 @@ class DeviceUtils {
             if (!PermissionUtils.isPermissionGranted(activity, Manifest.permission.READ_PHONE_STATE)) {
                 Log.e("TMG-AndroidUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
             }
-            return activity.managerTelephony.deviceId
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.managerTelephony.imei
+            } else {
+                activity.managerTelephony.deviceId
+            }
         }
     }
 }

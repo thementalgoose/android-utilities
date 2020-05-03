@@ -24,9 +24,10 @@ class IntExtensionsKtTest {
     @CsvSource(
         "-1,0",
         "0,0",
-        "1,1"
+        "1,1",
+        ",0"
     )
-    fun `IntExtensions positive making a number positive`(number: Int, expected: Int) {
+    fun `IntExtensions positive making a number positive`(number: Int?, expected: Int) {
 
         assertEquals(expected, number.positive())
     }
@@ -35,9 +36,10 @@ class IntExtensionsKtTest {
     @CsvSource(
         "-1,-1",
         "0,0",
-        "1,0"
+        "1,0",
+        ",0"
     )
-    fun `IntExtensions negative making a number positive`(number: Int, expected: Int) {
+    fun `IntExtensions negative making a number negative`(number: Int?, expected: Int) {
 
         assertEquals(expected, number.negative())
     }

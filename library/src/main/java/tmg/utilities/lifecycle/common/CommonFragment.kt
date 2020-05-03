@@ -59,6 +59,7 @@ abstract class CommonFragment: Fragment() {
      * Any component initialisation logic (ie. View Models)
      * Runs before the [initViews] method
      */
+    @Deprecated("This override is not needed. Override `onCreate` and apply this after `super.onCreate(savedInstanceState)`")
     open fun initComponents() { }
 
     /**

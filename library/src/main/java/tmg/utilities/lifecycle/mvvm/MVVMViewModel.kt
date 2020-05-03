@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 
-@Deprecated("No longer supported. Please use ViewModel as a raw class and generate your own base model")
+@Deprecated("No longer supported. Please use ViewModel as a raw class and generate your own base model, such as Dagger / Koin. This will be removed as of 2.0.0", level = DeprecationLevel.WARNING)
 abstract class MVVMViewModel: ViewModel() {
 
     lateinit var context: Context

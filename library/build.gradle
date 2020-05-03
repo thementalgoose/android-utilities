@@ -73,9 +73,9 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha02"
 
     // RxJava
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
