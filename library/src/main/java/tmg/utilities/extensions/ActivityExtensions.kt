@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.util.DisplayMetrics
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.Px
@@ -36,7 +37,7 @@ fun Activity.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
 }
 
 /**
- * Programatically set the status bar color
+ * Programmatically set the status bar color
  */
 fun Activity.setStatusBarColor(color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -46,6 +47,21 @@ fun Activity.setStatusBarColor(color: Int) {
     }
 }
 
+/**
+ * Programmatically set the status bar icon color to either light or dark (white or black)
+ */
+fun Activity.setStatusBarIconsDark() {
+    this.setStatusBarIconsLight(false)
+}
+
+/**
+ * Programmatically set the status bar icon color to either light or dark (white or black)
+ */
+fun Activity.setStatusBarIconsLight(isLight: Boolean = true) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        window.decorView.systemUiVisibility = if (isLight) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+}
 
 //region Soft keyboard
 

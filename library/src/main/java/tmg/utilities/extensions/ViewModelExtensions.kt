@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 
 //region Lifecycle
 
+@Deprecated("Shortcut method will be removed.", ReplaceWith("viewModelScope.launch { }"))
 fun ViewModel.async(block: suspend CoroutineScope.() -> Unit) {
     viewModelScope.launch(block = block)
 }
