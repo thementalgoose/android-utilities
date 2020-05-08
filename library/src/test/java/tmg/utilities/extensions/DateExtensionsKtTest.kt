@@ -13,49 +13,6 @@ class DateExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "$date1,dd/MM/yyyy HH:mm,24/04/2020 17:24",
-        "$date1,d MMM yyyy,24 Apr 2020",
-        "$date2,d MMMM yyyy HH:mm:ss,4 November 2017 10:09:13"
-    )
-    fun `DateExtensions toFormat date formats properly`(date: Long, format: String, expected: String) {
-
-        assertEquals(expected, date.toDate()!!.toFormat(format))
-    }
-
-    @Test
-    fun `DateExtensions toFormatHHMM converts to hours and minutes properly`() {
-
-        assertEquals("17:24", date1.toDate()!!.toFormatHHMM(locale = Locale.getDefault(Locale.Category.FORMAT)))
-        assertEquals("10:09", date2.toDate()!!.toFormatHHMM(locale = Locale.getDefault(Locale.Category.FORMAT)))
-        assertEquals("10-09", date2.toDate()!!.toFormatHHMM(separator = "-"))
-    }
-
-    @Test
-    fun `DateExtensions toFormatYYYYMMDD converts to hours and minutes properly`() {
-
-        assertEquals("2020-04-24", Date(date1).toFormatYYYYMMDD())
-        assertEquals("2017-11-04", Date(date2).toFormatYYYYMMDD())
-        assertEquals("2017/11/04", Date(date2).toFormatYYYYMMDD(separator = "/"))
-    }
-
-    @Test
-    fun `DateExtensions toFormatDDMMYYYY converts to hours and minutes properly`() {
-
-        assertEquals("24-04-2020", Date(date1).toFormatDDMMYYYY())
-        assertEquals("04-11-2017", Date(date2).toFormatDDMMYYYY())
-        assertEquals("04/11/2017", Date(date2).toFormatDDMMYYYY(separator = "/"))
-    }
-
-    @Test
-    fun `DateExtensions toFormatMMDDYYYY converts to hours and minutes properly`() {
-
-        assertEquals("04-24-2020", Date(date1).toFormatMMDDYYYY())
-        assertEquals("11-04-2017", Date(date2).toFormatMMDDYYYY())
-        assertEquals("11/04/2017", Date(date2).toFormatMMDDYYYY(separator = "/"))
-    }
-
-    @ParameterizedTest
-    @CsvSource(
         "20/04/2020,1,Mon,Monday",
         "21/04/2020,2,Tue,Tuesday",
         "22/04/2020,3,Wed,Wednesday",

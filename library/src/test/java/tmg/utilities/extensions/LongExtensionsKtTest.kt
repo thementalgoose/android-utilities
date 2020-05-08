@@ -16,8 +16,8 @@ class LongExtensionsKtTest {
 
         Locale.setDefault(Locale.CANADA)
 
-        assertEquals("24/04/2020 17:24:44", date1.toDate()?.toFormat("dd/MM/yyyy HH:mm:ss"))
-        assertEquals("04/11/2017 10:09:13", date2.toDate()?.toFormat("dd/MM/yyyy HH:mm:ss"))
+        val date = Date(date1)
+        assertEquals(date1.toDate(), date.time.toDate())
     }
 
     @Test
