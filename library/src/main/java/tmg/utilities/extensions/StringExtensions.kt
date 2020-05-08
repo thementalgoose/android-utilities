@@ -18,8 +18,8 @@ import java.util.*
  *
  * @param format The format that you expect the string in (ie. "2018-09-09".toDate("yyyy-MM-dd"))
  */
-fun String.toDate(format: String): Date? {
-    val sdf: SimpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
+fun String.toDate(format: String, locale: Locale = Locale.getDefault()): Date? {
+    val sdf: SimpleDateFormat = SimpleDateFormat(format, locale)
     sdf.isLenient = false
     return try {
         sdf.parse(this)

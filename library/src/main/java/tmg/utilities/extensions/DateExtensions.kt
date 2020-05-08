@@ -9,21 +9,21 @@ import java.util.*
  * Convert a Date to a string with a given format
  * @param dateFormat Defaults to `dd/MM/yyyy HH:mm`
  */
-fun Date.toFormat(dateFormat: String = "dd/MM/yyyy HH:mm"): String {
-    val sdf: SimpleDateFormat = SimpleDateFormat(dateFormat, Locale.getDefault())
+fun Date.toFormat(dateFormat: String = "dd/MM/yyyy HH:mm", locale: Locale = Locale.getDefault()): String {
+    val sdf: SimpleDateFormat = SimpleDateFormat(dateFormat, locale)
     return sdf.format(this)
 }
-fun Date.toFormatHHMM(separator: String = ":"): String {
-    return toFormat("HH${separator}mm")
+fun Date.toFormatHHMM(separator: String = ":", locale: Locale = Locale.getDefault()): String {
+    return toFormat("HH${separator}mm", locale)
 }
-fun Date.toFormatYYYYMMDD(separator: String = "-"): String {
-    return toFormat("yyyy${separator}MM${separator}dd")
+fun Date.toFormatYYYYMMDD(separator: String = "-", locale: Locale = Locale.getDefault()): String {
+    return toFormat("yyyy${separator}MM${separator}dd", locale)
 }
-fun Date.toFormatDDMMYYYY(separator: String = "-"): String {
-    return toFormat("dd${separator}MM${separator}yyyy")
+fun Date.toFormatDDMMYYYY(separator: String = "-", locale: Locale = Locale.getDefault()): String {
+    return toFormat("dd${separator}MM${separator}yyyy", locale)
 }
-fun Date.toFormatMMDDYYYY(separator: String = "-"): String {
-    return toFormat("MM${separator}dd${separator}yyyy")
+fun Date.toFormatMMDDYYYY(separator: String = "-", locale: Locale = Locale.getDefault()): String {
+    return toFormat("MM${separator}dd${separator}yyyy", locale)
 }
 
 /**

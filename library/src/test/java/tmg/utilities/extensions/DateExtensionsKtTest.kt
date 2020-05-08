@@ -6,28 +6,28 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.util.*
 
-private const val date1: Long = 1587749084000 // 24/04/2020 18:24:44
+private const val date1: Long = 1587749084000 // 24/04/2020 17:24:44
 private const val date2: Long = 1509793753000 // 04/11/2017 11:09:13
 
 class DateExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "$date1,dd/MM/yyyy HH:mm,24/04/2020 18:24",
+        "$date1,dd/MM/yyyy HH:mm,24/04/2020 17:24",
         "$date1,d MMM yyyy,24 Apr 2020",
-        "$date2,d MMMM yyyy HH:mm:ss,4 November 2017 11:09:13"
+        "$date2,d MMMM yyyy HH:mm:ss,4 November 2017 10:09:13"
     )
     fun `DateExtensions toFormat date formats properly`(date: Long, format: String, expected: String) {
 
-        assertEquals(expected, Date(date).toFormat(format))
+        assertEquals(expected, date.toDate()!!.toFormat(format))
     }
 
     @Test
     fun `DateExtensions toFormatHHMM converts to hours and minutes properly`() {
 
-        assertEquals("18:24", Date(date1).toFormatHHMM())
-        assertEquals("11:09", Date(date2).toFormatHHMM())
-        assertEquals("11-09", Date(date2).toFormatHHMM(separator = "-"))
+        assertEquals("17:24", date1.toDate()!!.toFormatHHMM(locale = Locale.getDefault(Locale.Category.FORMAT)))
+        assertEquals("10:09", date2.toDate()!!.toFormatHHMM(locale = Locale.getDefault(Locale.Category.FORMAT)))
+        assertEquals("10-09", date2.toDate()!!.toFormatHHMM(separator = "-"))
     }
 
     @Test
