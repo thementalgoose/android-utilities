@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class CharExtensionsKtTest {
 
+
     @ParameterizedTest
     @CsvSource(
         "A,4,AAAA",

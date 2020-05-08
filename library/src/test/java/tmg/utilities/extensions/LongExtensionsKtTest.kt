@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.util.*
 
-
 private const val date1: Long = 1587749084000 // 24/04/2020 18:24:44
 private const val date2: Long = 1509793753000 // 04/11/2017 11:09:13
 
