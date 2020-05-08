@@ -13,7 +13,6 @@ class StringExtensionsKtTest {
     @ParameterizedTest
     @CsvSource(
         "12/12/1999,dd/MM/yyyy,944956800000",
-        "6/21/2018 10:32,M/dd/yyyy HH:mm,1529573520000",
         "12/12/1999,dd/MM/HHHH,",
         "12/12/1999,yyyy/MM/dd,",
         "12/12/1999,asdasdas,",
