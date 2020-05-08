@@ -1,8 +1,12 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "de.mannodermaus.android-junit5"
 
 repositories {
     mavenCentral()
@@ -45,6 +49,17 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
         androidTest.resources.srcDirs += 'src/androidTest/res'
+        test.java.srcDirs += 'src/test/java'
+    }
+
+    testOptions {
+        unitTests {
+            all {
+                testLogging {
+                    events "passed", "skipped", "failed", "standardOut", "standardError"
+                }
+            }
+        }
     }
 }
 
@@ -53,8 +68,12 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junit"
+    testImplementation('org.mockito:mockito-junit-jupiter:3.0.0') {
+        exclude group: 'org.junit.jupiter'
+    }
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 

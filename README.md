@@ -1,6 +1,12 @@
-# Android Utilities class 
+# Android Utilities class
 
-Contains a collection of all the extensions and generic utilities that I commonly use
+[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) [![Build Status](https://travis-ci.org/thementalgoose/android-utilities.svg?branch=master)](https://travis-ci.org/thementalgoose/android-utilities)
+
+Contains a collection of all the extensions and generic utilities that I commonly use.
+
+## Travis CI
+
+Unit tests are being ran in [Travis-CI](https://travis-ci.org/github/thementalgoose/android-utilities)
 
 ## Install
 
@@ -19,7 +25,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-utilities:1.1.0'     // Use Jitpack version if newer
+    implementation 'com.github.thementalgoose:android-utilities:1.1.1'     // Use Jitpack version if newer
 }
 ```
 
