@@ -15,6 +15,7 @@ fun Long.toDate(): Date? {
  * Convert a Long to a date string
  * @param format Format for the date, defaults to "dd/MM/yyyy HH:mm"
  */
+@Deprecated("Please use LocalDate or Calendar to accurately convert the date")
 fun Long.toDateString(format: String = "dd/MM/yyyy HH:mm"): String? {
     return toDate()?.toFormat(format)
 }
