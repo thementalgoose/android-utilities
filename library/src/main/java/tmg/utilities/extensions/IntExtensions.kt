@@ -34,6 +34,7 @@ fun Int.pxToDp(res: Resources): Float {
  * @param min If the number is below the min, then cap it to the min
  * @param max If the number is below the max, then cap it to the max
  */
+@Deprecated("No longer required", replaceWith = ReplaceWith("coerceIn(minValue, maxValue)"))
 fun Int.capTo(min: Int, max: Int): Int {
     if (this < min) return min
     if (this > max) return max
