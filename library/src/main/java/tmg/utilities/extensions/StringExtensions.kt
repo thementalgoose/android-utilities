@@ -7,9 +7,11 @@ import android.text.Spanned
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import tmg.utilities.utils.ClipboardUtils
+import java.security.MessageDigest
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import android.util.Base64
 
 //region Dates
 
@@ -159,5 +161,35 @@ inline fun <reified T : Enum<T>> String.toEnum(by: (enum: T) -> String = { it.na
 fun String.copyToClipboard(context: Context, label: String = "Clipboard") {
     ClipboardUtils.copyToClipboard(context, this, label)
 }
+
+//endregion
+
+//region Encryption
+
+/**
+ * Get the md5 hash of a string
+ */
+val String.md5: String
+    get() {
+        val bytes = MessageDigest.getInstance("MD5").digest(this.toByteArray())
+        return bytes.joinToString("") {
+            "%02x".format(it)
+        }
+    }
+
+/**
+ * Get the SHA1 of a string
+ */
+val String.sha1: String
+    get() {
+        val bytes = MessageDigest.getInstance("SHA-1").digest(this.toByteArray())
+        return bytes.joinToString("") {
+            "%02x".format(it)
+        }
+    }
+
+val String.decodeBase64: String get() = Base64.decode(this, Base64.DEFAULT).toString(Charsets.UTF_8)
+
+val String.encodeBase64: String get() = Base64.encodeToString(this.toByteArray(Charsets.UTF_8), Base64.DEFAULT)
 
 //endregion

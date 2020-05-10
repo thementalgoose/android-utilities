@@ -48,33 +48,63 @@ fun Int.capTo(min: Int, max: Int): Int {
 /**
  * Display number as 2 digit string
  */
+@Deprecated("No longer used", ReplaceWith("Int.extend(numberOfDigits, extendWithChar)"))
 fun Int.dp2(): String {
-    return toLength(2)
+    return extend(2, extendWithChar = '0')
 }
 
 /**
  * Convert an integer to a string but with a given length
  *
- * (ie. 2.toLength(2) = "02"
+ * ie. 2.toLength(2) = "02"
+ * ie. 34.toLength(1) = "34"
+ */
+@Deprecated("No longer used", ReplaceWith("Int.extend(numberOfDigits, extendWithChar)"))
+fun Int.toLength(numberOfDigits: Int) {
+    this.extend(numberOfDigits, extendWithChar = '0')
+}
+
+/**
+ * Convert an integer to a string but with a given length
+ *
+ * ie. 2.toLength(2) = "02"
+ * ie. 34.toLength(1) = "34"
+ * ie. 34.toLength(4, extendWithDigit = 'A') = "AA34"
  *
  * @param numberOfDigits The number of digits we should make this integer
  */
-fun Int.toLength(numberOfDigits: Int): String {
-    return if (this < Math.pow(10.0, (numberOfDigits - 1).toDouble())) {
-        return "0" + toLength(numberOfDigits - 1)
+fun Int.extend(numberOfDigits: Int, extendWithChar: Char = '0'): String {
+    if (this < 0) {
+        return this.toString()
     }
-    else {
-        this.toString()
+    if (this.toString().length >= numberOfDigits) {
+        return this.toString()
     }
+    val numberToAdd = numberOfDigits - this.toString().length
+    return "${numberToAdd.itemsOf { extendWithChar }.joinToString(separator = "")}$this"
+}
+
+//endregion
+
+//region Duplication
+
+fun <T> Int.itemsOf(runner: (index: Int) -> T): List<T> {
+    return List(this) { runner(it) }
 }
 
 //endregion
 
 //region Time
 
-fun Int.secondsToHHmm(): String {
-    val hours: String = (this / (60 * 60)).toLength(2)
-    val minutes: String = (this / 60).toLength(2)
+/**
+ * Convert a number of seconds into a HH:mm representation, if the seconds is < 1440 and > 0
+ * (ie. A time format can made for it)
+ */
+fun Int.secondsToHHmm(): String? {
+    if (this >= (86400)) return null
+    if (this < 0) return null
+    val hours: String = (this / (60 * 60)).extend(2)
+    val minutes: String = ((this / 60) % 60).extend(2)
     return "$hours:$minutes"
 }
 

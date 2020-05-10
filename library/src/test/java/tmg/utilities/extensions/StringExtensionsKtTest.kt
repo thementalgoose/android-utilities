@@ -150,4 +150,28 @@ class StringExtensionsKtTest {
     }
 
     //endregion
+
+    //regions Encryption
+
+    @ParameterizedTest
+    @CsvSource(
+        "testing,ae2b1fca515949e5d54fb22b8ed95575",
+        "sample_password,e15d45d5e4030015e668ba8f863569ce"
+    )
+    fun `StringExtensions md5 test md5 generation`(input: String, expectedHash: String) {
+
+        assertEquals(expectedHash.toLowerCase(), input.md5.toLowerCase())
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "testing,DC724AF18FBDD4E59189F5FE768A5F8311527050",
+        "sample_password,FDC625010C4BEB998E590924DF39B7E59298612D"
+    )
+    fun `StringExtensions sha1 test sha1 generation`(input: String, expectedHash: String) {
+
+        assertEquals(expectedHash.toLowerCase(), input.sha1.toLowerCase())
+    }
+
+    //endregion
 }
