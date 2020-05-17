@@ -101,6 +101,32 @@ class IntExtensionsKtTest {
         assertNull(20.toEnum<SampleEnum> { it.key })
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "1,1st",
+        "2,2nd",
+        "3,3rd",
+        "4,4th",
+        "9,9th",
+        "11,11th",
+        "12,12th",
+        "13,13th",
+        "21,21st",
+        "22,22nd",
+        "23,23rd",
+        "50,50th",
+        "1142,1142nd",
+        "12711,12711th",
+        "234567,234567th",
+        "0,0",
+        "-1,-1"
+    )
+    fun `IntExtensions ordinalAbbreviation and elevatedTerminal numbers are converted correctly`(value: Int, expectedValue: String) {
+
+        assertEquals(expectedValue, value.ordinalAbbreviation)
+        assertEquals(expectedValue, value.elevatedTerminal)
+    }
+
     //endregion
 
 }
