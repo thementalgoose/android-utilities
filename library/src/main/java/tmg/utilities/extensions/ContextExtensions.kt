@@ -1,6 +1,9 @@
 package tmg.utilities.extensions
 
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
 import android.content.ClipboardManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -236,6 +239,36 @@ val Context.managerWifi: WifiManager
  */
 fun Context.copyToClipboard(text: String, label: String = "Clipboard") {
     ClipboardUtils.copyToClipboard(this, text, label)
+}
+
+//endregion
+
+//region Widgets
+
+/**
+ * Update all widgets that are active of a specified provider
+ */
+inline fun <reified T : AppWidgetProvider> Context.updateWidgets() {
+
+    val manager = AppWidgetManager.getInstance(this)
+    val ids = manager.getAppWidgetIds(ComponentName(this, T::class.java))
+
+    val intent = Intent(this, T::class.java)
+    intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+
+    sendBroadcast(intent)
+}
+
+/**
+ * Update a specific widget by it's app widget id
+ */
+inline fun <reified T : AppWidgetProvider> Context.updateWidget(widgetId: Int) {
+    val intent = Intent(this, T::class.java)
+    intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, IntArray(1) { widgetId })
+
+    sendBroadcast(intent)
 }
 
 //endregion
