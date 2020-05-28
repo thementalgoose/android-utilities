@@ -1,5 +1,7 @@
 package tmg.utilities.extensions
 
+import android.graphics.Color
+import androidx.core.graphics.toColorInt
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -125,6 +127,17 @@ class IntExtensionsKtTest {
 
         assertEquals(expectedValue, value.ordinalAbbreviation)
         assertEquals(expectedValue, value.elevatedTerminal)
+    }
+
+    @Test
+    fun `IntExtensions hexColor converts sample colour properly`() {
+
+        assertEquals("#FF0000", Color.RED.hexColor)
+        assertEquals("#0000FF", Color.BLUE.hexColor)
+        assertEquals("#00FF00", Color.GREEN.hexColor)
+        assertEquals("#FFFFFF", Color.WHITE.hexColor)
+        assertEquals("#000000", Color.BLACK.hexColor)
+        assertEquals("#96A1FD", 127312381.hexColor)
     }
 
     //endregion

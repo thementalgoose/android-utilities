@@ -186,3 +186,14 @@ inline fun <reified T : Enum<T>> Int.toEnum(by: (enum: T) -> Int = { it.ordinal 
 }
 
 //endregion
+
+//region Colours
+
+/**
+ * Get the hex colour code of an integer of a colour
+ * @return Capital letter color codes (ie. FF00FF)
+ */
+val Int.hexColor: String
+    get() = String.format("#%06X", (0xFFFFFF and this))
+
+//endregion
