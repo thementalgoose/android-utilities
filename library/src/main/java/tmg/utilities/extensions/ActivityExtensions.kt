@@ -2,11 +2,13 @@ package tmg.utilities.extensions
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.ColorInt
 import androidx.annotation.Px
 import tmg.utilities.models.DeviceStatus
 import tmg.utilities.models.PermissionRequestResult
@@ -37,9 +39,19 @@ fun Activity.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
 }
 
 /**
+ * Programatically set the status bar colour
+ */
+fun Activity.setStatusBarColor(@ColorInt color: Int) {
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+    window.statusBarColor = Color.TRANSPARENT
+}
+
+/**
  * Programmatically set the status bar color
  */
-fun Activity.setStatusBarColor(color: Int) {
+fun Activity.setStatusBarColorDark(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -56,6 +68,7 @@ fun Activity.setStatusBarIconsDark() {
 
 /**
  * Programmatically set the status bar icon color to either light or dark (white or black)
+ * @param isLight
  */
 fun Activity.setStatusBarIconsLight(isLight: Boolean = true) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

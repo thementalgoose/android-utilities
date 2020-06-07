@@ -20,6 +20,7 @@ import android.text.Spanned
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ArrayRes
+import androidx.annotation.DimenRes
 import androidx.annotation.StringRes
 import io.reactivex.rxjava3.core.Observable
 import tmg.utilities.models.InstalledPackageModel
@@ -270,5 +271,14 @@ inline fun <reified T : AppWidgetProvider> Context.updateWidget(widgetId: Int) {
 
     sendBroadcast(intent)
 }
+
+//endregion
+
+//region Dimensions
+
+/**
+ * Get the px size for a given dp value
+ */
+fun Context.dimensionPx(@DimenRes id: Int) = resources.getDimensionPixelSize(id).toFloat()
 
 //endregion
