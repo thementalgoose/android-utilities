@@ -44,7 +44,6 @@ fun Activity.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
 fun Activity.setStatusBarColor(@ColorInt color: Int) {
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
     window.statusBarColor = Color.TRANSPARENT
 }
 
