@@ -112,6 +112,8 @@ fun Int.secondsToHHmm(): String? {
 
 //region Strings
 
+fun Int.toEmptyIfZero(): String = if (this == 0) "" else this.toString()
+
 fun Int.toStringResource(context: Context): String {
     return context.getString(this)
 }

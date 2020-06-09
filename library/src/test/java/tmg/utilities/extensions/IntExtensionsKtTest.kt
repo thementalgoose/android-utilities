@@ -140,6 +140,19 @@ class IntExtensionsKtTest {
         assertEquals("#96A1FD", 127312381.hexColor)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "-1,-1",
+        "0,",
+        "1,1",
+        "11231231,11231231"
+    )
+    fun `IntExtensions toEmptyIfZero check empty if zero works`(value: Int, assertValue: String?) {
+        val expectedValue = assertValue ?: ""
+
+        assertEquals(expectedValue, value.toEmptyIfZero())
+    }
+
     //endregion
 
 }
