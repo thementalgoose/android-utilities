@@ -44,11 +44,11 @@ fun Activity.startActivityClearStack(intent: Intent, clearTopStack: Boolean = tr
 fun Activity.setStatusBarColor(@ColorInt color: Int) {
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    window.statusBarColor = Color.TRANSPARENT
+    window.statusBarColor = color
 }
 
 /**
- * Programmatically set the status bar color
+ * Programmatically set the status bar color to a darker shade of the supplied colour
  */
 fun Activity.setStatusBarColorDark(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
