@@ -1,6 +1,6 @@
 # Android Utilities class
 
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) ![main](https://github.com/thementalgoose/android-utilities/workflows/unit-test-main/badge.svg)
+[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) ![main](https://github.com/thementalgoose/android-utilities/workflows/Main/badge.svg)
 
 Contains a collection of all the extensions and generic utilities that I commonly use.
 
