@@ -1,12 +1,12 @@
 # Android Utilities class
 
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) [![Build Status](https://travis-ci.org/thementalgoose/android-utilities.svg?branch=master)](https://travis-ci.org/thementalgoose/android-utilities)
+[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) ![main](https://github.com/thementalgoose/android-utilities/workflows/unit-test-main/badge.svg)
 
 Contains a collection of all the extensions and generic utilities that I commonly use.
 
-## Travis CI
+## CI
 
-Unit tests are being ran in [Travis-CI](https://travis-ci.org/github/thementalgoose/android-utilities)
+Unit tests are ran in github actions
 
 ## Install
 
