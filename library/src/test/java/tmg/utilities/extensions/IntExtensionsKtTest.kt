@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class IntExtensionsKtTest {
 
-    @ParameterizedTest(name = "")
+    @ParameterizedTest
     @CsvSource(
         "12,0,24,12",
         "0,0,24,0",
