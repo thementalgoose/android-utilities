@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource
 class CharExtensionsKtTest {
 
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Extending char \'{0}\' by {1} results in {2}")
     @CsvSource(
         "A,4,AAAA",
         "2,1,2",
