@@ -16,23 +16,6 @@ import android.util.Base64
 //region Dates
 
 /**
- * Convert a string to a date with a given format
- *
- * @param format The format that you expect the string in (ie. "2018-09-09".toDate("yyyy-MM-dd"))
- */
-@Deprecated("Method usage is not encouraged as locale affects date parsing. Please use LocalDate or Calendar")
-fun String.toDate(format: String, locale: Locale = Locale.getDefault()): Date? {
-    val sdf: SimpleDateFormat = SimpleDateFormat(format, locale)
-    sdf.isLenient = false
-    return try {
-        sdf.parse(this)
-    }
-    catch (e: ParseException) {
-        null
-    }
-}
-
-/**
  * Get the minutes from a time string
  *
  * Assumes the string is "HH:mm"

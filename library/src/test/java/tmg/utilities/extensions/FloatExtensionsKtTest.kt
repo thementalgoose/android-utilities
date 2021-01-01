@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class FloatExtensionsKtTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}.toDecimalPlaces({1}) = {2}")
     @CsvSource(
         "0.02113,3,0.021",
         "0.0259,3,0.026",
@@ -22,7 +22,7 @@ class FloatExtensionsKtTest {
         assertEquals(expected.toFloat(), source.toFloat().toDecimalPlaces(decimalPlaces))
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}.positive() results in {1}")
     @CsvSource(
         "-1.0f,0.0f",
         "0.0f,0.0f",

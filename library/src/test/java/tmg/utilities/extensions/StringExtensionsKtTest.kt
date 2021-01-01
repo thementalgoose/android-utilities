@@ -10,20 +10,7 @@ class StringExtensionsKtTest {
 
     //region Dates
 
-    @ParameterizedTest
-    @CsvSource(
-        "12/12/1999,dd/MM/yyyy,944956800000",
-        "12/12/1999,dd/MM/HHHH,",
-        "12/12/1999,yyyy/MM/dd,",
-        "12/12/1999,asdasdas,",
-        ",sjdsdfj,"
-    )
-    fun `StringExtensions toDate formats are parsed properly`(source: String?, format: String, expected: Long?) {
-
-        assertEquals(expected, source?.toDate(format)?.time)
-    }
-
-    @ParameterizedTest
+    @ParameterizedTest(name = "Hours extracted from {0} = {1}")
     @CsvSource(
         "12:00,12",
         "21:23,21",
@@ -36,7 +23,7 @@ class StringExtensionsKtTest {
 
         assertEquals(expected, source.hours())
     }
-    @ParameterizedTest
+    @ParameterizedTest(name = "Total minutes extracted from {0} = {1}")
     @CsvSource(
         "12:00,720",
         "21:23,1283",
@@ -153,7 +140,7 @@ class StringExtensionsKtTest {
 
     //regions Encryption
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} >> MD5 >> {1}")
     @CsvSource(
         "testing,ae2b1fca515949e5d54fb22b8ed95575",
         "sample_password,e15d45d5e4030015e668ba8f863569ce"
@@ -163,7 +150,7 @@ class StringExtensionsKtTest {
         assertEquals(expectedHash.toLowerCase(), input.md5.toLowerCase())
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} >> SHA1 >> {1}")
     @CsvSource(
         "testing,DC724AF18FBDD4E59189F5FE768A5F8311527050",
         "sample_password,FDC625010C4BEB998E590924DF39B7E59298612D"
