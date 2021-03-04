@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.SortedList
 /**
  * Created by jordan on 16/10/2017
  */
+@Deprecated("Please use DiffList.Comparator instead")
 abstract class SortedListAdapter<E, T : RecyclerView.ViewHolder>: RecyclerView.Adapter<T> {
 
     lateinit var mSortedList: SortedList<E>

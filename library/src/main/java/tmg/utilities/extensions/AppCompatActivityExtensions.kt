@@ -153,3 +153,7 @@ fun AppCompatActivity.observeEvent(liveData: LiveData<Event>, action: () -> Unit
     }
 }
 //endregion
+
+//region Permissions
+
+//endregion
