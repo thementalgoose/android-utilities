@@ -22,11 +22,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ArrayRes
 import androidx.annotation.DimenRes
 import androidx.annotation.StringRes
-import io.reactivex.rxjava3.core.Observable
 import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.SharedPreferencesUtils
-import tmg.utilities.utils.ongoing
 
 
 //region Shared Preferences
@@ -122,10 +120,6 @@ fun Context.installedPackages(flags: Int? = null): List<InstalledPackageModel> {
     return pmList.map {
         InstalledPackageModel(packageManager, it)
     }
-}
-
-fun Context.installedPackagesObservable(): Observable<List<InstalledPackageModel>> {
-    return ongoing { installedPackages() }
 }
 
 //endregion
