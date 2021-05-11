@@ -2,7 +2,7 @@ package tmg.utilities.difflist
 
 import androidx.recyclerview.widget.DiffUtil
 
-
+@Deprecated("Usage is no longer recommended, use the standard implementation", replaceWith = ReplaceWith("DiffUtil.Callback()"))
 class DiffListComparatorCallback<MODEL>(
     private val oldItems: List<MODEL>,
     private val newItems: List<MODEL>,

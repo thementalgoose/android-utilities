@@ -3,6 +3,7 @@ package tmg.utilities.difflist
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
+@Deprecated("Usage is no longer recommended, use the standard implementation with your own DiffUtil", replaceWith = ReplaceWith("RecyclerView.Adapter<ViewHolder>"))
 abstract class DiffListAdapter<MODEL, VIEW_HOLDER : RecyclerView.ViewHolder>(
     private val diffListComparator: DiffListComparator<MODEL>
 ): RecyclerView.Adapter<VIEW_HOLDER>(){
