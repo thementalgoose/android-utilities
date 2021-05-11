@@ -33,10 +33,6 @@ class DeviceStatus(
     val screenHeight: Int = activity.getScreenHeight()
     val screenWidth: Int = activity.getScreenWidth()
     val packageName: String = activity.packageName
-    @Deprecated("Value no longer used.", ReplaceWith("BuildConfig.VERSION_CODE"), DeprecationLevel.ERROR)
-    val versionCode: Long = 0L
-    @Deprecated("Value no longer used.", ReplaceWith("BuildConfig.VERSION_NAME"), DeprecationLevel.ERROR)
-    val versionName: String = ""
     val appName: String? = activity.appName()
     val deviceIMEI: String = DeviceUtils.getIMEI(activity)
 }
