@@ -86,8 +86,6 @@ dependencies {
     testImplementation('org.mockito:mockito-junit-jupiter:3.0.0') {
         exclude group: 'org.junit.jupiter'
     }
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // AndroidX
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'

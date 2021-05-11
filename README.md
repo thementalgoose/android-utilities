@@ -1,35 +1,32 @@
 # Android Utilities class
 
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) [![main](https://github.com/thementalgoose/android-utilities/workflows/Main/badge.svg)](https://github.com/thementalgoose/android-utilities/actions)
-
 Contains a collection of all the extensions and generic utilities that I commonly use.
 
-## CI
+[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities) [![main](https://github.com/thementalgoose/android-utilities/workflows/Main/badge.svg)](https://github.com/thementalgoose/android-utilities/actions)
 
-Unit tests are ran in github actions
+## Installation
 
-## Install
+<details>
+    <summary><code>build.gradle</code></summary>
 
-#### `build.gradle`
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+</details>
 
-```
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
+<details>
+    <summary><code>app/build.gradle</code></summary>
 
-#### `app/build.gradle`
+    dependencies {
+        implementation 'com.github.thementalgoose:android-utilities:3.0.0'
+        // Use Jitpack version if newer
+    }
 
-```
-dependencies {
-    implementation 'com.github.thementalgoose:android-utilities:2.1.2'     // Use Jitpack version if newer
-}
-```
-
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
+Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
+</details>
 
 ## License
 
