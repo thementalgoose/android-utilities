@@ -11,18 +11,6 @@ class IntExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "12,0,24,12",
-        "0,0,24,0",
-        "24,0,24,24",
-        "-8,-5,24,-5",
-        "72,0,24,24"
-    )
-    fun `IntExtensions capTo checking integers are capped too`(source: Int, min: Int, max: Int, expected: Int) {
-        assertEquals(expected, source.capTo(min, max))
-    }
-
-    @ParameterizedTest
-    @CsvSource(
         "-1,0",
         "0,0",
         "1,1",

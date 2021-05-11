@@ -23,7 +23,7 @@ import android.util.Base64
 fun String.minsPastHour(): Int? {
     val resp: List<String> = this.split(":")
     if (resp.size == 2 && this.length == 5) {
-        return (resp[1].toIntOrNull() ?: 0).capTo(0, 59)
+        return (resp[1].toIntOrNull() ?: 0).coerceIn(0, 59)
     }
     return null
 }
@@ -51,7 +51,7 @@ fun String.minsTotal(): Int? {
 fun String.hours(): Int? {
     val resp: List<String> = this.split(":")
     if (resp.size == 2 && this.length == 5) {
-        return (resp[0].toIntOrNull() ?: 0).capTo(min = 0, max = 24)
+        return (resp[0].toIntOrNull() ?: 0).coerceIn(0, 24)
     }
     return null
 }
