@@ -17,10 +17,13 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.telephony.TelephonyManager
 import android.text.Spanned
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import androidx.annotation.ArrayRes
 import androidx.annotation.DimenRes
+import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.utils.ClipboardUtils
@@ -274,5 +277,18 @@ inline fun <reified T : AppWidgetProvider> Context.updateWidget(widgetId: Int) {
  * Get the px size for a given dp value
  */
 fun Context.dimensionPx(@DimenRes id: Int) = resources.getDimensionPixelSize(id).toFloat()
+
+//endregion
+
+//region Popup menu
+
+fun Context.popupMenu(anchorView: View, @MenuRes menuRes: Int, itemClicked: (id: Int) -> Boolean) {
+    val popupMenu = PopupMenu(anchorView.context, anchorView)
+    popupMenu.inflate(menuRes)
+    popupMenu.setOnMenuItemClickListener {
+        itemClicked(it.itemId)
+    }
+    popupMenu.show()
+}
 
 //endregion
