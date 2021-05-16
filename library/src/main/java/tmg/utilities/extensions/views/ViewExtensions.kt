@@ -4,6 +4,8 @@ import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.PopupMenu
+import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import tmg.utilities.extensions.managerInputMethod
@@ -100,6 +102,21 @@ fun View.snackbar(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG
     val snackbar = Snackbar.make(this, resources.getString(messageRes), length)
     snackbar.func()
     snackbar.show()
+}
+
+//endregion
+
+//region PopupMenu
+
+fun View.setOnClickPopupMenu(@MenuRes menuRes: Int, itemClicked: (id: Int) -> Boolean) {
+    this.setOnClickListener { view ->
+        val popupMenu = PopupMenu(view.context, view)
+        popupMenu.inflate(menuRes)
+        popupMenu.setOnMenuItemClickListener {
+            itemClicked(it.itemId)
+        }
+        popupMenu.show()
+    }
 }
 
 //endregion
