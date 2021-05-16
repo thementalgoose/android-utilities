@@ -3,6 +3,7 @@ package tmg.utilities.extensions
 import android.content.Context
 import android.content.res.Resources
 import tmg.utilities.utils.DensityUtils
+import kotlin.math.floor
 
 //region Density conversions
 
@@ -107,6 +108,21 @@ fun Int.secondsToHHmm(): String? {
     val minutes: String = ((this / 60) % 60).extend(2)
     return "$hours:$minutes"
 }
+
+
+
+/**
+ * Given that the number is in seconds, convert it to a pair containing hours and minutes
+ */
+val Int.secondsToHHmm: Pair<Int, Int>
+    get() {
+        if (this < 0) {
+            return Pair(0, 0)
+        }
+        val hours = floor(this / 3600f).toInt()
+        val minutes = floor((this % 3600f) / 60f).toInt()
+        return Pair(hours, minutes)
+    }
 
 //endregion
 

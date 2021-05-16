@@ -45,6 +45,20 @@ class IntExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
+        "86400,24,0",
+        "88200,24,30",
+        "86399,23,59",
+        "43200,12,00",
+        "0,0,0",
+        "-1,0,0"
+    )
+    fun `IntExtensions secondsToHHmm formats a valid time`(seconds: Int, expectedHours: Int, expectedMinutes: Int) {
+        assertEquals(expectedHours, seconds.secondsToHHmm.first)
+        assertEquals(expectedMinutes, seconds.secondsToHHmm.second)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
         "3,0,4,0003",
         "0,1,2,10",
         "-1,2,4,-1",
