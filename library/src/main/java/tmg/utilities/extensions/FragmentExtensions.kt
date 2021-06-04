@@ -1,11 +1,19 @@
     package tmg.utilities.extensions
 
 import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
+import androidx.viewbinding.ViewBinding
 import tmg.utilities.lifecycle.DataEvent
 import tmg.utilities.lifecycle.Event
+import tmg.utilities.viewbinding.ActivityViewBindingDelegate
+import tmg.utilities.viewbinding.FragmentViewBindingDelegate
+import tmg.utilities.viewbinding.toViewBinder
+import tmg.utilities.viewbinding.toViewInflater
 
     /**
  * Start an activity but clear the back stack
@@ -44,6 +52,31 @@ fun Fragment.observeEvent(liveData: LiveData<Event>, action: () -> Unit) {
             action()
         }
     }
+}
+
+//endregion
+
+//region View Binding
+
+/**
+ * Delegate based view binding for activity
+ *
+ * <pre>
+ * class MyFragment: Fragment(R.layout.fragment_test) {
+ *     private val binding by viewBinding { FragmentTestBinding.bind(it) }
+ * }
+ * </pre>
+ *
+ * <pre>
+ * class MyFragment: Fragment(R.layout.fragment_test) {
+ *     private val binding by viewBinding(FragmentTestBinding::bind)
+ * }
+ * </pre>
+ */
+inline fun <reified T: ViewBinding> Fragment.viewBinding(
+    noinline binder: (view: View) -> T
+): FragmentViewBindingDelegate<T> {
+    return FragmentViewBindingDelegate(binder.toViewBinder())
 }
 
 //endregion
