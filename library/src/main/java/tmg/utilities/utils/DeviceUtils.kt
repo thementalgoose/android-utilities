@@ -12,39 +12,41 @@ import tmg.utilities.extensions.managerAudio
 import tmg.utilities.extensions.managerTelephony
 import tmg.utilities.models.DeviceStatus
 
-object DeviceUtils {
-    /**
-     * Get device summary info
-     */
-    @JvmStatic
-    fun getDeviceInfo(activity: Activity): DeviceStatus {
-        return DeviceStatus(activity)
-    }
-
-    /**
-     * Get device ringer mode
-     */
-    @JvmStatic
-    fun getDeviceRingerMode(context: Context): DeviceRingerMode {
-        return when (context.managerAudio?.ringerMode) {
-            AudioManager.RINGER_MODE_SILENT -> DeviceRingerMode.SILENT
-            AudioManager.RINGER_MODE_VIBRATE -> DeviceRingerMode.VIBRATE
-            else -> DeviceRingerMode.NORMAL
+class DeviceUtils {
+    companion object {
+        /**
+         * Get device summary info
+         */
+        @JvmStatic
+        fun getDeviceInfo(activity: Activity): DeviceStatus {
+            return DeviceStatus(activity)
         }
-    }
 
-    /**
-     * Get the device IMEI
-     */
-    @JvmStatic
-    fun getIMEI(activity: Activity): String? {
-        if (!PermissionUtils.isPermissionGranted(activity, Manifest.permission.READ_PHONE_STATE)) {
-            Log.e("DeviceUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
+        /**
+         * Get device ringer mode
+         */
+        @JvmStatic
+        fun getDeviceRingerMode(context: Context): DeviceRingerMode {
+            return when (context.managerAudio?.ringerMode) {
+                AudioManager.RINGER_MODE_SILENT -> DeviceRingerMode.SILENT
+                AudioManager.RINGER_MODE_VIBRATE -> DeviceRingerMode.VIBRATE
+                else -> DeviceRingerMode.NORMAL
+            }
         }
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            activity.managerTelephony?.imei
-        } else {
-            activity.managerTelephony?.deviceId
+
+        /**
+         * Get the device IMEI
+         */
+        @JvmStatic
+        fun getIMEI(activity: Activity): String? {
+            if (!PermissionUtils.isPermissionGranted(activity, Manifest.permission.READ_PHONE_STATE)) {
+                Log.e("DeviceUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
+            }
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.managerTelephony?.imei
+            } else {
+                activity.managerTelephony?.deviceId
+            }
         }
     }
 }
