@@ -154,6 +154,6 @@ val Activity.deviceStatus: DeviceStatus
  * Check if the WiFi is enabled
  */
 val Activity.isWiFiEnabled: Boolean
-    get() = managerWifi.isWifiEnabled == true
+    get() = managerWifi?.isWifiEnabled == true
 
 //endregion

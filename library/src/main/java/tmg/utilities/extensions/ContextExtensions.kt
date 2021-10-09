@@ -183,50 +183,50 @@ fun Context.appName(): String? {
 /**
  * Audio Manager
  */
-val Context.managerAudio: AudioManager
-    get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+val Context.managerAudio: AudioManager?
+    get() = getSystemService(Context.AUDIO_SERVICE) as? AudioManager
 
 /**
  * Connectivity manager
  */
-val Context.managerConnectivity: ConnectivityManager
-    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+val Context.managerConnectivity: ConnectivityManager?
+    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
 
 /**
  * Window manager
  */
-val Context.managerWindow: WindowManager
-    get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+val Context.managerWindow: WindowManager?
+    get() = getSystemService(Context.WINDOW_SERVICE) as? WindowManager
 
 /**
  * Input method manager
  */
-val Context.managerInputMethod: InputMethodManager
-    get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+val Context.managerInputMethod: InputMethodManager?
+    get() = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
 
 /**
  * Clipboard Manager
  */
-val Context.managerClipboard: ClipboardManager
-    get() = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+val Context.managerClipboard: ClipboardManager?
+    get() = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
 
 /**
  * Sensor Manager
  */
-val Context.managerSensor: SensorManager
-    get() = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+val Context.managerSensor: SensorManager?
+    get() = getSystemService(Context.SENSOR_SERVICE) as? SensorManager
 
 /**
  * Telephony Manager
  */
-val Context.managerTelephony: TelephonyManager
-    get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+val Context.managerTelephony: TelephonyManager?
+    get() = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
 /**
  * Wifi Manager
  */
-val Context.managerWifi: WifiManager
-    get() = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+val Context.managerWifi: WifiManager?
+    get() = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
 
 //endregion
 
