@@ -81,13 +81,14 @@ fun Activity.setStatusBarIconsLight(isLight: Boolean = true) {
  * Show or hide the soft keyboard
  */
 fun Activity.setSoftKeyboard(show: Boolean) {
-    val inputMethodManager = this.managerInputMethod
-    if (show) {
-        inputMethodManager.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
-    }
-    else {
-        currentFocus?.windowToken?.let {
-            inputMethodManager.hideSoftInputFromWindow(it, 0)
+    this.managerInputMethod?.let { inputMethodManager ->
+        if (show) {
+            inputMethodManager.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT)
+        }
+        else {
+            currentFocus?.windowToken?.let {
+                inputMethodManager.hideSoftInputFromWindow(it, 0)
+            }
         }
     }
 }
@@ -153,6 +154,6 @@ val Activity.deviceStatus: DeviceStatus
  * Check if the WiFi is enabled
  */
 val Activity.isWiFiEnabled: Boolean
-    get() = managerWifi.isWifiEnabled
+    get() = managerWifi?.isWifiEnabled == true
 
 //endregion

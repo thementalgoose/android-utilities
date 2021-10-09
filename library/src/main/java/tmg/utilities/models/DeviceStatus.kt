@@ -34,5 +34,5 @@ class DeviceStatus(
     val screenWidth: Int = activity.getScreenWidth()
     val packageName: String = activity.packageName
     val appName: String? = activity.appName()
-    val deviceIMEI: String = DeviceUtils.getIMEI(activity)
+    val deviceIMEI: String? = DeviceUtils.getIMEI(activity)
 }
