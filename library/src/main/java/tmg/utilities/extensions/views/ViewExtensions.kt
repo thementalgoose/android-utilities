@@ -71,14 +71,14 @@ fun View.show(value: Boolean, isGone: Boolean = true) {
  * Close the keyboard from the given view
  */
 fun View.closeKeyboard() {
-    this.context.managerInputMethod.hideSoftInputFromWindow(this.windowToken, 0)
+    this.context.managerInputMethod?.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 /**
  * Focus the keyboard on a given edit text if it can
  */
 fun EditText.focusKeyboard() {
-    this.context.managerInputMethod.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    this.context.managerInputMethod?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
 //endregion

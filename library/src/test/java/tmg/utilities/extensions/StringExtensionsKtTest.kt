@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalTime
 import java.text.ParseException
 
 class StringExtensionsKtTest {
@@ -49,6 +51,63 @@ class StringExtensionsKtTest {
     fun `StringExtensions minsPastHour checking mins past hour can be parsed from strings properly`(source: String, expected: Int?) {
 
         assertEquals(expected, source.minsPastHour())
+    }
+
+    //endregion
+
+    //region LocalDate + LocalTime
+
+    @ParameterizedTest(name = "\"{0}\".toLocalDate() is valid")
+    @CsvSource(
+        "1995-11-12",
+        "1995-November-12"
+    )
+    fun `StringExtensions toLocalDate converts to local date`(input: String) {
+        val expected = LocalDate.of(1995, 11, 12)
+
+        assertEquals(expected, input.toLocalDate())
+    }
+
+    @Test
+    fun `StringExtensions toLocalDate converts to local with valid custom format`() {
+        val input = "1937-11-10"
+        val expected = LocalDate.of(1937, 10, 11)
+
+        assertEquals(expected, input.toLocalDate("yyyy-dd-MM"))
+    }
+
+    @Test
+    fun `StringExtensions toLocalDate converts to null with invalid custom format`() {
+        val input = "1937-11-13"
+
+        assertNull(input.toLocalDate("yyyy-dd-MM"))
+    }
+
+    @ParameterizedTest(name = "\"{0}\".toLocalTime() is valid")
+    @CsvSource(
+        "09:10:11",
+        "09:10:11Z",
+        "09:10:11.000"
+    )
+    fun `StringExtensions toLocalTime converts to local time`(input: String) {
+        val expected = LocalTime.of(9, 10, 11)
+
+        assertEquals(expected, input.toLocalTime())
+    }
+
+    @Test
+    fun `StringExtensions toLocalTime converts to local with valid custom format`() {
+        val input = "59:18:00"
+        val expected = LocalTime.of(18, 59, 0)
+
+        assertEquals(expected, input.toLocalTime("mm:HH:ss"))
+    }
+
+    @Test
+    fun `StringExtensions toLocalTime converts to null with invalid custom format`() {
+        val input = "11:27:00"
+
+        assertNull(input.toLocalTime("mm:HH:ss"))
     }
 
     //endregion
