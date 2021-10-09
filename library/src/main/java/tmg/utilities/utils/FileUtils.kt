@@ -5,18 +5,21 @@ import java.io.File
 
 class FileUtils {
     companion object {
-
-        fun deleteFile(uri: Uri) {
+        @JvmStatic
+        fun deleteFile(uri: Uri): Boolean {
             uri.path?.let {
-                File(it).delete()
+                return File(it).delete()
             }
+            return false
         }
 
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-        fun renameFile(from: Uri, to: Uri) {
-            if (from.path != null && to.path != null) {
-                File(from.path).renameTo(File(to.path))
+        @JvmStatic
+        fun renameFile(from: Uri?, to: Uri?): Boolean {
+            if (from?.path != null && to?.path != null) {
+                return File(from.path).renameTo(File(to.path))
             }
+            return false
         }
     }
 }

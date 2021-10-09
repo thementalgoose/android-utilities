@@ -15,17 +15,15 @@ import tmg.utilities.extensions.managerTelephony
 import tmg.utilities.extensions.managerWifi
 import tmg.utilities.models.NetworkConnectionType
 
-
 class NetworkUtils {
     companion object {
         /**
          * Check if network is available
          */
         @JvmStatic
-        @SuppressLint("MissingPermission")
         fun isNetworkAvailable(context: Context): Boolean {
-            val activeNetworkInfo = context.managerConnectivity.activeNetworkInfo
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected
+            val activeNetworkInfo = context.managerConnectivity?.activeNetworkInfo
+            return activeNetworkInfo?.isConnected == true
         }
 
         /**
@@ -33,23 +31,27 @@ class NetworkUtils {
          * Null if it cannot be found
          */
         @JvmStatic
-        @SuppressLint("MissingPermission", "HardwareIds")
         fun getWifiMacAddress(activity: Activity): String? {
-            if (PermissionUtils.isPermissionGranted(activity, Manifest.permission.ACCESS_WIFI_STATE)) {
-                Log.e("TMG-AndroidUtils", "Permission is not granted for the MAC address - Please grant '${Manifest.permission.ACCESS_WIFI_STATE}' permission")
+            if (PermissionUtils.isPermissionGranted(
+                    activity,
+                    Manifest.permission.ACCESS_WIFI_STATE
+                )
+            ) {
+                Log.e(
+                    "TMG-AndroidUtils",
+                    "Permission is not granted for the MAC address - Please grant '${Manifest.permission.ACCESS_WIFI_STATE}' permission"
+                )
                 return null
             }
-            val info = activity.managerWifi.connectionInfo
-            return info.macAddress
+            return activity.managerWifi?.connectionInfo?.macAddress
         }
 
         /**
          * Get the connection type of the device
          */
-        @SuppressLint("MissingPermission")
         @JvmStatic
         fun getNetworkState(context: Context): NetworkConnectionType {
-            context.managerConnectivity.run {
+            context.managerConnectivity?.run {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     getNetworkCapabilities(activeNetwork)?.run {
                         return when {
@@ -82,11 +84,18 @@ class NetworkUtils {
          */
         @JvmStatic
         fun isWifiEnabled(activity: Activity): Boolean? {
-            if (PermissionUtils.isPermissionGranted(activity, Manifest.permission.ACCESS_WIFI_STATE)) {
-                Log.e("TMG-AndroidUtils", "Permission is not granted for the WiFi state - Please grant '${Manifest.permission.ACCESS_WIFI_STATE}' permission")
+            if (PermissionUtils.isPermissionGranted(
+                    activity,
+                    Manifest.permission.ACCESS_WIFI_STATE
+                )
+            ) {
+                Log.e(
+                    "NetworkUtils",
+                    "Permission is not granted for the WiFi state - Please grant '${Manifest.permission.ACCESS_WIFI_STATE}' permission"
+                )
                 return null
             }
-            return activity.managerWifi.isWifiEnabled
+            return activity.managerWifi?.isWifiEnabled
         }
 
         /**
@@ -95,7 +104,7 @@ class NetworkUtils {
          */
         @JvmStatic
         fun getNetworkDataState(context: Context): NetworkDataState {
-            return when (context.managerTelephony.networkType) {
+            return when (context.managerTelephony?.networkType) {
                 TelephonyManager.NETWORK_TYPE_GPRS,
                 TelephonyManager.NETWORK_TYPE_EDGE,
                 TelephonyManager.NETWORK_TYPE_CDMA,

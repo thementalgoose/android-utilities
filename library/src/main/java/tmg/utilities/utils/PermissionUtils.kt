@@ -14,8 +14,8 @@ class PermissionUtils {
          * @param permission
          */
         @JvmStatic
-        fun isPermissionGranted(activity: Activity, permission: String): Boolean {
-            return getPermissionsState(activity, permission).isAllGranted
+        fun isPermissionGranted(activity: Activity, vararg permission: String): Boolean {
+            return getPermissionsState(activity, *permission).isAllGranted
         }
 
         /**
@@ -49,7 +49,7 @@ class PermissionUtils {
                         granted.add(permission)
                     }
                     else {
-                        Log.e("TMG-AndroidUtils", "Permission has been denied but but the device is pre runtime permissions - Is '$permission' declared inside the Manifest?")
+                        Log.e("TMG-AndroidUtils", "Permission has been denied but the device is pre runtime permissions - Is '$permission' declared inside the Manifest?")
                         denied.add(permission)
                     }
                 }

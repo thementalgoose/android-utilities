@@ -27,7 +27,7 @@ class DeviceUtils {
          */
         @JvmStatic
         fun getDeviceRingerMode(context: Context): DeviceRingerMode {
-            return when (context.managerAudio.ringerMode) {
+            return when (context.managerAudio?.ringerMode) {
                 AudioManager.RINGER_MODE_SILENT -> DeviceRingerMode.SILENT
                 AudioManager.RINGER_MODE_VIBRATE -> DeviceRingerMode.VIBRATE
                 else -> DeviceRingerMode.NORMAL
@@ -37,16 +37,15 @@ class DeviceUtils {
         /**
          * Get the device IMEI
          */
-        @SuppressLint("MissingPermission")
         @JvmStatic
-        fun getIMEI(activity: Activity): String {
+        fun getIMEI(activity: Activity): String? {
             if (!PermissionUtils.isPermissionGranted(activity, Manifest.permission.READ_PHONE_STATE)) {
-                Log.e("TMG-AndroidUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
+                Log.e("DeviceUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
             }
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                activity.managerTelephony.imei
+                activity.managerTelephony?.imei
             } else {
-                activity.managerTelephony.deviceId
+                activity.managerTelephony?.deviceId
             }
         }
     }

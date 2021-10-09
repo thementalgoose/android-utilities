@@ -27,44 +27,6 @@ fun Int.pxToDp(res: Resources): Float {
 
 //endregion
 
-//region Capping
-
-/**
- * Cap an integer to a specific min and max value
- *
- * @param min If the number is below the min, then cap it to the min
- * @param max If the number is below the max, then cap it to the max
- */
-@Deprecated("No longer required", replaceWith = ReplaceWith("coerceIn(minValue, maxValue)"), level = DeprecationLevel.ERROR)
-fun Int.capTo(min: Int, max: Int): Int {
-    if (this < min) return min
-    if (this > max) return max
-    return this
-}
-
-//endregion
-
-//region To String
-
-/**
- * Display number as 2 digit string
- */
-@Deprecated("No longer used", ReplaceWith("Int.extend(numberOfDigits, extendWithChar)"), level = DeprecationLevel.ERROR)
-fun Int.dp2(): String {
-    return extend(2, extendWithChar = '0')
-}
-
-/**
- * Convert an integer to a string but with a given length
- *
- * ie. 2.toLength(2) = "02"
- * ie. 34.toLength(1) = "34"
- */
-@Deprecated("No longer used", ReplaceWith("Int.extend(numberOfDigits, extendWithChar)"), level = DeprecationLevel.ERROR)
-fun Int.toLength(numberOfDigits: Int) {
-    this.extend(numberOfDigits, extendWithChar = '0')
-}
-
 /**
  * Convert an integer to a string but with a given length
  *

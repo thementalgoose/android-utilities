@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class SharedPreferencesUtils {
-
     companion object {
         private const val SHARED_PREFS_KEY = "DefaultPrefs"
 
@@ -87,11 +86,13 @@ class SharedPreferencesUtils {
         //region Utilities
 
         @JvmStatic
+        @JvmOverloads
         fun prefs(context: Context, prefsKey: String = SHARED_PREFS_KEY): SharedPreferences {
             return context.getSharedPreferences(prefsKey, Context.MODE_PRIVATE)
         }
 
         @JvmStatic
+        @JvmOverloads
         fun edit(context: Context, prefsKey: String = SHARED_PREFS_KEY): SharedPreferences.Editor {
             return prefs(context, prefsKey).edit()
         }

@@ -12,6 +12,12 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Base64
+import org.threeten.bp.DateTimeUtils
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.LocalTime
+import tmg.utilities.utils.LocalDateUtils
+import tmg.utilities.utils.LocalTimeUtils
 
 //region Dates
 
@@ -174,5 +180,25 @@ val String.sha1: String
 val String.decodeBase64: String get() = Base64.decode(this, Base64.DEFAULT).toString(Charsets.UTF_8)
 
 val String.encodeBase64: String get() = Base64.encodeToString(this.toByteArray(Charsets.UTF_8), Base64.DEFAULT)
+
+//endregion
+
+//region LocalDate
+
+fun String.toLocalDate(formats: List<String> = LocalDateUtils.defaultDateFormats): LocalDate? {
+    return LocalDateUtils.fromDate(this, formats)
+}
+
+fun String.toLocalDate(format: String): LocalDate? {
+    return LocalDateUtils.fromDate(this, listOf(format))
+}
+
+fun String.toLocalTime(formats: List<String> = LocalTimeUtils.defaultTimeFormats): LocalTime? {
+    return LocalTimeUtils.fromTime(this, formats)
+}
+
+fun String.toLocalTime(format: String): LocalTime? {
+    return LocalTimeUtils.fromTime(this, listOf(format))
+}
 
 //endregion

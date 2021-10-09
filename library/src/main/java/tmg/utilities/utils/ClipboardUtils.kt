@@ -9,9 +9,9 @@ class ClipboardUtils {
     companion object {
         @JvmStatic
         fun copyToClipboard(context: Context, text: String, label: String = "Copy") {
-            val clipManager: ClipboardManager = context.managerClipboard
+            val clipManager: ClipboardManager? = context.managerClipboard
             val clipData: ClipData = ClipData.newPlainText(label, text)
-            clipManager.setPrimaryClip(clipData)
+            clipManager?.setPrimaryClip(clipData)
         }
     }
 }

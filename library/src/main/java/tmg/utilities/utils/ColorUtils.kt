@@ -44,6 +44,7 @@ class ColorUtils {
         }
 
         @JvmOverloads
+        @JvmStatic
         fun contrastTextLight(
             @ColorInt color: Int,
             threshold: Int = 180,
@@ -58,6 +59,7 @@ class ColorUtils {
         }
 
         @JvmOverloads
+        @JvmStatic
         fun contrastTextDark(
             @ColorInt color: Int,
             threshold: Int = 180,
