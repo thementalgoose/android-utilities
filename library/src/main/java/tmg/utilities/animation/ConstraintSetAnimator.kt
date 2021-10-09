@@ -1,4 +1,4 @@
-package tmg.utilities.utils
+package tmg.utilities.animation
 
 import android.view.animation.DecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,11 +17,6 @@ import androidx.transition.TransitionManager
  *
  * Callback should be used to set the other state of the constraint layout
  */
-@Deprecated(
-    message = "This file has moved package",
-    replaceWith = ReplaceWith("tmg.utilities.animation.ConstraintSetAnimator"),
-    level = DeprecationLevel.ERROR
-)
 open class ConstraintSetAnimator(
     private val layout: ConstraintLayout,
     private val duration: Int = 200,
