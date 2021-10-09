@@ -3,6 +3,7 @@ package tmg.utilities.utils
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.DateTimeParseException
+import org.threeten.bp.temporal.ChronoUnit
 import java.lang.Exception
 import java.lang.RuntimeException
 import kotlin.jvm.Throws
@@ -21,6 +22,7 @@ object LocalDateUtils {
 
     @Throws(DateTimeParseException::class)
     @JvmOverloads
+    @JvmStatic
     fun requireFromDate(dateString: String, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): LocalDate {
         return dateFormats
             .mapNotNull { pattern ->
@@ -34,6 +36,7 @@ object LocalDateUtils {
     }
 
     @JvmOverloads
+    @JvmStatic
     fun fromDate(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): LocalDate? {
         if (dateString == null) {
             return null
@@ -46,7 +49,17 @@ object LocalDateUtils {
     }
 
     @JvmOverloads
+    @JvmStatic
     fun isDateValid(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): Boolean {
         return fromDate(dateString, dateFormats) != null
+    }
+
+    @JvmStatic
+    fun daysBetween(start: LocalDate, end: LocalDate): Int {
+        return when {
+            start < end -> ChronoUnit.DAYS.between(start, end).toInt()
+            start > end -> -ChronoUnit.DAYS.between(end, start).toInt()
+            else -> 0
+        }
     }
 }

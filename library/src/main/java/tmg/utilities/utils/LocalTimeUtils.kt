@@ -19,6 +19,7 @@ object LocalTimeUtils {
 
     @Throws(DateTimeParseException::class)
     @JvmOverloads
+    @JvmStatic
     fun requireFromTime(timeString: String, timeFormats: List<String> = defaultTimeFormats): LocalTime {
         return timeFormats
             .mapNotNull { pattern ->
@@ -32,6 +33,7 @@ object LocalTimeUtils {
     }
 
     @JvmOverloads
+    @JvmStatic
     fun fromTime(timeString: String?, timeFormats: List<String> = defaultTimeFormats): LocalTime? {
         if (timeString == null) {
             return null
@@ -44,6 +46,7 @@ object LocalTimeUtils {
     }
 
     @JvmOverloads
+    @JvmStatic
     fun isTimeValid(timeString: String?, timeFormats: List<String> = defaultTimeFormats): Boolean {
         return fromTime(timeString, timeFormats) != null
     }

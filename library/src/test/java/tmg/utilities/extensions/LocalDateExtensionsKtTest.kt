@@ -18,10 +18,10 @@ internal class LocalDateExtensionsKtTest {
 
     @ParameterizedTest(name = "Age between {0} and {1} is {2}")
     @CsvSource(
-        "1995-11-16,2020-11-15,25",
-        "1995-11-16,2020-11-16,26",
-        "1995-11-16,2020-11-17,26",
-        "1990-11-01,2021-05-23,31",
+        "1995-11-16,2020-11-15,24",
+        "1995-11-16,2020-11-16,25",
+        "1995-11-16,2020-11-17,25",
+        "1990-11-01,2021-05-23,30",
     )
     fun `LocalDate age calculates age correctly`(source: String, now: String, expectedAge: Int) {
 

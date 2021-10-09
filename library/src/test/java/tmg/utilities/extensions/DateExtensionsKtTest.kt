@@ -14,13 +14,13 @@ class DateExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "20/04/2020,1,Mon.,Monday",
-        "21/04/2020,2,Tue.,Tuesday",
-        "22/04/2020,3,Wed.,Wednesday",
-        "23/04/2020,4,Thu.,Thursday",
-        "24/04/2020,5,Fri.,Friday",
-        "25/04/2020,6,Sat.,Saturday",
-        "26/04/2020,7,Sun.,Sunday"
+        "20/04/2020,1,Mon,Monday",
+        "21/04/2020,2,Tue,Tuesday",
+        "22/04/2020,3,Wed,Wednesday",
+        "23/04/2020,4,Thu,Thursday",
+        "24/04/2020,5,Fri,Friday",
+        "25/04/2020,6,Sat,Saturday",
+        "26/04/2020,7,Sun,Sunday"
     )
     fun `DateExtensions dayOfWeek converts date to represent proper day of week`(date: String, expectedWeekdayInt: Int, expectedWeekdayShort: String, expectedWeekdayLong: String) {
 

@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeParseException
+import tmg.utilities.extensions.toLocalDate
+import tmg.utilities.utils.LocalDateUtils.daysBetween
 import tmg.utilities.utils.LocalTimeUtils.fromTime
 import tmg.utilities.utils.LocalTimeUtils.isTimeValid
 import tmg.utilities.utils.LocalTimeUtils.requireFromTime
@@ -83,5 +85,19 @@ internal class LocalDateUtilsTest {
     fun `isDateValid returns false for invalid date`() {
         val input = "25:00:00"
         assertFalse(isTimeValid(input))
+    }
+
+    @ParameterizedTest(name = "days between {0} and {1} is calculated to be {2}")
+    @CsvSource(
+        "2020-12-05,2020-12-04,-1",
+        "2020-12-05,2020-12-05,0",
+        "2020-12-05,2020-12-06,1",
+        "1995-12-05,2020-12-06,9133"
+    )
+    fun `daysBetween between two dates results in expected days`(start: String, end: String, days: Int) {
+        val inputStart = start.toLocalDate()!!
+        val inputEnd = end.toLocalDate()!!
+
+        assertEquals(days, daysBetween(inputStart, inputEnd))
     }
 }
