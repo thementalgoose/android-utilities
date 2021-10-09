@@ -29,44 +29,13 @@ open class ConstraintSetAnimator(
 ) {
 
     var isAnimated: Boolean = false
-    private var originalConstraintSet: ConstraintSet = ConstraintSet()
-    private var modifiedConstraintSet: ConstraintSet = ConstraintSet()
 
     init {
-        originalConstraintSet.clone(layout)
-        modifiedConstraintSet.clone(originalConstraintSet)
-        initialiseNewLayout(modifiedConstraintSet)
     }
 
-    fun revert() {
-        if (!isAnimated)
-            return
-        beginTransition()
-        originalConstraintSet.applyTo(layout)
-        isAnimated = false
-    }
+    fun revert() { /* No op */ }
 
-    fun animate() {
-        if (isAnimated)
-            return
-        beginTransition()
-        modifiedConstraintSet.applyTo(layout)
-        isAnimated = true
-    }
+    fun animate() { /* No op */ }
 
-    fun toggle() {
-        if (isAnimated) {
-            revert()
-        }
-        else {
-            animate()
-        }
-    }
-
-    private fun beginTransition() {
-        val transition = AutoTransition()
-        transition.duration = duration.toLong()
-        transition.interpolator = DecelerateInterpolator()
-        TransitionManager.beginDelayedTransition(layout, transition)
-    }
+    fun toggle() { /* No op */ }
 }
