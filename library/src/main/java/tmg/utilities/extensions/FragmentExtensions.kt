@@ -1,13 +1,35 @@
-    package tmg.utilities.extensions
+package tmg.utilities.extensions
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
 import tmg.utilities.lifecycle.DataEvent
 import tmg.utilities.lifecycle.Event
 
-    /**
+
+/**
+ * View a URL in the Activity
+ * @param url The url to view
+ */
+fun Fragment.viewUrl(url: String): Boolean {
+    return try {
+        val intent: Intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        false
+    }
+}
+
+fun Fragment.viewWebpage(url: String): Boolean {
+    return this.viewUrl(url)
+}
+
+/**
  * Start an activity but clear the back stack
  */
 fun Fragment.startActivityClearStack(intent: Intent, clearTopStack: Boolean = true) {

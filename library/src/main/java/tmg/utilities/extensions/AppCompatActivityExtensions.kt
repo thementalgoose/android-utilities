@@ -1,5 +1,6 @@
 package tmg.utilities.extensions
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -11,25 +12,27 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
 import tmg.utilities.lifecycle.DataEvent
 import tmg.utilities.lifecycle.Event
 
-    /**
+/**
  * View a URL in the Activity
  * @param url The url to view
  */
-fun AppCompatActivity.viewUrl(url: String) {
-    val intent: Intent = Intent(Intent.ACTION_VIEW)
-    intent.data = Uri.parse(url)
-    startActivity(intent)
+fun AppCompatActivity.viewUrl(url: String): Boolean {
+    return try {
+        val intent: Intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        false
+    }
 }
 
-fun AppCompatActivity.viewWebpage(url: String) {
-    this.viewUrl(url)
+fun AppCompatActivity.viewWebpage(url: String): Boolean {
+    return this.viewUrl(url)
 }
-
-//endregion
 
 //region Logging
 
