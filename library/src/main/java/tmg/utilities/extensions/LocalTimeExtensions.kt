@@ -2,8 +2,10 @@ package tmg.utilities.extensions
 
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
-fun LocalTime.format(format: String): String {
-    val dateTimeFormatter = DateTimeFormatter.ofPattern(format)
+@JvmOverloads
+fun LocalTime.format(format: String, locale: Locale = Locale.UK): String {
+    val dateTimeFormatter = DateTimeFormatter.ofPattern(format, locale)
     return this.format(dateTimeFormatter)
 }

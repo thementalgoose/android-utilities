@@ -3,9 +3,11 @@ package tmg.utilities.extensions
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
-fun LocalDate.format(format: String): String? {
-    val dateTimeFormatter = DateTimeFormatter.ofPattern(format)
+@JvmOverloads
+fun LocalDate.format(format: String, locale: Locale = Locale.UK): String? {
+    val dateTimeFormatter = DateTimeFormatter.ofPattern(format, locale)
     return this.format(dateTimeFormatter)
 }
 
