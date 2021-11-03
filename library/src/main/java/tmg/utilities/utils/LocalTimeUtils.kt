@@ -5,10 +5,12 @@ import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.DateTimeParseException
 import java.lang.Exception
 import java.lang.RuntimeException
+import java.util.*
 import kotlin.jvm.Throws
 
 class LocalTimeUtils {
     companion object {
+        @JvmStatic
         val defaultTimeFormats = listOf(
             "HH:mm:ss'Z'",
             "HH:mm:ssZ",
@@ -20,11 +22,11 @@ class LocalTimeUtils {
         @Throws(DateTimeParseException::class)
         @JvmOverloads
         @JvmStatic
-        fun requireFromTime(timeString: String, timeFormats: List<String> = defaultTimeFormats): LocalTime {
+        fun requireFromTime(timeString: String, timeFormats: List<String> = defaultTimeFormats, locale: Locale = Locale.ENGLISH): LocalTime {
             return timeFormats
                 .mapNotNull { pattern ->
                     try {
-                        LocalTime.parse(timeString, DateTimeFormatter.ofPattern(pattern))
+                        LocalTime.parse(timeString, DateTimeFormatter.ofPattern(pattern, locale))
                     } catch (e: RuntimeException) {
                         null
                     }
@@ -34,12 +36,12 @@ class LocalTimeUtils {
 
         @JvmOverloads
         @JvmStatic
-        fun fromTime(timeString: String?, timeFormats: List<String> = defaultTimeFormats): LocalTime? {
+        fun fromTime(timeString: String?, timeFormats: List<String> = defaultTimeFormats, locale: Locale = Locale.ENGLISH): LocalTime? {
             if (timeString == null) {
                 return null
             }
             return try {
-                return requireFromTime(timeString, timeFormats)
+                return requireFromTime(timeString, timeFormats, locale)
             } catch (e: Exception) {
                 null
             }
@@ -47,8 +49,8 @@ class LocalTimeUtils {
 
         @JvmOverloads
         @JvmStatic
-        fun isTimeValid(timeString: String?, timeFormats: List<String> = defaultTimeFormats): Boolean {
-            return fromTime(timeString, timeFormats) != null
+        fun isTimeValid(timeString: String?, timeFormats: List<String> = defaultTimeFormats, locale: Locale = Locale.ENGLISH): Boolean {
+            return fromTime(timeString, timeFormats, locale) != null
         }
     }
 }

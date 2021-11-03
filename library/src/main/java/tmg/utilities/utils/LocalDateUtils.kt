@@ -6,10 +6,12 @@ import org.threeten.bp.format.DateTimeParseException
 import org.threeten.bp.temporal.ChronoUnit
 import java.lang.Exception
 import java.lang.RuntimeException
+import java.util.*
 import kotlin.jvm.Throws
 
 class LocalDateUtils {
     companion object {
+        @JvmStatic
         val defaultDateFormats = listOf(
             "yyyy-M-d",
             "yyyy-MM-dd",
@@ -23,11 +25,11 @@ class LocalDateUtils {
         @Throws(DateTimeParseException::class)
         @JvmOverloads
         @JvmStatic
-        fun requireFromDate(dateString: String, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): LocalDate {
+        fun requireFromDate(dateString: String, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate {
             return dateFormats
                 .mapNotNull { pattern ->
                     try {
-                        LocalDate.parse(dateString, DateTimeFormatter.ofPattern(pattern))
+                        LocalDate.parse(dateString, DateTimeFormatter.ofPattern(pattern, locale))
                     } catch (e: RuntimeException) {
                         null
                     }
@@ -37,12 +39,12 @@ class LocalDateUtils {
 
         @JvmOverloads
         @JvmStatic
-        fun fromDate(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): LocalDate? {
+        fun fromDate(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate? {
             if (dateString == null) {
                 return null
             }
             return try {
-                return requireFromDate(dateString, dateFormats)
+                return requireFromDate(dateString, dateFormats, locale)
             } catch (e: Exception) {
                 null
             }
@@ -50,8 +52,8 @@ class LocalDateUtils {
 
         @JvmOverloads
         @JvmStatic
-        fun isDateValid(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats): Boolean {
-            return fromDate(dateString, dateFormats) != null
+        fun isDateValid(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): Boolean {
+            return fromDate(dateString, dateFormats, locale) != null
         }
 
         @JvmStatic

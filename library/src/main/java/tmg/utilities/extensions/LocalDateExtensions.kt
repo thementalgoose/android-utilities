@@ -6,7 +6,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 @JvmOverloads
-fun LocalDate.format(format: String, locale: Locale = Locale.UK): String? {
+fun LocalDate.format(format: String, locale: Locale = Locale.ENGLISH): String? {
     val dateTimeFormatter = DateTimeFormatter.ofPattern(format, locale)
     return this.format(dateTimeFormatter)
 }
