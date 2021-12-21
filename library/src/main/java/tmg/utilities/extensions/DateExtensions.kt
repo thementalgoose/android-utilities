@@ -39,7 +39,7 @@ fun Date.dayOfWeek(): Int {
     return ((toCal().get(Calendar.DAY_OF_WEEK) + 5) % 7) + 1
 }
 fun Date.dayOfWeekString(isShort: Boolean = true): String {
-    return toFormat(if (isShort) "E" else "EEEE")
+    return toFormat(if (isShort) "E" else "EEEE").replace(".", "")
 }
 fun Date.dayOfMonth(): Int {
     return toCal().get(Calendar.DAY_OF_MONTH)
