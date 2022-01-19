@@ -21,7 +21,7 @@ Contains a collection of all the extensions and generic utilities that I commonl
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-utilities:2.3.3'
+        implementation 'com.github.thementalgoose:android-utilities:2.4.1'
         // Use Jitpack version if newer
     }
 
@@ -31,7 +31,7 @@ Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)
 ## License
 
 ```
-Copyright (C) 2020 Jordan Fisher
+Copyright (C) 2022 Jordan Fisher
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
