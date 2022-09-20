@@ -30,4 +30,44 @@ internal class LocalDateExtensionsKtTest {
 
         assertEquals(expectedAge, sourceLocalDate.age(nowLocalDate))
     }
+
+    @ParameterizedTest(name = "Given date {0}, startOfWeek monday returns {1}")
+    @CsvSource(
+        "2022-09-17,2022-09-12",
+        "2022-09-18,2022-09-12",
+        "2022-09-19,2022-09-19",
+        "2022-09-20,2022-09-19",
+        "2022-09-21,2022-09-19",
+        "2022-09-22,2022-09-19",
+        "2022-09-23,2022-09-19",
+        "2022-09-24,2022-09-19",
+        "2022-09-25,2022-09-19",
+        "2022-09-26,2022-09-26"
+    )
+    fun `LocalDate startOfWeek isMonday true returns correctly`(initialDate: String, expectedDate: String) {
+        val expected = expectedDate.toLocalDate("yyyy-MM-dd")!!
+        val initial = initialDate.toLocalDate("yyyy-MM-dd")!!
+
+        assertEquals(expected, initial.startOfWeek())
+    }
+
+    @ParameterizedTest(name = "Given date {0}, startOfWeek sunday returns {1}")
+    @CsvSource(
+        "2022-09-17,2022-09-11",
+        "2022-09-18,2022-09-18",
+        "2022-09-19,2022-09-18",
+        "2022-09-20,2022-09-18",
+        "2022-09-21,2022-09-18",
+        "2022-09-22,2022-09-18",
+        "2022-09-23,2022-09-18",
+        "2022-09-24,2022-09-18",
+        "2022-09-25,2022-09-25",
+        "2022-09-26,2022-09-25"
+    )
+    fun `LocalDate startOfWeek isMonday false returns correctly`(initialDate: String, expectedDate: String) {
+        val expected = expectedDate.toLocalDate("yyyy-MM-dd")!!
+        val initial = initialDate.toLocalDate("yyyy-MM-dd")!!
+
+        assertEquals(expected, initial.startOfWeek(mondayIsStart = false))
+    }
 }
