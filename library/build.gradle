@@ -96,11 +96,11 @@ dependencies {
     implementation 'android.arch.navigation:navigation-ui:1.0.0'
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation 'androidx.annotation:annotation:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.leanback:leanback-preference:1.0.0'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
@@ -111,8 +111,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     // ThreeTen
-    implementation "com.jakewharton.threetenabp:threetenabp:1.4.0"
-    testImplementation ("org.threeten:threetenbp:1.6.0") {
+    implementation "com.jakewharton.threetenabp:threetenabp:1.4.2"
+    testImplementation ("org.threeten:threetenbp:1.6.3") {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 
