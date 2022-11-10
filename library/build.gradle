@@ -110,7 +110,7 @@ dependencies {
 
     // ThreeTen
     implementation "com.jakewharton.threetenabp:threetenabp:1.4.2"
-    testImplementation ("org.threeten:threetenbp:1.6.3") {
+    testImplementation ("org.threeten:threetenbp:1.6.4") {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 
