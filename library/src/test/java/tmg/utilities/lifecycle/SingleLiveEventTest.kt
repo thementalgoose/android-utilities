@@ -1,18 +1,13 @@
 package tmg.utilities.lifecycle
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import org.junit.Rule
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.rules.TestRule
+import org.junit.jupiter.api.extension.ExtendWith
+import tmg.utilities.TestingTaskExecutor
 
+@ExtendWith(TestingTaskExecutor::class)
 internal class SingleLiveEventTest {
-
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
 
     @Test
     fun `onChanged is still called when new value is set and is being actively observed`() {

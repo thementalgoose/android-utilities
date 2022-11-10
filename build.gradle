@@ -3,6 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.7.21'
     ext.junit = "5.9.1"
+    ext.coroutines = "1.6.4"
     repositories {
         google()
         mavenCentral()
