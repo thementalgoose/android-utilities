@@ -8,9 +8,8 @@ import org.junit.Rule
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.rules.TestRule
-import tmg.testutils.BaseTest
 
-internal class SingleLiveEventTest: BaseTest() {
+internal class SingleLiveEventTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()

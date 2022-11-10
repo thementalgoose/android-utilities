@@ -113,7 +113,6 @@ dependencies {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 
-    testImplementation "com.github.thementalgoose:android-test-utilities:1.1.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
 
