@@ -10,7 +10,6 @@ apply plugin: "de.mannodermaus.android-junit5"
 repositories {
     mavenCentral()
     google()
-    jcenter()
     maven { url "https://jitpack.io" }
 }
 
