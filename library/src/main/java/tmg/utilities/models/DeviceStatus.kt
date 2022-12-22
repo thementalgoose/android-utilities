@@ -8,8 +8,9 @@ import tmg.utilities.extensions.*
 import tmg.utilities.utils.DeviceUtils
 import java.util.*
 
-class DeviceStatus(
-    activity: Activity
+class DeviceStatus @JvmOverloads constructor(
+    activity: Activity,
+    requestDeviceIMEI: Boolean = true
 ) {
     val deviceManufacturer: String = Build.MANUFACTURER
     val deviceModel: String = Build.MODEL
@@ -34,5 +35,8 @@ class DeviceStatus(
     val screenWidth: Int = activity.getScreenWidth()
     val packageName: String = activity.packageName
     val appName: String? = activity.appName()
-    val deviceIMEI: String? = DeviceUtils.getIMEI(activity)
+    val deviceIMEI: String? = when (requestDeviceIMEI) {
+        true -> DeviceUtils.getIMEI(activity)
+        false -> null
+    }
 }
