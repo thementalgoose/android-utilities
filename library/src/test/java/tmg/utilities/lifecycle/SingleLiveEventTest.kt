@@ -28,7 +28,7 @@ internal class SingleLiveEventTest {
 
     private fun getObserver() = object : Observer<Int> {
         var count: Int = 0
-        override fun onChanged(t: Int?) {
+        override fun onChanged(t: Int) {
             count++
         }
     }

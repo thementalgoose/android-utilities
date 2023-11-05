@@ -9,26 +9,9 @@ import java.util.*
  * Convert a Date to a string with a given format
  * @param dateFormat Defaults to `dd/MM/yyyy HH:mm`
  */
-@Deprecated("These are unreliable methods of printing the date. Please use either LocalDate or Calendar")
-fun Date.toFormat(dateFormat: String = "dd/MM/yyyy HH:mm", locale: Locale = Locale.getDefault()): String {
+internal fun Date.toFormat(dateFormat: String = "dd/MM/yyyy HH:mm", locale: Locale = Locale.getDefault()): String {
     val sdf: SimpleDateFormat = SimpleDateFormat(dateFormat, locale)
     return sdf.format(this)
-}
-@Deprecated("These are unreliable methods of printing the date. Please use either LocalDate or Calendar", level = DeprecationLevel.ERROR)
-fun Date.toFormatHHMM(separator: String = ":", locale: Locale = Locale.getDefault()): String {
-    return toFormat("HH${separator}mm", locale)
-}
-@Deprecated("These are unreliable methods of printing the date. Please use either LocalDate or Calendar", level = DeprecationLevel.ERROR)
-fun Date.toFormatYYYYMMDD(separator: String = "-", locale: Locale = Locale.getDefault()): String {
-    return toFormat("yyyy${separator}MM${separator}dd", locale)
-}
-@Deprecated("These are unreliable methods of printing the date. Please use either LocalDate or Calendar", level = DeprecationLevel.ERROR)
-fun Date.toFormatDDMMYYYY(separator: String = "-", locale: Locale = Locale.getDefault()): String {
-    return toFormat("dd${separator}MM${separator}yyyy", locale)
-}
-@Deprecated("These are unreliable methods of printing the date. Please use either LocalDate or Calendar", level = DeprecationLevel.ERROR)
-fun Date.toFormatMMDDYYYY(separator: String = "-", locale: Locale = Locale.getDefault()): String {
-    return toFormat("MM${separator}dd${separator}yyyy", locale)
 }
 
 /**
