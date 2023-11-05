@@ -121,8 +121,6 @@ dependencies {
 
     implementation libs.kotlinx.coroutines.core
     implementation libs.kotlinx.coroutines.test
-    implementation libs.androidx.test.core
-    implementation libs.androidx.test.coretesting
 }
 
 project.afterEvaluate {

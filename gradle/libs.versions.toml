@@ -1,13 +1,10 @@
 [versions]  # ===========================================================================
-appcompat = "1.6.1"
-core = "1.5.0"
-core-ktx = "1.12.0"
-core-testing = "2.1.0"
 kotlin = "1.9.10"
+appcompat = "1.6.1"
 androidx_navigation = "2.7.5"
 androidx_lifecycle = "2.6.2"
 junit = "5.9.3"
-coroutines = "1.6.4"
+coroutines = "1.7.2"
 material = "1.10.0"
 
 [libraries]  # ===========================================================================
@@ -29,9 +26,6 @@ androidx_annotation = "androidx.annotation:annotation:1.7.0"
 androidx_viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
 androidx_constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 material = { module = "com.google.android.material:material", version.ref = "material" }
-
-androidx_test_core = { module = "androidx.test:core", version.ref = "core" }
-androidx_test_coretesting = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
 
 kotlin_stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
 kotlinx_coroutines_core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
