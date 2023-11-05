@@ -16,11 +16,14 @@ repositories {
 group = 'com.github.thementalgoose'
 
 android {
-    compileSdkVersion 33
+
+    namespace "tmg.utilities"
+
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -76,52 +79,50 @@ android {
             }
         }
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    testImplementation "org.junit.jupiter:junit-jupiter:$junit"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit"
-    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junit"
-    testImplementation('org.mockito:mockito-junit-jupiter:3.0.0') {
-        exclude group: 'org.junit.jupiter'
-    }
+    implementation libs.kotlin.stdlib
+    implementation libs.androidx.lifecycle.extensions
+    testImplementation libs.junit.jupiter.core
+    testImplementation libs.junit.jupiter.engine
+    testImplementation libs.junit.vintage
 
     // AndroidX
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.annotation:annotation:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.leanback:leanback-preference:1.0.0'
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui
+    implementation libs.material
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.recyclerview
+    implementation libs.androidx.annotation
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.viewpager2
 
     // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.lifecycle.livedata
 
     // ThreeTen
-    implementation "com.jakewharton.threetenabp:threetenabp:1.4.2"
-    testImplementation ("org.threeten:threetenbp:1.6.4") {
+    implementation libs.threeten.abp
+    testImplementation (libs.threeten.core) {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
-    implementation 'androidx.test:core:1.5.0'
-    implementation 'androidx.arch.core:core-testing:2.1.0'
-}
-
-task androidSourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.srcDirs
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.kotlinx.coroutines.test
+    implementation libs.androidx.test.core
+    implementation libs.androidx.test.coretesting
 }
 
 project.afterEvaluate {
