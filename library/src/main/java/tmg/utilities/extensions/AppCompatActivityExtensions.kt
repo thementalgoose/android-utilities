@@ -15,25 +15,6 @@ import androidx.lifecycle.LiveData
 import tmg.utilities.lifecycle.DataEvent
 import tmg.utilities.lifecycle.Event
 
-/**
- * View a URL in the Activity
- * @param url The url to view
- */
-fun AppCompatActivity.viewUrl(url: String): Boolean {
-    return try {
-        val intent: Intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
-        true
-    } catch (e: ActivityNotFoundException) {
-        false
-    }
-}
-
-fun AppCompatActivity.viewWebpage(url: String): Boolean {
-    return this.viewUrl(url)
-}
-
 //region Logging
 
 /**

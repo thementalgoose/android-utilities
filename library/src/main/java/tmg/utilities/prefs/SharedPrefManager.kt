@@ -2,19 +2,28 @@ package tmg.utilities.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 
 abstract class SharedPrefManager(
-    val context: Context
+    private val applicationContext: Context
 ) {
     /**
      * Specify the preference key
+     * If value is null, application default shared preferences will be used
      */
-    abstract val prefsKey: String
+    abstract val prefsKey: String?
 
+    /**
+     * Specify the preference mode
+     * If prefsKey = null, this field has no effect because it reads application default
+     */
     open val mode: Int = Context.MODE_PRIVATE
 
     private val sharedPrefs: SharedPreferences
-        get() = context.getSharedPreferences(prefsKey, mode)
+        get() = when (val key = prefsKey) {
+            null -> getSharedPrefs(context = applicationContext)
+            else -> getSharedPrefs(context = applicationContext, prefsKey = key, mode = mode)
+        }
 
     private val editor: SharedPreferences.Editor
         get() = sharedPrefs.edit()
@@ -70,4 +79,14 @@ abstract class SharedPrefManager(
     }
 
     //endregion
+
+    internal companion object {
+
+        fun getSharedPrefs(context: Context): SharedPreferences {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+        }
+        fun getSharedPrefs(context: Context, prefsKey: String, mode: Int = Context.MODE_PRIVATE): SharedPreferences {
+            return context.getSharedPreferences(prefsKey, mode)
+        }
+    }
 }
