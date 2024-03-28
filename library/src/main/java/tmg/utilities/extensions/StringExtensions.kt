@@ -147,8 +147,17 @@ inline fun <reified T : Enum<T>> String.toEnum(by: (enum: T) -> String = { it.na
 /**
  * Copy a string to the clipboard
  */
-fun String.copyToClipboard(context: Context, label: String = "Clipboard") {
-    ClipboardUtils.copyToClipboard(context, this, label)
+fun String.copyToClipboard(
+    context: Context,
+    label: String = "",
+    copySuccessfulToastMessage: String? = null
+) {
+    ClipboardUtils.copyToClipboard(
+        context = context,
+        text = this,
+        label = label,
+        copySuccessfulToastMessage = copySuccessfulToastMessage
+    )
 }
 
 //endregion

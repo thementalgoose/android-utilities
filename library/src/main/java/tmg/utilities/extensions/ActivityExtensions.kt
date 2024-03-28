@@ -1,8 +1,11 @@
 package tmg.utilities.extensions
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -10,14 +13,18 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
+import androidx.appcompat.app.AppCompatActivity
 import tmg.utilities.models.DeviceStatus
 import tmg.utilities.models.PermissionRequestResult
+import tmg.utilities.utils.ClipboardUtils
 import tmg.utilities.utils.ColorUtils
 import tmg.utilities.utils.PermissionUtils
+import java.net.MalformedURLException
 
 /**
  * Get the height of the status bar that's displayed inside an activity
  */
+@SuppressLint("InternalInsetResource")
 @Px
 fun Activity.statusBarHeight(): Int {
     var statusBarHeight = 0
@@ -51,11 +58,9 @@ fun Activity.setStatusBarColor(@ColorInt color: Int) {
  * Programmatically set the status bar color to a darker shade of the supplied colour
  */
 fun Activity.setStatusBarColorDark(@ColorInt color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = ColorUtils.darken(color)
-    }
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = ColorUtils.darken(color)
 }
 
 /**
@@ -157,3 +162,37 @@ val Activity.isWiFiEnabled: Boolean
     get() = managerWifi?.isWifiEnabled == true
 
 //endregion
+
+/**
+ * View a URL in the Activity
+ * @param url The url to view
+ */
+fun Activity.viewUrl(url: String): Boolean {
+    val uri = try {
+        Uri.parse(url)
+    } catch (e: MalformedURLException) {
+        return false
+    }
+
+    val browserSelectorIntent = Intent()
+        .setAction(Intent.ACTION_VIEW)
+        .addCategory(Intent.CATEGORY_BROWSABLE)
+        .setData(Uri.parse("https:"))
+    val targetIntent = Intent()
+        .setAction(Intent.ACTION_VIEW)
+        .addCategory(Intent.CATEGORY_BROWSABLE)
+        .setData(uri)
+
+    targetIntent.selector = browserSelectorIntent
+
+    return try {
+        startActivity(targetIntent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        false
+    }
+}
+
+fun Activity.viewWebpage(url: String): Boolean {
+    return this.viewUrl(url)
+}

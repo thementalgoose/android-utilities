@@ -100,6 +100,7 @@ dependencies {
     // AndroidX
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui
+    implementation libs.androidx.preferences
     implementation libs.material
     implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
