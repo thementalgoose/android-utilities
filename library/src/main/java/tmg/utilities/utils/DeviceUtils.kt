@@ -37,10 +37,11 @@ class DeviceUtils {
         /**
          * Get the device IMEI
          */
+        @SuppressLint("MissingPermission", "HardwareIds")
         @JvmStatic
         fun getIMEI(activity: Activity): String? {
             if (!PermissionUtils.isPermissionGranted(activity, Manifest.permission.READ_PHONE_STATE)) {
-                Log.e("DeviceUtils","Permission is not granted for the IMEI - Please grant '${Manifest.permission.READ_PHONE_STATE}' permission")
+                Log.e("NetworkUtils", "Permission '${Manifest.permission.READ_PHONE_STATE}' is not granted")
             }
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 activity.managerTelephony?.imei

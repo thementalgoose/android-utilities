@@ -206,7 +206,7 @@ class StringExtensionsKtTest {
     )
     fun `StringExtensions md5 test md5 generation`(input: String, expectedHash: String) {
 
-        assertEquals(expectedHash.toLowerCase(), input.md5.toLowerCase())
+        assertEquals(expectedHash.lowercase(), input.md5.lowercase())
     }
 
     @ParameterizedTest(name = "{0} >> SHA1 >> {1}")
@@ -216,7 +216,7 @@ class StringExtensionsKtTest {
     )
     fun `StringExtensions sha1 test sha1 generation`(input: String, expectedHash: String) {
 
-        assertEquals(expectedHash.toLowerCase(), input.sha1.toLowerCase())
+        assertEquals(expectedHash.lowercase(), input.sha1.lowercase())
     }
 
     //endregion

@@ -21,7 +21,7 @@ Contains a collection of all the extensions and generic utilities that I commonl
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-utilities:2.6.1'
+        implementation 'com.github.thementalgoose:android-utilities:2.6.2'
         // Use Jitpack version if newer
     }
 
