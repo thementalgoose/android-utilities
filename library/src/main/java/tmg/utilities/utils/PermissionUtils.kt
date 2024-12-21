@@ -1,6 +1,7 @@
 package tmg.utilities.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
@@ -14,8 +15,22 @@ class PermissionUtils {
          * @param permission
          */
         @JvmStatic
-        fun isPermissionGranted(activity: Activity, vararg permission: String): Boolean {
-            return getPermissionsState(activity, *permission).isAllGranted
+        fun isPermissionsGranted(activity: Activity, vararg permission: String): Map<String, Boolean> {
+            val result = getPermissionsState(activity, *permission)
+            return buildMap {
+                putAll(result.granted.map { it to true })
+                putAll(result.showRational.map { it to true })
+                putAll(result.denied.map { it to true })
+            }
+        }
+
+        @JvmStatic
+        fun isPermissionGranted(context: Context, permission: String): Boolean {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+            } else {
+                context.checkCallingOrSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+            }
         }
 
         /**
@@ -49,7 +64,7 @@ class PermissionUtils {
                         granted.add(permission)
                     }
                     else {
-                        Log.e("TMG-AndroidUtils", "Permission has been denied but the device is pre runtime permissions - Is '$permission' declared inside the Manifest?")
+                        Log.e("PermissionUtils", "Permission has been denied but the device is pre runtime permissions - Is '$permission' declared inside the Manifest?")
                         denied.add(permission)
                     }
                 }
