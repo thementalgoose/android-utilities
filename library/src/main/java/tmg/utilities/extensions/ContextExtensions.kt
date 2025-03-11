@@ -14,7 +14,6 @@ import android.hardware.SensorManager
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import android.os.Build
 import android.telephony.TelephonyManager
 import android.text.Spanned
 import android.view.View
@@ -23,23 +22,21 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import androidx.annotation.ArrayRes
 import androidx.annotation.DimenRes
-import androidx.annotation.Discouraged
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
+import androidx.core.content.edit
 import tmg.utilities.models.InstalledPackageModel
 import tmg.utilities.prefs.SharedPrefManager
 import tmg.utilities.utils.ClipboardUtils
-import tmg.utilities.utils.SharedPreferencesUtils
-
 
 //region Shared Preferences
 
 // String
 fun Context.saveString(key: String, value: String) {
-    SharedPrefManager.getSharedPrefs(this).edit().putString(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putString(key, value) }
 }
 fun Context.saveString(key: String, value: String, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putString(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putString(key, value) }
 }
 // Named this way to ensure prefsKey is not used as default value while upgrading.
 // Will be renamed in future release to getString()
@@ -54,10 +51,10 @@ fun Context.getStr(key: String, defaultValue: String = "", prefsKey: String, mod
 
 // Boolean
 fun Context.saveBoolean(key: String, value: Boolean) {
-    SharedPrefManager.getSharedPrefs(this).edit().putBoolean(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putBoolean(key, value) }
 }
 fun Context.saveBoolean(key: String, value: Boolean, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putBoolean(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putBoolean(key, value) }
 }
 fun Context.getBoolean(key: String, defaultValue: Boolean = false): Boolean {
     return SharedPrefManager.getSharedPrefs(this).getBoolean(key, defaultValue)
@@ -68,11 +65,12 @@ fun Context.getBoolean(key: String, defaultValue: Boolean = false, prefsKey: Str
 
 // Float
 fun Context.saveFloat(key: String, value: Float) {
-    SharedPrefManager.getSharedPrefs(this).edit().putFloat(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putFloat(key, value) }
 }
 fun Context.saveFloat(key: String, value: Float, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putFloat(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putFloat(key, value) }
 }
+
 fun Context.getFloat(key: String, defaultValue: Float = -1f): Float {
     return SharedPrefManager.getSharedPrefs(this).getFloat(key, defaultValue)
 }
@@ -82,10 +80,10 @@ fun Context.getFloat(key: String, defaultValue: Float = -1f, prefsKey: String, m
 
 // Int
 fun Context.saveInt(key: String, value: Int) {
-    SharedPrefManager.getSharedPrefs(this).edit().putInt(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putInt(key, value) }
 }
 fun Context.saveInt(key: String, value: Int, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putInt(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putInt(key, value) }
 }
 fun Context.getInt(key: String, defaultValue: Int = -1): Int {
     return SharedPrefManager.getSharedPrefs(this).getInt(key, defaultValue)
@@ -96,10 +94,10 @@ fun Context.getInt(key: String, defaultValue: Int = -1, prefsKey: String, mode: 
 
 // Long
 fun Context.saveLong(key: String, value: Long) {
-    SharedPrefManager.getSharedPrefs(this).edit().putLong(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putLong(key, value) }
 }
 fun Context.saveLong(key: String, value: Long, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putLong(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putLong(key, value) }
 }
 fun Context.getLong(key: String, defaultValue: Long = -1): Long {
     return SharedPrefManager.getSharedPrefs(this).getLong(key, defaultValue)
@@ -110,11 +108,12 @@ fun Context.getLong(key: String, defaultValue: Long = -1, prefsKey: String, mode
 
 // Set<String>
 fun Context.saveStringSet(key: String, value: Set<String>) {
-    SharedPrefManager.getSharedPrefs(this).edit().putStringSet(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this).edit { putStringSet(key, value) }
 }
 fun Context.saveStringSet(key: String, value: Set<String>, prefsKey: String, mode: Int = Context.MODE_PRIVATE) {
-    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit().putStringSet(key, value).apply()
+    SharedPrefManager.getSharedPrefs(this, prefsKey, mode).edit { putStringSet(key, value) }
 }
+
 fun Context.getStringSet(key: String, defaultValue: Set<String> = emptySet()): Set<String> {
     return SharedPrefManager.getSharedPrefs(this).getStringSet(key, defaultValue) ?: defaultValue
 }
@@ -128,99 +127,111 @@ fun Context.getStringSet(key: String, defaultValue: Set<String> = emptySet(), pr
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveString(key, value, prefsKey)", "tmg.utilities.extensions.saveString")
+    replaceWith = ReplaceWith("saveString(key, value, prefsKey)", "tmg.utilities.extensions.saveString"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: String, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveBoolean(key, value, prefsKey)", "tmg.utilities.extensions.saveBoolean")
+    replaceWith = ReplaceWith("saveBoolean(key, value, prefsKey)", "tmg.utilities.extensions.saveBoolean"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: Boolean, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveFloat(key, value, prefsKey)", "tmg.utilities.extensions.saveFloat")
+    replaceWith = ReplaceWith("saveFloat(key, value, prefsKey)", "tmg.utilities.extensions.saveFloat"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: Float, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveInt(key, value, prefsKey)", "tmg.utilities.extensions.saveInt")
+    replaceWith = ReplaceWith("saveInt(key, value, prefsKey)", "tmg.utilities.extensions.saveInt"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: Int, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveStringSet(key, value, prefsKey)", "tmg.utilities.extensions.saveStringSet")
+    replaceWith = ReplaceWith("saveStringSet(key, value, prefsKey)", "tmg.utilities.extensions.saveStringSet"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: Set<String>, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("saveLong(key, value, prefsKey)", "tmg.utilities.extensions.saveLong")
+    replaceWith = ReplaceWith("saveLong(key, value, prefsKey)", "tmg.utilities.extensions.saveLong"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.save(key: String, value: Long, prefsKey: String) {
-    SharedPreferencesUtils.save(this, key, value, prefsKey)
+    throw NotImplementedError()
 }
 
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getStr(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getStr")
+    replaceWith = ReplaceWith("getStr(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getStr"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getString(key: String, prefsKey: String): String {
-    return SharedPreferencesUtils.getString(this, key, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getInt(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getInt")
+    replaceWith = ReplaceWith("getInt(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getInt"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getInt(key: String, prefsKey: String, defaultValue: Int = -1): Int {
-    return SharedPreferencesUtils.getInt(this, key, defaultValue, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getLong(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getLong")
+    replaceWith = ReplaceWith("getLong(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getLong"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getLong(key: String, prefsKey: String, defaultValue: Long = -1L): Long {
-    return SharedPreferencesUtils.getLong(this, key, defaultValue, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getFloat(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getFloat")
+    replaceWith = ReplaceWith("getFloat(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getFloat"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getFloat(key: String, prefsKey: String, defaultValue: Float = -1f): Float {
-    return SharedPreferencesUtils.getFloat(this, key, defaultValue, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getBoolean(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getBoolean")
+    replaceWith = ReplaceWith("getBoolean(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getBoolean"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getBoolean(key: String, prefsKey: String, defaultValue: Boolean = false): Boolean {
-    return SharedPreferencesUtils.getBoolean(this, key, defaultValue, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 @Deprecated(
     message = "Replace with context extensions",
-    replaceWith = ReplaceWith("getStringSet(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getStringSet")
+    replaceWith = ReplaceWith("getStringSet(key, defaultValue, prefsKey)", "tmg.utilities.extensions.getStringSet"),
+    level = DeprecationLevel.ERROR
 )
 fun Context.getSet(key: String, prefsKey: String, defaultValue: Set<String> = setOf()): Set<String> {
-    return SharedPreferencesUtils.getSet(this, key, defaultValue, prefsKey = prefsKey)
+    throw NotImplementedError()
 }
 
 //endregion
