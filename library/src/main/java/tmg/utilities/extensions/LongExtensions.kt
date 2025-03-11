@@ -7,6 +7,7 @@ import java.util.*
 /**
  * Convert a long representing the milliseconds of a date to a date object
  */
+@Deprecated("Please use LocalDate or Calendar to accurately convert the date")
 fun Long.toDate(): Date? {
     return if (this < 0L) null else Date(this - (Calendar.getInstance().get(Calendar.DST_OFFSET)))
 }

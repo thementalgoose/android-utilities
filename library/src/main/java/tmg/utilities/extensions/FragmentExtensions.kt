@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import tmg.utilities.lifecycle.DataEvent
 import tmg.utilities.lifecycle.Event
+import androidx.core.net.toUri
 
 
 /**
@@ -17,7 +18,7 @@ import tmg.utilities.lifecycle.Event
 fun Fragment.viewUrl(url: String): Boolean {
     return try {
         val intent: Intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
+        intent.data = url.toUri()
         startActivity(intent)
         true
     } catch (e: ActivityNotFoundException) {

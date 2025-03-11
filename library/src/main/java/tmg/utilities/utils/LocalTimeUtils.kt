@@ -23,15 +23,13 @@ class LocalTimeUtils {
         @JvmOverloads
         @JvmStatic
         fun requireFromTime(timeString: String, timeFormats: List<String> = defaultTimeFormats, locale: Locale = Locale.ENGLISH): LocalTime {
-            return timeFormats
-                .mapNotNull { pattern ->
-                    try {
-                        LocalTime.parse(timeString, DateTimeFormatter.ofPattern(pattern, locale))
-                    } catch (e: RuntimeException) {
-                        null
-                    }
+            return timeFormats.firstNotNullOfOrNull { pattern ->
+                try {
+                    LocalTime.parse(timeString, DateTimeFormatter.ofPattern(pattern, locale))
+                } catch (e: RuntimeException) {
+                    null
                 }
-                .firstOrNull() ?: throw DateTimeParseException("Failed to parse time string $timeString with no supported patterns.", "", 0)
+            } ?: throw DateTimeParseException("Failed to parse time string $timeString with no supported patterns.", "", 0)
         }
 
         @JvmOverloads
