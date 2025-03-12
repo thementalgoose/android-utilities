@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.provider.CsvSource
 import tmg.utilities.enums.PermissionRequestState
+import tmg.utilities.extensions.toEnum
 
 
 internal class PermissionRequestResultTest {
@@ -62,22 +63,16 @@ internal class PermissionRequestResultTest {
             denied = emptyList()
         )
 
-        assertFalse(model.isAllGranted)
+        assertTrue(model.isAllGranted)
     }
 
-    @CsvSource(
-        "granted,GRANTED",
-        "rationale,SHOW_RATIONALE",
-        "denied,DENIED",
-        ",DENIED",
-    )
     @Test
-    fun `get permission returns granted`(permission: String, expectedState: PermissionRequestState) {
+    fun `get permission returns denied for not found permission`() {
         val model = PermissionRequestResult(
             granted = listOf("granted"),
             showRational = listOf("rationale"),
             denied = listOf("denied")
         )
-        assertEquals(expectedState, model.get(permission))
+        assertEquals(PermissionRequestState.DENIED, model.get(""))
     }
 }

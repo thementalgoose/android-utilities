@@ -1,6 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -94,6 +91,7 @@ dependencies {
     implementation libs.kotlin.stdlib
     implementation libs.androidx.lifecycle.extensions
     testImplementation libs.junit.jupiter.core
+    testImplementation libs.junit.jupiter.platform
     testImplementation libs.junit.jupiter.engine
     testImplementation libs.junit.vintage
 

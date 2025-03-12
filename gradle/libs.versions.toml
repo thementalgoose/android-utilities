@@ -35,6 +35,7 @@ kotlinx_coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 junit_jupiter_core = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junit_jupiter_engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junit_vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit" }
+junit_jupiter_platform = "org.junit.platform:junit-platform-launcher:1.12.0"
 
 threeten_core = "org.threeten:threetenbp:1.7.0"
 threeten_abp = "com.jakewharton.threetenabp:threetenabp:1.4.8"
