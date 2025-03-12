@@ -25,21 +25,19 @@ class LocalDateUtils {
         @Throws(DateTimeParseException::class)
         @JvmOverloads
         @JvmStatic
-        fun requireFromDate(dateString: String, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate {
-            return dateFormats
-                .mapNotNull { pattern ->
-                    try {
-                        LocalDate.parse(dateString, DateTimeFormatter.ofPattern(pattern, locale))
-                    } catch (e: RuntimeException) {
-                        null
-                    }
+        fun requireFromDate(dateString: String, dateFormats: List<String> = defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate {
+            return dateFormats.firstNotNullOfOrNull { pattern ->
+                try {
+                    LocalDate.parse(dateString, DateTimeFormatter.ofPattern(pattern, locale))
+                } catch (e: RuntimeException) {
+                    null
                 }
-                .firstOrNull() ?: throw DateTimeParseException("Failed to parse date string $dateString with no supported patterns", "", 0)
+            } ?: throw DateTimeParseException("Failed to parse date string $dateString with no supported patterns", "", 0)
         }
 
         @JvmOverloads
         @JvmStatic
-        fun fromDate(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate? {
+        fun fromDate(dateString: String?, dateFormats: List<String> = defaultDateFormats, locale: Locale = Locale.ENGLISH): LocalDate? {
             if (dateString == null) {
                 return null
             }
@@ -52,7 +50,7 @@ class LocalDateUtils {
 
         @JvmOverloads
         @JvmStatic
-        fun isDateValid(dateString: String?, dateFormats: List<String> = LocalDateUtils.defaultDateFormats, locale: Locale = Locale.ENGLISH): Boolean {
+        fun isDateValid(dateString: String?, dateFormats: List<String> = defaultDateFormats, locale: Locale = Locale.ENGLISH): Boolean {
             return fromDate(dateString, dateFormats, locale) != null
         }
 

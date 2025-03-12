@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.util.Log
 import androidx.annotation.ColorInt
 import java.text.ParseException
+import androidx.core.graphics.toColorInt
+import kotlin.math.roundToInt
 
 class ColorUtils {
     companion object {
@@ -23,20 +25,22 @@ class ColorUtils {
         @JvmStatic
         fun manipulate(@ColorInt color: Int, factor: Float): Int {
             val a = Color.alpha(color)
-            val r = Math.round(Color.red(color) * factor)
-            val g = Math.round(Color.green(color) * factor)
-            val b = Math.round(Color.blue(color) * factor)
+            val r = (Color.red(color) * factor).roundToInt()
+            val g = (Color.green(color) * factor).roundToInt()
+            val b = (Color.blue(color) * factor).roundToInt()
             return Color.argb(a,
-                Math.min(r, 255),
-                Math.min(g, 255),
-                Math.min(b, 255))
+                r.coerceAtMost(255),
+                g.coerceAtMost(255),
+                b.coerceAtMost(255)
+            )
         }
 
         @ColorInt
         @JvmStatic
-        fun parse(color: String?): Int {
+        @Throws(IllegalArgumentException::class)
+        fun parse(color: String): Int {
             return try {
-                Color.parseColor(color)
+                color.toColorInt()
             } catch (e: ParseException) {
                 Log.d("ColorUtils", "Colour $color cannot be parsed")
                 Color.WHITE
