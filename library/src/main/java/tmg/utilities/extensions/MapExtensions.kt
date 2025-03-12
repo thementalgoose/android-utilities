@@ -9,3 +9,13 @@ fun <T,E> Map<T, E>?.keySet(): Set<T> {
         ?.toSet()
         ?: emptySet()
 }
+
+/**
+ * Isolate the values out of a list of pairs and store them in a set
+ */
+fun <T,E> Map<T, E>?.valueSet(): Set<E> {
+    return this
+        ?.map { (_, value) -> value }
+        ?.toSet()
+        ?: emptySet()
+}
