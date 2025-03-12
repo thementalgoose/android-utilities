@@ -81,6 +81,7 @@ abstract class SharedPrefManager(
         return sharedPrefs.getInt(key, value)
     }
 
+    @JvmName("getNullableString")
     fun getString(key: String, value: String? = null): String? {
         return sharedPrefs.getString(key, value)
     }
