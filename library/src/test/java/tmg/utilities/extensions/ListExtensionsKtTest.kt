@@ -24,6 +24,6 @@ class ListExtensionsKtTest {
             "c" to 3
         )
 
-        assertEquals(setOf(1, 2, 3), sampleMap.toList().keySet())
+        assertEquals(setOf(1, 2, 3), sampleMap.toList().valueSet())
     }
 }
