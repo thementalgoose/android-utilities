@@ -85,10 +85,10 @@ fun Activity.setStatusBarIconsLight(isLight: Boolean = true) {
 /**
  * Show or hide the soft keyboard
  */
-fun Activity.setSoftKeyboard(show: Boolean) {
+fun Activity.setSoftKeyboard(view: View, show: Boolean) {
     this.managerInputMethod?.let { inputMethodManager ->
         if (show) {
-            inputMethodManager.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT)
+            inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
         else {
             currentFocus?.windowToken?.let {
