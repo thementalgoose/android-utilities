@@ -23,7 +23,7 @@ abstract class SharedPrefManager(
         replaceWith = ReplaceWith("prefConfig"),
         level = DeprecationLevel.ERROR
     )
-    abstract val prefsKey: String?
+    open val prefsKey: String? = null
 
     /**
      * Specify the preference mode
