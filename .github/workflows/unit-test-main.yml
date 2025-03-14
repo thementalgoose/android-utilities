@@ -7,7 +7,7 @@ name: Main
     branches:
       - main
 jobs:
-  build_and_deploy:
+  unit_test:
     runs-on: ubuntu-latest
     steps:
       # Checkout
