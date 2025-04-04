@@ -37,6 +37,4 @@ junit_jupiter_engine = { module = "org.junit.jupiter:junit-jupiter-engine", vers
 junit_vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit" }
 junit_jupiter_platform = "org.junit.platform:junit-platform-launcher:1.12.0"
 
-threeten_core = "org.threeten:threetenbp:1.7.0"
-threeten_abp = "com.jakewharton.threetenabp:threetenabp:1.4.8"
-
+core_desugaring = "com.android.tools:desugar_jdk_libs:2.1.5"

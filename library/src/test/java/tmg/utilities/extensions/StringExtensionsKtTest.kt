@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalTime
-import java.text.ParseException
+import java.time.LocalDate
+import java.time.LocalTime
 
 class StringExtensionsKtTest {
 

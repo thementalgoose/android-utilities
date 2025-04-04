@@ -6,9 +6,9 @@ import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalTime
-import org.threeten.bp.format.DateTimeParseException
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeParseException
 import tmg.utilities.extensions.toLocalDate
 import tmg.utilities.utils.LocalDateUtils.Companion.daysBetween
 import tmg.utilities.utils.LocalTimeUtils.Companion.fromTime
