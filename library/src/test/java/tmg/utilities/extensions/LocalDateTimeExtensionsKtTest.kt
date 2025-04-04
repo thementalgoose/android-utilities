@@ -2,7 +2,7 @@ package tmg.utilities.extensions
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.threeten.bp.LocalDateTime
+import java.time.LocalDateTime
 
 internal class LocalDateTimeExtensionsKtTest {
 

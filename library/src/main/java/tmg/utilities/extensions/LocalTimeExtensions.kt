@@ -1,7 +1,7 @@
 package tmg.utilities.extensions
 
-import org.threeten.bp.LocalTime
-import org.threeten.bp.format.DateTimeFormatter
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @JvmOverloads

@@ -4,20 +4,15 @@ import android.content.Context
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Base64
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import tmg.utilities.utils.ClipboardUtils
-import java.security.MessageDigest
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
-import android.util.Base64
-import org.threeten.bp.DateTimeUtils
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.LocalTime
 import tmg.utilities.utils.LocalDateUtils
 import tmg.utilities.utils.LocalTimeUtils
+import java.security.MessageDigest
+import java.time.LocalDate
+import java.time.LocalTime
 
 //region Dates
 
