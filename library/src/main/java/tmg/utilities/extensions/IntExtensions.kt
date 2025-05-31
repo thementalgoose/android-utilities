@@ -59,24 +59,67 @@ fun <T> Int.itemsOf(runner: (index: Int) -> T): List<T> {
 
 //region Time
 
-/**
- * Convert a number of seconds into a HH:mm representation, if the seconds is < 1440 and > 0
- * (ie. A time format can made for it)
- */
+@Deprecated(
+    message = "Replace with more explicit extension",
+    replaceWith = ReplaceWith("secondsToHoursMinutes()"),
+    level = DeprecationLevel.WARNING
+)
 fun Int.secondsToHHmm(): String? {
-    if (this >= (86400)) return null
-    if (this < 0) return null
-    val hours: String = (this / (60 * 60)).extend(2)
-    val minutes: String = ((this / 60) % 60).extend(2)
-    return "$hours:$minutes"
+    return this.secondsToHoursMinutes()
+}
+
+/**
+ * Convert a number of seconds into a HH:mm representation
+ * @param extendHours Extends minutes to 2 digits
+ */
+fun Int.secondsToHoursMinutes(extendHours: Boolean = true): String {
+    val (hours, minutes) = this.secondsToHoursMinutes
+    return "${hours.extend(if (extendHours) 2 else 1)}:${minutes.extend(2)}"
+}
+
+/**
+ * Convert a number of seconds into a HH:mm:ss representation
+ * @param extendHours Extends hours to 2 digits
+ * @param extendMinutes Extends minutes to 2 digits
+ * @param hideHoursIfZero Hides the hours field (and returns mm:ss) if hours are zero
+ */
+fun Int.secondsToHoursMinutesSeconds(
+    extendHours: Boolean = true,
+    extendMinutes: Boolean = true,
+    hideHoursIfZero: Boolean = false
+): String {
+    val (hours, minutes, seconds) = this.secondsToHoursMinutesSeconds
+    if (hours == 0 && hideHoursIfZero) {
+        return "${minutes.extend(if (extendMinutes) 2 else 1)}:${seconds.extend(2)}"
+    }
+    return "${hours.extend(if (extendHours) 2 else 1)}:" +
+            "${minutes.extend(if (extendMinutes) 2 else 1)}:" +
+            seconds.extend(2)
+}
+
+/**
+ * Convert a number of seconds into a mm:ss representation
+ * @param extendMinutes Extends minutes to 2 digits
+ */
+fun Int.secondsToMinutesSeconds(extendMinutes: Boolean = true): String {
+    val (minutes, seconds) = this.secondsToMinutesSeconds
+    return "${minutes.extend(if (extendMinutes) 2 else 1)}:${seconds.extend(2)}"
 }
 
 
 
+@Deprecated(
+    message = "Replace with more explicit extension",
+    replaceWith = ReplaceWith("secondsToHoursMinutes"),
+    level = DeprecationLevel.WARNING
+)
+val Int.secondsToHHmm: Pair<Int, Int>
+    get() = secondsToHoursMinutes
+
 /**
  * Given that the number is in seconds, convert it to a pair containing hours and minutes
  */
-val Int.secondsToHHmm: Pair<Int, Int>
+val Int.secondsToHoursMinutes: Pair<Int, Int>
     get() {
         if (this < 0) {
             return Pair(0, 0)
@@ -84,6 +127,34 @@ val Int.secondsToHHmm: Pair<Int, Int>
         val hours = floor(this / 3600f).toInt()
         val minutes = floor((this % 3600f) / 60f).toInt()
         return Pair(hours, minutes)
+    }
+
+/**
+ * Given that the number is in seconds, convert it to a pair containing hours and minutes and seconds
+ */
+val Int.secondsToHoursMinutesSeconds: Triple<Int, Int, Int>
+    get() {
+        if (this < 0) {
+            return Triple(0, 0, 0)
+        }
+        val hours = floor(this / 3600f).toInt()
+        val minutes = floor((this % 3600f) / 60f).toInt()
+        val seconds = (this % 60f).toInt()
+        return Triple(hours, minutes, seconds)
+    }
+
+
+/**
+ * Given that the number is in seconds, convert it to a pair containing hours and minutes and seconds
+ */
+val Int.secondsToMinutesSeconds: Pair<Int, Int>
+    get() {
+        if (this < 0) {
+            return Pair(0, 0)
+        }
+        val minutes = floor(this / 60f).toInt()
+        val seconds = floor(this % 60f).toInt()
+        return Pair(minutes, seconds)
     }
 
 //endregion
