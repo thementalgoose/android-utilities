@@ -33,14 +33,46 @@ class IntExtensionsKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "86400,",
-        "86399,23:59",
-        "43200,12:00",
-        "0,00:00",
-        "-1,"
+        "86400,true,24:00",
+        "86399,true,23:59",
+        "43200,true,12:00",
+        "7379,true,02:02",
+        "7379,false,2:02",
+        "0,true,00:00",
+        "0,false,0:00",
+        "-1,true,00:00"
     )
-    fun `IntExtensions secondsToHHmm formats a valid time`(seconds: Int, expectedTime: String?) {
-        assertEquals(expectedTime, seconds.secondsToHHmm())
+    fun `IntExtensions secondsToHoursMinutes formats a valid time`(seconds: Int, extendHours: Boolean, expectedTime: String?) {
+        assertEquals(expectedTime, seconds.secondsToHoursMinutes(extendHours = extendHours))
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "86400,true,true,true,24:00:00",
+        "86399,true,true,true,23:59:59",
+        "43200,true,true,true,12:00:00",
+        "7379,true,true,true,02:02:59",
+        "7379,false,true,true,02:02:59",
+        "7379,false,false,true,2:02:59",
+        "0,false,true,true,00:00:00",
+        "0,true,false,false,0:00",
+        "-1,false,true,true,00:00:00",
+        "-1,false,false,false,0:0:00",
+        "-1,true,false,false,0:00",
+        "-1,true,false,true,00:00"
+    )
+    fun `IntExtensions secondsToHoursMinutesSeconds formats a valid time`(
+        seconds: Int,
+        hideHoursIfZero: Boolean,
+        extendHours: Boolean,
+        extendMinutes: Boolean,
+        expectedTime: String?
+    ) {
+        assertEquals(expectedTime, seconds.secondsToHoursMinutesSeconds(
+            extendHours = extendHours,
+            extendMinutes = extendMinutes,
+            hideHoursIfZero = hideHoursIfZero
+        ))
     }
 
     @ParameterizedTest
@@ -52,9 +84,47 @@ class IntExtensionsKtTest {
         "0,0,0",
         "-1,0,0"
     )
-    fun `IntExtensions secondsToHHmm formats a valid time`(seconds: Int, expectedHours: Int, expectedMinutes: Int) {
-        assertEquals(expectedHours, seconds.secondsToHHmm.first)
-        assertEquals(expectedMinutes, seconds.secondsToHHmm.second)
+    fun `IntExtensions secondsToHoursMinutes formats a valid time`(seconds: Int, expectedHours: Int, expectedMinutes: Int) {
+        assertEquals(expectedHours, seconds.secondsToHoursMinutes.first)
+        assertEquals(expectedMinutes, seconds.secondsToHoursMinutes.second)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "86400,24,0,0",
+        "88200,24,30,0",
+        "86399,23,59,59",
+        "43200,12,00,00",
+        "0,0,0,0",
+        "-1,0,0,0"
+    )
+    fun `IntExtensions secondsToHoursMinutesSeconds formats a valid time`(
+        seconds: Int,
+        expectedHours: Int,
+        expectedMinutes: Int,
+        expectedSeconds: Int
+    ) {
+        assertEquals(expectedHours, seconds.secondsToHoursMinutesSeconds.first)
+        assertEquals(expectedMinutes, seconds.secondsToHoursMinutesSeconds.second)
+        assertEquals(expectedSeconds, seconds.secondsToHoursMinutesSeconds.third)
+    }
+
+
+    @ParameterizedTest
+    @CsvSource(
+        "3600,60,0",
+        "3599,59,59",
+        "599,9,59",
+        "0,0,0",
+        "-1,0,0"
+    )
+    fun `IntExtensions secondsToMinutesSeconds formats a valid time`(
+        seconds: Int,
+        expectedMinutes: Int,
+        expectedSeconds: Int
+    ) {
+        assertEquals(expectedMinutes, seconds.secondsToMinutesSeconds.first)
+        assertEquals(expectedSeconds, seconds.secondsToMinutesSeconds.second)
     }
 
     @ParameterizedTest
